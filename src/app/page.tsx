@@ -1,9 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [ageVerified, setAgeVerified] = useState(false);
+  const [bannerIndex, setBannerIndex] = useState(0);
+
+  const announcements = [
+    '🚀 New shipment arriving: Order by Friday for guaranteed delivery next week',
+    '💎 Autoship & Save: Lock in 10% off with Subscribe & Save',
+    '🔬 ISO 17025 certified. Every batch verified with serialized COAs',
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBannerIndex((prev) => (prev + 1) % announcements.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   if (!ageVerified) {
     return (
@@ -42,8 +56,15 @@ export default function Home() {
 
   return (
     <div className="bg-white min-h-screen font-sans">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-sm">
+      {/* Rotating Announcement Banner */}
+      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-white py-3 px-8 text-center font-semibold overflow-hidden">
+        <div className="max-w-6xl mx-auto animate-pulse">
+          {announcements[bannerIndex]}
+        </div>
+      </div>
+
+      {/* Header (offset for banner) */}
+      <header className="sticky top-12 z-50 bg-white border-b border-slate-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
           <div className="text-3xl font-bold">
             <span className="text-slate-900">Blue</span><span className="text-amber-400">Label</span>
@@ -123,36 +144,46 @@ export default function Home() {
       </header>
 
       {/* Top Hero Section with Product Image */}
-      <section id="home" className="py-20 px-8 bg-gradient-to-b from-slate-50 to-white">
+      <section id="home" className="relative pt-32 pb-20 px-8 overflow-hidden">
+        {/* Background texture + gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-95"></div>
+        <div className="absolute inset-0 opacity-20" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, #fbbf24 0%, transparent 50%), radial-gradient(circle at 80% 80%, #f97316 0%, transparent 50%)'}}></div>
+        
+        {/* Dark overlay with grain texture */}
+        <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'url(data:image/svg+xml,%3Csvg width="100" height="100" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /%3E%3C/filter%3E%3Crect width="100" height="100" filter="url(%23noise)" /%3E%3C/svg%3E)'}}></div>
+
+        <div className="relative max-w-6xl mx-auto">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div>
-              <p className="text-sm text-amber-600 font-bold uppercase tracking-wide mb-4">Premium Research Grade</p>
-              <h1 className="text-6xl font-bold mb-6 text-slate-900">
+              <p className="text-sm text-amber-300 font-bold uppercase tracking-wide mb-4">Premium Research Grade</p>
+              <h1 className="text-6xl md:text-7xl font-black mb-6 text-white drop-shadow-lg">
                 ≥98% Purity
               </h1>
-              <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+              <p className="text-xl text-slate-100 mb-8 leading-relaxed">
                 Research-grade 7-OH tablets with verified COAs. Lab-tested, pharmaceutical-grade tablets for wholesale distribution and research use.
               </p>
               <div className="flex gap-4 flex-wrap mb-6">
-                <a href="#products" className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-10 py-4 rounded-full font-bold transition shadow-lg">
+                <a href="#products" className="inline-block bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-900 px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105">
                   Shop Now
                 </a>
-                <a href="#wholesale" className="inline-block border-2 border-slate-900 text-slate-900 hover:bg-slate-50 px-10 py-4 rounded-full font-bold transition">
+                <a href="#wholesale" className="inline-block border-2 border-amber-300 text-white hover:bg-white/10 px-10 py-4 rounded-full font-bold transition backdrop-blur-sm">
                   Wholesale
                 </a>
               </div>
-              <p className="text-sm text-slate-500">For research use only. Not for human consumption.</p>
+              <p className="text-sm text-slate-200">For research use only. Not for human consumption.</p>
             </div>
 
             {/* Right - Product Image */}
             <div className="flex items-center justify-center">
               <div className="relative w-full max-w-sm">
+                {/* Glowing orb effect behind image */}
+                <div className="absolute -inset-8 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full blur-3xl opacity-30 animate-pulse"></div>
                 <img 
                   src="/cherry.jpg" 
                   alt="BlueLabel 7-OH Cherry Tablets" 
-                  className="w-full h-auto object-contain drop-shadow-2xl"
+                  className="w-full h-auto object-contain drop-shadow-2xl relative"
                 />
               </div>
             </div>
@@ -161,7 +192,10 @@ export default function Home() {
       </section>
 
       {/* Products Section */}
-      <section id="products" className="py-24 px-8 bg-slate-50 border-b border-slate-200">
+      <section id="products" className="relative py-24 px-8 bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200">
+        {/* Subtle gradient accent */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-amber-50 to-transparent rounded-full blur-3xl opacity-40 pointer-events-none"></div>
+        <div className="relative">
         <div className="max-w-6xl mx-auto">
           <p className="text-amber-600 font-bold uppercase tracking-wide text-center mb-4">Our Selection</p>
           <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Premium Product Line</h2>
@@ -220,11 +254,13 @@ export default function Home() {
             </a>
           </div>
         </div>
+        </div>
       </section>
 
       {/* Autoship Program */}
-      <section className="bg-slate-900 text-white py-24 px-8">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <section className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-24 px-8 overflow-hidden">
+        <div className="absolute inset-0 opacity-20" style={{backgroundImage: 'linear-gradient(45deg, #fbbf24 25%, transparent 25%), linear-gradient(-45deg, #fbbf24 25%, transparent 25%)', backgroundSize: '40px 40px'}}></div>
+        <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-amber-300 font-bold uppercase tracking-wide mb-4">Autoship Program</p>
             <h2 className="text-4xl font-bold mb-6">Lock in 10% off with Subscribe & Save</h2>
@@ -249,10 +285,13 @@ export default function Home() {
             </a>
           </div>
         </div>
+        </div>
       </section>
 
       {/* Why Choose BlueLabel */}
-      <section className="py-24 px-8 bg-slate-50 border-y border-slate-200">
+      <section className="relative py-24 px-8 bg-gradient-to-b from-slate-50 via-white to-slate-50 border-y border-slate-200 overflow-hidden">
+        <div className="absolute top-20 left-0 w-72 h-72 bg-gradient-to-br from-emerald-100 to-transparent rounded-full blur-3xl opacity-30"></div>
+        <div className="relative">
         <div className="max-w-6xl mx-auto">
           <p className="text-amber-600 font-bold uppercase tracking-wide text-center mb-4">Why BlueLabel?</p>
           <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Trusted science. Verified batches.</h2>
@@ -283,11 +322,13 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* Advanced Manufacturing */}
-      <section className="py-24 px-8">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <section className="relative py-24 px-8 bg-gradient-to-b from-white to-slate-50">
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-blue-50 to-transparent rounded-full blur-3xl opacity-40 pointer-events-none"></div>
+        <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-amber-600 font-bold uppercase tracking-wide mb-4">Advanced Manufacturing</p>
             <h2 className="text-4xl font-bold mb-6 text-slate-900">Sterile. Precise. Automated.</h2>
@@ -326,7 +367,9 @@ export default function Home() {
       </section>
 
       {/* Wholesale & White Label */}
-      <section id="wholesale" className="bg-slate-50 py-24 px-8 border-y border-slate-200">
+      <section id="wholesale" className="relative bg-gradient-to-br from-slate-100 via-slate-50 to-white py-24 px-8 border-y border-slate-200">
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-gradient-to-br from-orange-100 to-transparent rounded-full blur-3xl opacity-40 pointer-events-none"></div>
+        <div className="relative">
         <div className="max-w-6xl mx-auto">
           <p className="text-amber-600 font-bold uppercase tracking-wide text-center mb-4">Wholesale Solutions</p>
           <h2 className="text-4xl font-bold text-center mb-8 text-slate-900">Wholesale & White Label Solutions</h2>
@@ -337,23 +380,26 @@ export default function Home() {
             Minimum Order Quantities apply. ISO 17025 testing included with all bulk orders.
           </p>
         </div>
+        </div>
       </section>
 
       {/* Bottom Hero / CTA Section */}
-      <section id="contact" className="bg-slate-900 text-white py-32 px-8">
-        <div className="max-w-6xl mx-auto text-center">
+      <section id="contact" className="relative bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white py-32 px-8 overflow-hidden">
+        <div className="absolute inset-0 opacity-30" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, #f97316 0%, transparent 50%), radial-gradient(circle at 80% 80%, #fbbf24 0%, transparent 50%)'}}></div>
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
           <h2 className="text-5xl font-bold mb-6">Ready to Get Started?</h2>
           <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
             Join researchers and distributors worldwide who trust BlueLabel for premium 7-OH tablets. Contact us for wholesale inquiries, sample orders, or partnership opportunities.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="mailto:info@bluelabel.com" className="inline-block bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-full font-bold transition shadow-lg text-lg">
+            <a href="mailto:info@bluelabel.com" className="inline-block bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105 text-lg">
               Contact Sales
             </a>
-            <a href="#products" className="inline-block border-2 border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-slate-900 px-10 py-4 rounded-full font-bold transition text-lg">
+            <a href="#products" className="inline-block border-2 border-amber-400 text-amber-300 hover:bg-white/10 px-10 py-4 rounded-full font-bold transition text-lg backdrop-blur-sm">
               View Products
             </a>
           </div>
+        </div>
         </div>
       </section>
 
