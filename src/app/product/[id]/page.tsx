@@ -83,8 +83,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     <div className="bg-white min-h-screen font-sans">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-sm">
-        <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-slate-900">BlueLabel</Link>
+        <div className="max-w-6xl mx-auto px-8 py-2 flex items-center justify-between">
+          <Link href="/"><img src="/logo.jpg" alt="BlueLabel Wholesale" className="h-16 w-auto" /></Link>
           <nav className="flex gap-8 items-center">
             <Link href="/" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Home</Link>
             <Link href="/catalog" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Catalog</Link>
