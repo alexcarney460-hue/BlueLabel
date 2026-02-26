@@ -69,7 +69,7 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="sticky top-8 sm:top-12 z-50 bg-white border-b border-slate-100 shadow-sm">
+      <header className="sticky top-[32px] sm:top-12 z-50 bg-white border-b border-slate-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 py-3 sm:py-4 flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="text-2xl sm:text-3xl font-bold">
             <span className="text-slate-900">Blue</span><span className="text-amber-400">Label</span>
