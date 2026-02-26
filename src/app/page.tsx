@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useCart } from './cart-context';
+import CartDrawer from './CartDrawer';
 import { allProducts } from '@/lib/products';
 
 export default function Home() {
   const [ageVerified, setAgeVerified] = useState(false);
   const [bannerIndex, setBannerIndex] = useState(0);
+  const [cartOpen, setCartOpen] = useState(false);
   const { addToCart, cartCount } = useCart();
 
   const announcements = [
@@ -61,15 +63,16 @@ export default function Home() {
 
   return (
     <div className="bg-white min-h-screen font-sans">
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
       {/* Rotating Announcement Banner */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-white py-2 sm:py-3 px-3 sm:px-8 text-center font-semibold overflow-hidden text-xs sm:text-base leading-none">
-        <div className="max-w-6xl mx-auto whitespace-nowrap overflow-hidden text-ellipsis sm:whitespace-normal sm:overflow-visible sm:text-clip sm:animate-pulse">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-white h-8 sm:h-auto sm:py-3 px-3 sm:px-8 text-center font-semibold overflow-hidden text-xs sm:text-base">
+        <div className="max-w-6xl mx-auto h-8 sm:h-auto flex items-center justify-center whitespace-nowrap overflow-hidden text-ellipsis sm:whitespace-normal sm:overflow-visible sm:text-clip sm:animate-pulse">
           {announcements[bannerIndex]}
         </div>
       </div>
 
       {/* Header */}
-      <header className="sticky top-[32px] sm:top-12 z-50 bg-white border-b border-slate-100 shadow-sm">
+      <header className="sticky top-8 sm:top-12 z-50 bg-white border-b border-slate-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 py-3 sm:py-4 flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="text-2xl sm:text-3xl font-bold">
             <span className="text-slate-900">Blue</span><span className="text-amber-400">Label</span>
@@ -82,7 +85,7 @@ export default function Home() {
           </nav>
           <div className="flex gap-4 items-center">
             {/* Cart Button */}
-            <button className="relative p-2 hover:text-amber-600 transition" aria-label="Cart">
+            <button onClick={() => setCartOpen(true)} className="relative p-2 hover:text-amber-600 transition" aria-label="Cart">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
