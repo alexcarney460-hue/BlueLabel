@@ -62,14 +62,14 @@ export default function Home() {
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* Rotating Announcement Banner */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-white py-2 sm:py-3 px-3 sm:px-8 text-center font-semibold overflow-hidden text-xs sm:text-base">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-white py-2 sm:py-3 px-3 sm:px-8 text-center font-semibold overflow-hidden text-xs sm:text-base leading-none">
         <div className="max-w-6xl mx-auto whitespace-nowrap overflow-hidden text-ellipsis sm:whitespace-normal sm:overflow-visible sm:text-clip sm:animate-pulse">
           {announcements[bannerIndex]}
         </div>
       </div>
 
       {/* Header */}
-      <header className="sticky top-9 sm:top-12 z-50 bg-white border-b border-slate-100 shadow-sm">
+      <header className="sticky top-8 sm:top-12 z-50 bg-white border-b border-slate-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 py-3 sm:py-4 flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="text-2xl sm:text-3xl font-bold">
             <span className="text-slate-900">Blue</span><span className="text-amber-400">Label</span>
