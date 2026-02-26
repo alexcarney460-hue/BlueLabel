@@ -1,8 +1,11 @@
-import products from './products.json' assert { type: 'json' };
+import productsJson from './products.json' assert { type: 'json' };
 
-export type Product = (typeof products)[number];
+const resolvedProducts: any = (productsJson as any)?.default ?? productsJson;
+const productsArray = Array.isArray(resolvedProducts) ? resolvedProducts : [];
 
-export const allProducts = products as Product[];
+export type Product = (typeof productsArray)[number];
+
+export const allProducts = productsArray as Product[];
 
 const productMap = new Map(allProducts.map((product) => [product.id, product] as const));
 
