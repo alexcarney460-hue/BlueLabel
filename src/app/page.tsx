@@ -1,18 +1,35 @@
 export default function Home() {
   return (
     <div className="bg-white min-h-screen font-sans">
-      {/* Hero Section */}
-      <section className="py-20 px-8">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-slate-900">BlueLabel</h1>
+          <nav className="flex gap-8 items-center">
+            <a href="#home" className="text-slate-700 hover:text-slate-900 font-bold text-sm uppercase tracking-wide">Home</a>
+            <a href="#catalog" className="text-slate-700 hover:text-slate-900 font-bold text-sm uppercase tracking-wide">Catalog</a>
+            <a href="#wholesale" className="text-slate-700 hover:text-slate-900 font-bold text-sm uppercase tracking-wide">Wholesale</a>
+            <a href="#contact" className="text-slate-700 hover:text-slate-900 font-bold text-sm uppercase tracking-wide">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Top Hero Section */}
+      <section id="home" className="py-24 px-8 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-sm text-amber-600 font-bold uppercase tracking-wide mb-4">QC-tested</p>
-          <h1 className="text-5xl font-bold mb-6 text-slate-900">≥98% Purity</h1>
+          <p className="text-sm text-amber-600 font-bold uppercase tracking-wide mb-4">QC-tested & Verified</p>
+          <h1 className="text-6xl font-bold mb-6 text-slate-900">≥98% Purity</h1>
           <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
-            Research-grade 7-OH tablets with verified COAs
+            Research-grade 7-OH tablets with verified COAs. Lab-tested, pharmaceutical-grade tablets for wholesale distribution and research use.
           </p>
-          <a href="#catalog" className="inline-block bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition">
-            View Catalog
-          </a>
-          <p className="text-sm text-slate-500 mt-8">For research use only. Not for human consumption.</p>
+          <div className="flex gap-4 justify-center">
+            <a href="#catalog" className="inline-block bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition">
+              View Catalog
+            </a>
+            <a href="#wholesale" className="inline-block border-2 border-slate-900 text-slate-900 px-8 py-3 rounded-full font-bold hover:bg-slate-50 transition">
+              Wholesale Info
+            </a>
+          </div>
         </div>
       </section>
 
@@ -120,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* Wholesale & White Label */}
-      <section className="bg-slate-50 py-20 px-8">
+      <section id="wholesale" className="bg-slate-50 py-20 px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-8 text-slate-900">Wholesale & White Label Solutions</h2>
           <p className="text-center text-slate-600 max-w-2xl mx-auto mb-12">
@@ -132,9 +149,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Bottom Hero / CTA Section */}
+      <section id="contact" className="bg-slate-900 text-white py-24 px-8">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-5xl font-bold mb-6">Ready to Get Started?</h2>
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+            Join researchers and distributors worldwide who trust BlueLabel for premium 7-OH tablets. Contact us for wholesale inquiries, sample orders, or partnership opportunities.
+          </p>
+          <div className="flex gap-4 justify-center">
+            <a href="mailto:info@bluelabel.com" className="inline-block bg-amber-500 text-white px-8 py-3 rounded-full font-bold hover:bg-amber-600 transition">
+              Contact Sales
+            </a>
+            <a href="#catalog" className="inline-block border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition">
+              View Products
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-8 px-8 text-center border-t border-slate-800">
-        <p className="text-slate-400">Research use only · Not for human consumption</p>
+      <footer className="bg-slate-950 text-slate-400 py-8 px-8 text-center border-t border-slate-800">
+        <p>Research use only · Not for human consumption</p>
+        <p className="text-sm mt-4">© 2026 BlueLabel. All rights reserved.</p>
       </footer>
     </div>
   );
