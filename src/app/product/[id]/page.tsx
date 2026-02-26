@@ -153,8 +153,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               {/* Specs */}
               <div className="mb-8 space-y-3 bg-slate-50 p-6 rounded-lg">
                 <div className="flex justify-between">
-                  <span className="font-bold text-slate-900">Purity:</span>
-                  <span className="text-slate-700 font-semibold">{product.purity}</span>
+                  <span className="font-bold text-slate-900">Wholesale:</span>
+                  <span className="text-slate-700 font-semibold">Contact sales for bulk pricing</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-bold text-slate-900">Dosage:</span>
