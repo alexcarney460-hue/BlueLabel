@@ -2,50 +2,12 @@ import Header from '@/app/Header';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import AddToCartClient from './AddToCartClient';
-import { getProductById, normalizeProductId } from '@/lib/products';
+import { getProductById } from '@/lib/products';
 
-export default async function ProductPage({
-  params,
-  searchParams
-}: {
-  params: Promise<{ id: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  const resolvedParams = await params;
-  const resolvedSearch = searchParams ? await searchParams : {};
-
-  const rawId = resolvedParams?.id ?? '';
-  const normalized = normalizeProductId(rawId);
-  const product = getProductById(rawId);
-  const debug = resolvedSearch?.debug === '1' || resolvedSearch?.debug === 'true';
+export default function ProductPage({ params }: { params: { id: string } }) {
+  const product = getProductById(params?.id ?? '');
 
   if (!product) {
-    if (debug) {
-      return (
-        <div className="min-h-screen bg-white flex items-center justify-center px-6">
-          <div className="max-w-xl w-full bg-slate-50 border border-slate-200 rounded-2xl p-6">
-            <h1 className="text-xl font-black text-slate-900 mb-2">Debug: Product lookup failed</h1>
-            <div className="text-sm text-slate-700 space-y-1">
-              <div>
-                <span className="font-bold">params.id:</span> <code>{JSON.stringify(rawId)}</code>
-              </div>
-              <div>
-                <span className="font-bold">normalized:</span> <code>{JSON.stringify(normalized)}</code>
-              </div>
-              <div>
-                <span className="font-bold">url:</span> <code>/product/{rawId}</code>
-              </div>
-            </div>
-            <div className="mt-4">
-              <Link href="/catalog" className="text-amber-700 font-bold hover:underline">
-                Go to catalog
-              </Link>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
     redirect('/catalog');
   }
 
