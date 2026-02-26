@@ -4,16 +4,62 @@ import { notFound, redirect } from 'next/navigation';
 import AddToCartClient from './AddToCartClient';
 import { allProducts, normalizeProductId } from '@/lib/products';
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const raw = params?.id ?? '';
+export default async function ProductPage({
+  params,
+  searchParams
+}: {
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedParams = await params;
+  const resolvedSearch = searchParams ? await searchParams : {};
+
+  const raw = resolvedParams?.id ?? '';
   const lastSegment = raw.split('/').filter(Boolean).pop() ?? '';
   const slug = normalizeProductId(lastSegment);
+  const debug = resolvedSearch?.debug === '1' || resolvedSearch?.debug === 'true';
+
+  const product = slug ? allProducts.find((p) => p.id === slug) : undefined;
+
+  if (debug) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center px-6">
+        <div className="max-w-xl w-full bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <h1 className="text-xl font-black text-slate-900 mb-2">Debug: /product/[id]</h1>
+          <div className="text-sm text-slate-700 space-y-2">
+            <div>
+              <span className="font-bold">params.id:</span> <code>{JSON.stringify(raw)}</code>
+            </div>
+            <div>
+              <span className="font-bold">lastSegment:</span> <code>{JSON.stringify(lastSegment)}</code>
+            </div>
+            <div>
+              <span className="font-bold">slug:</span> <code>{JSON.stringify(slug)}</code>
+            </div>
+            <div>
+              <span className="font-bold">found:</span> <code>{JSON.stringify(!!product)}</code>
+            </div>
+            <div>
+              <span className="font-bold">available:</span>{' '}
+              <code>{JSON.stringify(allProducts.map((p) => p.id))}</code>
+            </div>
+          </div>
+          <div className="mt-4 flex gap-4">
+            <Link href="/catalog" className="text-amber-700 font-bold hover:underline">
+              Go to catalog
+            </Link>
+            <Link href={`/product/${slug || 'cherry'}`} className="text-slate-700 font-bold hover:underline">
+              Try product page
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!slug) {
     redirect('/catalog');
   }
-
-  const product = allProducts.find((p) => p.id === slug);
 
   if (!product) {
     notFound();
