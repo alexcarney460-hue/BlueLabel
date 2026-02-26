@@ -149,24 +149,24 @@ export default function Home() {
       </header>
 
       {/* Top Hero Section with Dark Gradient */}
-      <section id="home" className="relative pt-32 pb-20 px-8" style={{background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'}}>
+      <section id="home" className="relative pt-20 sm:pt-28 pb-14 sm:pb-20 px-4 sm:px-8" style={{background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'}}>
         
         <div className="relative max-w-6xl mx-auto z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-10 sm:gap-12 items-center">
             {/* Left Content */}
             <div>
               <p className="text-sm text-amber-300 font-bold uppercase tracking-wide mb-4">Premium Research Grade</p>
-              <h1 className="text-5xl md:text-6xl font-black mb-6 text-white drop-shadow-lg">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-5 sm:mb-6 text-white drop-shadow-lg">
                 Research-grade 7-OH Tablets
               </h1>
-              <p className="text-xl text-slate-100 mb-8 leading-relaxed">
+              <p className="text-base sm:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed">
                 Research-grade 7-OH tablets with verified COAs. Lab-tested, pharmaceutical-grade tablets for wholesale distribution and research use.
               </p>
-              <div className="flex gap-4 flex-wrap mb-6">
-                <a href="#products" className="inline-block bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-900 px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105">
+              <div className="flex gap-3 sm:gap-4 flex-col sm:flex-row flex-wrap mb-6">
+                <a href="#products" className="inline-block w-full sm:w-auto text-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-900 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105">
                   Shop Now
                 </a>
-                <a href="#wholesale" className="inline-block border-2 border-amber-300 text-amber-300 hover:bg-white/10 px-10 py-4 rounded-full font-bold transition backdrop-blur-sm">
+                <a href="#wholesale" className="inline-block w-full sm:w-auto text-center border-2 border-amber-300 text-amber-300 hover:bg-white/10 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition backdrop-blur-sm">
                   Wholesale
                 </a>
               </div>
@@ -188,12 +188,12 @@ export default function Home() {
       </section>
 
       {/* Products Section */}
-      <section id="products" className="py-24 px-8" style={{background: 'linear-gradient(to bottom, #ffffff, #f1f5f9, #f8fafc)'}}>
+      <section id="products" className="py-16 sm:py-24 px-4 sm:px-8" style={{background: 'linear-gradient(to bottom, #ffffff, #f1f5f9, #f8fafc)'}}>
         <div className="max-w-6xl mx-auto">
           <p className="text-amber-600 font-bold uppercase tracking-wide text-center mb-4">Our Selection</p>
-          <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Premium Product Line</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-slate-900">Premium Product Line</h2>
           
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {/* Product 1 - Cherry */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
               <a href="/product/cherry" className="block mb-4">
@@ -204,7 +204,7 @@ export default function Home() {
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Cherry</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
               <p className="text-slate-600 text-sm mb-4">Premium cherry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button onClick={() => addToCart({id: 'cherry', name: 'Cherry 7-OH', price: 29.99, quantity: 1, image: '/cherry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+              <button onClick={() => addToCart({id: 'cherry', name: 'Cherry 7-OH', price: 29.99, quantity: 1, image: '/cherry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
                 Add to Cart
               </button>
             </div>
@@ -219,7 +219,7 @@ export default function Home() {
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Mix Berry</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
               <p className="text-slate-600 text-sm mb-4">Enhanced berry blend 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button onClick={() => addToCart({id: 'mix-berry', name: 'Mix Berry 7-OH', price: 32.99, quantity: 1, image: '/mixberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+              <button onClick={() => addToCart({id: 'mix-berry', name: 'Mix Berry 7-OH', price: 32.99, quantity: 1, image: '/mixberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
                 Add to Cart
               </button>
             </div>
@@ -234,7 +234,7 @@ export default function Home() {
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Strawberry</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
               <p className="text-slate-600 text-sm mb-4">Premium strawberry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button onClick={() => addToCart({id: 'strawberry', name: 'Strawberry 7-OH', price: 29.99, quantity: 1, image: '/strawberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+              <button onClick={() => addToCart({id: 'strawberry', name: 'Strawberry 7-OH', price: 29.99, quantity: 1, image: '/strawberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
                 Add to Cart
               </button>
             </div>
@@ -249,7 +249,7 @@ export default function Home() {
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Watermelon</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
               <p className="text-slate-600 text-sm mb-4">Premium watermelon-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button onClick={() => addToCart({id: 'watermelon', name: 'Watermelon 7-OH', price: 31.99, quantity: 1, image: '/watermelon.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+              <button onClick={() => addToCart({id: 'watermelon', name: 'Watermelon 7-OH', price: 31.99, quantity: 1, image: '/watermelon.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
                 Add to Cart
               </button>
             </div>
