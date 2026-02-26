@@ -5,7 +5,9 @@ import AddToCartClient from './AddToCartClient';
 import { allProducts, normalizeProductId } from '@/lib/products';
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const slug = normalizeProductId(params?.id ?? '');
+  const raw = params?.id ?? '';
+  const lastSegment = raw.split('/').filter(Boolean).pop() ?? '';
+  const slug = normalizeProductId(lastSegment);
 
   if (!slug) {
     redirect('/catalog');
