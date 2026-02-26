@@ -77,7 +77,7 @@ export default function Home() {
           <div className="text-2xl sm:text-3xl font-bold">
             <span className="text-slate-900">Blue</span><span className="text-amber-400">Label</span>
           </div>
-          <nav className="flex flex-wrap gap-x-4 gap-y-2 sm:gap-6 lg:gap-8 items-center text-xs sm:text-sm">
+          <nav className="flex flex-wrap w-full justify-center sm:justify-start gap-x-4 gap-y-2 sm:gap-6 lg:gap-8 items-center text-xs sm:text-sm">
             <a href="#home" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Home</a>
             <a href="#products" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Products</a>
             <a href="#wholesale" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Wholesale</a>
