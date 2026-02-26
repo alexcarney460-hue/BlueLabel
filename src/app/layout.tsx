@@ -27,11 +27,14 @@ export const metadata: Metadata = {
   },
 };
 
+import TrackPageView from './Track';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <CartProvider>
+          <TrackPageView />
           {children}
         </CartProvider>
       </body>
