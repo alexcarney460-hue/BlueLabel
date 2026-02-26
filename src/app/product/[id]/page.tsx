@@ -3,95 +3,21 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useCart } from '@/app/cart-context';
-
-const products: { [key: string]: any } = {
-  'cherry': {
-    id: 'cherry',
-    name: 'Cherry 7-OH',
-    image: '/cherry.jpg',
-    purity: '≥98%',
-    dosage: '20mg per unit',
-    price: 29.99,
-    description: 'Premium cherry-flavored 7-OH tablets crafted for research use.',
-    details: [
-      'Lab-verified ≥98% purity',
-      '20mg per tablet',
-      '2 containers of 10 tablets',
-      'HPLC & GC-MS tested',
-      'Certificate of Analysis included'
-    ]
-  },
-  'mix-berry': {
-    id: 'mix-berry',
-    name: 'Mix Berry 7-OH',
-    image: '/mixberry.jpg',
-    purity: '≥98%',
-    dosage: '20mg per unit',
-    price: 32.99,
-    description: 'Enhanced berry blend 7-OH tablets optimized for research applications.',
-    details: [
-      'Lab-verified ≥98% purity',
-      '20mg per tablet',
-      '2 containers of 10 tablets',
-      'Advanced alkaloid blend',
-      'Serialized COA included'
-    ]
-  },
-  'strawberry': {
-    id: 'strawberry',
-    name: 'Strawberry 7-OH',
-    image: '/strawberry.jpg',
-    purity: '≥98%',
-    dosage: '20mg per unit',
-    price: 29.99,
-    description: 'Lab-verified strawberry-flavored 7-OH tablets for research.',
-    details: [
-      'Lab-verified ≥98% purity',
-      '20mg per tablet',
-      '2 containers of 10 tablets',
-      'HPLC & GC-MS tested',
-      'Chain-of-custody documentation'
-    ]
-  },
-  'watermelon': {
-    id: 'watermelon',
-    name: 'Watermelon 7-OH',
-    image: '/watermelon.jpg',
-    purity: '≥98%',
-    dosage: '20mg per unit',
-    price: 31.99,
-    description: 'Premium watermelon-flavored 7-OH tablets with comprehensive verification.',
-    details: [
-      'Lab-verified ≥98% purity',
-      '20mg per tablet',
-      '2 containers of 10 tablets',
-      'Microbial analysis included',
-      'ISO 17025 certified testing'
-    ]
-  }
-};
+import { getProductById, normalizeProductId } from '@/lib/products';
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const key = decodeURIComponent((params.id || '').toLowerCase());
-  const product = products[key];
+  const rawId = params?.id ?? '';
+  const normalizedId = normalizeProductId(rawId);
+  const product = getProductById(normalizedId);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [isSubscription, setIsSubscription] = useState(false);
   const [frequency, setFrequency] = useState('monthly');
-  const { addToCart } = useCart();
+  const { addToCart, cartCount } = useCart();
 
   if (!product) {
-    // try fuzzy match by replacing spaces/dashes
-    const altKey = key.replace(/[^a-z0-9]/g, '-');
-    const alt = products[altKey];
-    if (alt) {
-      // redirect client-side
-      if (typeof window !== 'undefined') window.location.href = `/product/${altKey}`;
-      return null;
-    }
-
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center px-6">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Product Not Found</h1>
           <p className="mb-4">If you followed a link, please try the catalog or contact support.</p>
@@ -99,6 +25,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         </div>
       </div>
     );
+  }
+
+  if (normalizedId && normalizedId !== rawId && typeof window !== 'undefined') {
+    window.location.replace(`/product/${normalizedId}`);
   }
 
   const subscriptionDiscount = 0.10;
@@ -120,39 +50,47 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     <div className="bg-white min-h-screen font-sans">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-sm">
-        <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
-          <Link href="/" className="text-3xl font-bold">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 py-3 sm:py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <Link href="/" className="text-2xl sm:text-3xl font-bold">
             <span className="text-slate-900">Blue</span><span className="text-amber-400">Label</span>
           </Link>
-          <nav className="flex gap-8 items-center">
-            <Link href="/" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Home</Link>
-            <Link href="/#products" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Products</Link>
-            <Link href="/#wholesale" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Wholesale</Link>
-            <Link href="/#contact" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Contact</Link>
+          <nav className="flex flex-wrap gap-4 sm:gap-8 items-center text-xs sm:text-sm">
+            <Link href="/" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Home</Link>
+            <Link href="/#products" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Products</Link>
+            <Link href="/#wholesale" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Wholesale</Link>
+            <Link href="/#contact" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Contact</Link>
           </nav>
+          <div className="flex gap-4 items-center">
+            <button className="relative p-2 hover:text-amber-600 transition" aria-label="Cart">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span className="absolute top-0 right-0 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Product Details */}
-      <section className="py-20 px-8">
+      <section className="py-16 sm:py-20 px-4 sm:px-8">
         <div className="max-w-6xl mx-auto">
           <Link href="/#products" className="text-amber-600 hover:underline mb-8 inline-block font-bold">← Back to Products</Link>
           
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             {/* Product Image */}
             <div className="flex items-center justify-center">
-              <div className="w-full max-w-sm h-96 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl overflow-hidden flex items-center justify-center shadow-lg">
-                <img src={product.image} alt={product.name} className="w-full h-full object-contain p-8" />
+              <div className="w-full max-w-xs sm:max-w-sm h-80 sm:h-96 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl overflow-hidden flex items-center justify-center shadow-lg">
+                <img src={product.image} alt={product.name} className="w-full h-full object-contain p-6 sm:p-8" />
               </div>
             </div>
 
             {/* Product Info */}
             <div>
-              <h1 className="text-5xl font-bold mb-2 text-slate-900">{product.name}</h1>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 text-slate-900">{product.name}</h1>
               <p className="text-amber-600 text-sm font-bold uppercase mb-6">Research Grade</p>
               
               <div className="mb-8">
-                <p className={`text-4xl font-black ${isSubscription ? 'text-emerald-600' : 'text-slate-900'}`}>
+                <p className={`text-3xl sm:text-4xl font-black ${isSubscription ? 'text-emerald-600' : 'text-slate-900'}`}>
                   ${isSubscription ? subscriptionPrice.toFixed(2) : product.price.toFixed(2)}
                 </p>
                 {isSubscription && (
@@ -160,19 +98,19 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 )}
               </div>
               
-              <p className="text-lg text-slate-600 mb-8 leading-relaxed">{product.description}</p>
+              <p className="text-base sm:text-lg text-slate-600 mb-8 leading-relaxed">{product.description}</p>
               
               {/* Specs */}
-              <div className="mb-8 space-y-3 bg-slate-50 p-6 rounded-lg">
-                <div className="flex justify-between">
+              <div className="mb-8 space-y-3 bg-slate-50 p-5 sm:p-6 rounded-lg text-sm sm:text-base">
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span className="font-bold text-slate-900">Wholesale:</span>
-                  <span className="text-slate-700 font-semibold">Contact sales for bulk pricing</span>
+                  <span className="text-slate-700 font-semibold">Wholesale pricing available — contact sales for bulk quotes.</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span className="font-bold text-slate-900">Dosage:</span>
                   <span className="text-slate-700 font-semibold">{product.dosage}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span className="font-bold text-slate-900">Format:</span>
                   <span className="text-slate-700 font-semibold">2x10 Tablet Containers</span>
                 </div>
@@ -181,7 +119,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               {/* Purchase Type */}
               <div className="mb-8 space-y-3">
                 <label className="block font-bold text-slate-900">Purchase Type</label>
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <button
                     onClick={() => setIsSubscription(false)}
                     className={`flex-1 py-3 px-4 rounded-lg border-2 font-bold transition ${
@@ -209,7 +147,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               {isSubscription && (
                 <div className="mb-8">
                   <label className="block font-bold text-slate-900 mb-3">Frequency</label>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4">
                     <button
                       onClick={() => setFrequency('monthly')}
                       className={`flex-1 py-2 px-4 rounded-lg border-2 font-semibold transition ${
@@ -248,7 +186,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     type="number" 
                     value={quantity} 
                     onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-14 h-10 text-center font-bold border-2 border-slate-300 rounded-lg focus:outline-none focus:border-amber-600"
+                    className="w-16 h-10 text-center font-bold border-2 border-slate-300 rounded-lg focus:outline-none focus:border-amber-600"
                   />
                   <button 
                     onClick={() => setQuantity(quantity + 1)}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useCart } from './cart-context';
+import { allProducts } from '@/lib/products';
 
 export default function Home() {
   const [ageVerified, setAgeVerified] = useState(false);
@@ -13,6 +14,8 @@ export default function Home() {
     '💎 Autoship & Save: Lock in 10% off with Subscribe & Save',
     '🔬 ISO 17025 certified. Every batch verified with serialized COAs',
   ];
+
+  const products = allProducts;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -59,27 +62,27 @@ export default function Home() {
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* Rotating Announcement Banner */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-white py-3 px-8 text-center font-semibold overflow-hidden">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-white py-2.5 sm:py-3 px-4 sm:px-8 text-center font-semibold overflow-hidden text-sm sm:text-base">
         <div className="max-w-6xl mx-auto animate-pulse">
           {announcements[bannerIndex]}
         </div>
       </div>
 
       {/* Header */}
-      <header className="sticky top-12 z-50 bg-white border-b border-slate-100 shadow-sm">
-        <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
-          <div className="text-3xl font-bold">
+      <header className="sticky top-10 sm:top-12 z-50 bg-white border-b border-slate-100 shadow-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 py-3 sm:py-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="text-2xl sm:text-3xl font-bold">
             <span className="text-slate-900">Blue</span><span className="text-amber-400">Label</span>
           </div>
-          <nav className="flex gap-8 items-center">
-            <a href="#home" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Home</a>
-            <a href="#products" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Products</a>
-            <a href="#wholesale" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Wholesale</a>
-            <a href="#contact" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Contact</a>
+          <nav className="flex flex-wrap gap-4 sm:gap-6 lg:gap-8 items-center text-xs sm:text-sm">
+            <a href="#home" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Home</a>
+            <a href="#products" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Products</a>
+            <a href="#wholesale" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Wholesale</a>
+            <a href="#contact" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Contact</a>
           </nav>
           <div className="flex gap-4 items-center">
             {/* Cart Button */}
-            <button className="relative p-2 hover:text-amber-600 transition">
+            <button className="relative p-2 hover:text-amber-600 transition" aria-label="Cart">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
@@ -88,7 +91,7 @@ export default function Home() {
 
             {/* Account / Login */}
             <div className="relative group">
-              <button className="flex items-center gap-2 px-4 py-2 text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">
+              <button className="flex items-center gap-2 px-3 sm:px-4 py-2 text-slate-700 hover:text-amber-600 font-bold text-xs sm:text-sm uppercase tracking-wide transition">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -300,7 +303,7 @@ export default function Home() {
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-md transition">
               <div className="h-10 w-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-3">✓</div>
               <h3 className="font-bold text-slate-900 mb-2">Unmatched Quality</h3>
-              <p className="text-slate-600 text-sm">≥98% purity confirmed via HPLC + MS.</p>
+              <p className="text-slate-600 text-sm">Lab-verified purity confirmed via HPLC + MS.</p>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-md transition">
               <div className="h-10 w-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-3">✓</div>
