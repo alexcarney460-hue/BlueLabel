@@ -79,25 +79,41 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Top Hero Section - PROMINENT */}
-      <section id="home" className="py-32 px-8 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-sm text-amber-600 font-bold uppercase tracking-wide mb-4">QC-tested & Verified</p>
-          <h1 className="text-7xl font-bold mb-8 text-slate-900 leading-tight">
-            ≥98% Purity
-          </h1>
-          <p className="text-2xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-            Research-grade 7-OH tablets with verified COAs. Lab-tested, pharmaceutical-grade tablets for wholesale distribution and research use.
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="#catalog" className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-10 py-4 rounded-full font-bold transition shadow-lg text-lg">
-              View Catalog
-            </a>
-            <a href="#wholesale" className="inline-block border-2 border-slate-900 text-slate-900 hover:bg-slate-50 px-10 py-4 rounded-full font-bold transition text-lg">
-              Wholesale Info
-            </a>
+      {/* Top Hero Section with Product Image */}
+      <section id="home" className="py-20 px-8 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <p className="text-sm text-amber-600 font-bold uppercase tracking-wide mb-4">Premium Research Grade</p>
+              <h1 className="text-6xl font-bold mb-6 text-slate-900">
+                ≥98% Purity
+              </h1>
+              <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+                Research-grade 7-OH tablets with verified COAs. Lab-tested, pharmaceutical-grade tablets for wholesale distribution and research use.
+              </p>
+              <div className="flex gap-4 flex-wrap mb-6">
+                <a href="#catalog" className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-10 py-4 rounded-full font-bold transition shadow-lg">
+                  Shop Now
+                </a>
+                <a href="#wholesale" className="inline-block border-2 border-slate-900 text-slate-900 hover:bg-slate-50 px-10 py-4 rounded-full font-bold transition">
+                  Wholesale
+                </a>
+              </div>
+              <p className="text-sm text-slate-500">For research use only. Not for human consumption.</p>
+            </div>
+
+            {/* Right - Product Image */}
+            <div className="flex items-center justify-center">
+              <div className="relative w-full max-w-sm">
+                <img 
+                  src="/product-hero.jpg" 
+                  alt="BlueLabel 7-OH Watermelon Tablets" 
+                  className="w-full h-auto object-contain drop-shadow-2xl rounded-2xl"
+                />
+              </div>
+            </div>
           </div>
-          <p className="text-sm text-slate-500 mt-10">For research use only. Not for human consumption.</p>
         </div>
       </section>
 
