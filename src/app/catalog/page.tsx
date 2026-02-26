@@ -1,46 +1,18 @@
 'use client';
 
 import Link from 'next/link';
+import { allProducts } from '@/lib/products';
 
 export default function Catalog() {
-  const products = [
-    {
-      id: 'cherry',
-      name: 'Cherry',
-      image: '/cherry.jpg',
-      purity: '≥98%',
-      dosage: '20mg per unit',
-      description: 'Premium cherry-flavored 7-OH tablets for research use.',
-      price: '$29.99'
-    },
-    {
-      id: 'mix-berry',
-      name: 'Mix Berry',
-      image: '/mixberry.jpg',
-      purity: '≥98%',
-      dosage: '20mg per unit',
-      description: 'Enhanced berry blend 7-OH tablets for optimal research results.',
-      price: '$32.99'
-    },
-    {
-      id: 'strawberry',
-      name: 'Strawberry',
-      image: '/strawberry.jpg',
-      purity: '≥98%',
-      dosage: '20mg per unit',
-      description: 'Lab-verified strawberry-flavored 7-OH tablets.',
-      price: '$29.99'
-    },
-    {
-      id: 'watermelon',
-      name: 'Watermelon',
-      image: '/watermelon.jpg',
-      purity: '≥98%',
-      dosage: '20mg per unit',
-      description: 'Premium watermelon-flavored 7-OH tablets with COA verification.',
-      price: '$31.99'
-    }
-  ];
+  const products = allProducts.map((p) => ({
+    id: p.id,
+    name: p.shortName,
+    image: p.image,
+    purity: p.purityLabel,
+    dosage: p.dosage,
+    description: p.summary,
+    price: `$${p.price.toFixed(2)}`
+  }));
 
   return (
     <div className="bg-white min-h-screen font-sans">
