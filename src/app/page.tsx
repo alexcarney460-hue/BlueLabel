@@ -319,10 +319,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="relative aspect-square rounded-3xl overflow-hidden bg-slate-200 border border-slate-300">
-            <div className="absolute inset-0 flex items-center justify-center text-slate-500 font-semibold">
-              [Manufacturing Image]
-            </div>
+          <div className="relative aspect-square rounded-3xl overflow-hidden border border-slate-300">
+            <img src="/manufacturing.jpg" alt="Advanced Manufacturing Facility" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
