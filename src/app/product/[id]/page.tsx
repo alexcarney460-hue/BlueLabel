@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import AddToCartClient from './AddToCartClient';
 import { getProductById } from '@/lib/products';
 
@@ -6,17 +7,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const product = getProductById(params?.id ?? '');
 
   if (!product) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center px-6">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold mb-4">Product Not Found</h1>
-          <p className="mb-4">If you followed a link, please try the catalog or contact support.</p>
-          <Link href="/catalog" className="text-amber-600 hover:underline">
-            Back to Catalog
-          </Link>
-        </div>
-      </div>
-    );
+    redirect('/catalog');
   }
 
   return (
