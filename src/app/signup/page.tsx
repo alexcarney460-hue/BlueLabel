@@ -1,0 +1,93 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { getSupabase } from '@/lib/supabase';
+
+export default function SignupPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const supabase = getSupabase();
+        const { data } = await supabase.auth.getUser();
+        setUserEmail(data.user?.email ?? null);
+      } catch {
+        setUserEmail(null);
+      }
+    })();
+  }, []);
+
+  async function signup(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+
+    try {
+      const supabase = getSupabase();
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) throw error;
+      window.location.href = '/profile';
+    } catch {
+      setError('Signup failed');
+    }
+  }
+
+  if (userEmail) {
+    return (
+      <div className="min-h-screen bg-white p-6">
+        <div className="max-w-md mx-auto">
+          <h1 className="text-3xl font-black mb-2">Create account</h1>
+          <div className="border rounded-2xl p-4">
+            <div className="text-sm text-slate-600">Already signed in as</div>
+            <div className="font-bold mb-4">{userEmail}</div>
+            <a href="/profile" className="inline-block px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Go to profile</a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-white p-6">
+      <div className="max-w-md mx-auto">
+        <h1 className="text-3xl font-black mb-2">Create account</h1>
+        <p className="text-slate-600 mb-6">Email + password signup.</p>
+
+        <form onSubmit={signup} className="border rounded-2xl p-4">
+          <label className="block text-sm font-bold mb-2">Email</label>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            required
+            placeholder="you@company.com"
+            className="w-full border rounded-lg px-3 py-2 mb-3"
+          />
+
+          <label className="block text-sm font-bold mb-2">Password</label>
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            required
+            placeholder="••••••••"
+            className="w-full border rounded-lg px-3 py-2 mb-4"
+          />
+
+          <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-black py-3 rounded-lg">
+            Create account
+          </button>
+
+          {error && <div className="text-sm text-red-700 mt-3">{error}</div>}
+
+          <div className="text-sm text-slate-600 mt-4">
+            Already have an account? <a className="font-bold underline" href="/login">Sign in</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}

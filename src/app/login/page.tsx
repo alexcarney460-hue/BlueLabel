@@ -5,7 +5,6 @@ import { getSupabase } from '@/lib/supabase';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
-  const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
 
@@ -21,21 +20,17 @@ export default function LoginPage() {
     })();
   }, []);
 
-  async function sendMagicLink(e: React.FormEvent) {
+  const [password, setPassword] = useState('');
+
+  async function signIn(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    setSent(false);
 
     try {
       const supabase = getSupabase();
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/profile` : undefined,
-        },
-      });
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
-      setSent(true);
+      window.location.href = '/profile';
     } catch {
       setError('Login failed');
     }
@@ -55,7 +50,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-white p-6">
       <div className="max-w-md mx-auto">
         <h1 className="text-3xl font-black mb-2">Sign in</h1>
-        <p className="text-slate-600 mb-6">We’ll email you a secure magic link.</p>
+        <p className="text-slate-600 mb-6">Sign in with your email and password.</p>
 
         {userEmail ? (
           <div className="border rounded-2xl p-4">
@@ -67,7 +62,7 @@ export default function LoginPage() {
             </div>
           </div>
         ) : (
-          <form onSubmit={sendMagicLink} className="border rounded-2xl p-4">
+          <form onSubmit={signIn} className="border rounded-2xl p-4">
             <label className="block text-sm font-bold mb-2">Email</label>
             <input
               value={email}
@@ -77,11 +72,25 @@ export default function LoginPage() {
               placeholder="you@company.com"
               className="w-full border rounded-lg px-3 py-2 mb-3"
             />
+
+            <label className="block text-sm font-bold mb-2">Password</label>
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              required
+              placeholder="••••••••"
+              className="w-full border rounded-lg px-3 py-2 mb-4"
+            />
+
             <button className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-3 rounded-lg">
-              Email me a login link
+              Sign in
             </button>
-            {sent && <div className="text-sm text-green-700 mt-3">Check your email for the login link.</div>}
             {error && <div className="text-sm text-red-700 mt-3">{error}</div>}
+
+            <div className="text-sm text-slate-600 mt-4">
+              No account? <a className="font-bold underline" href="/signup">Create one</a>
+            </div>
           </form>
         )}
 
