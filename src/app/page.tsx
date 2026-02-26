@@ -150,8 +150,6 @@ export default function Home() {
 
       {/* Top Hero Section with Dark Gradient */}
       <section id="home" className="relative pt-32 pb-20 px-8" style={{background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'}}>
-        {/* Subtle glow effect */}
-        <div style={{position: 'absolute', top: '30%', right: '0', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%)', borderRadius: '50%'}} />
         
         <div className="relative max-w-6xl mx-auto z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -178,8 +176,6 @@ export default function Home() {
             {/* Right - Product Image */}
             <div className="flex items-center justify-center">
               <div className="relative w-full max-w-sm">
-                {/* Glowing orb */}
-                <div className="absolute -inset-8 rounded-full blur-3xl opacity-30 animate-pulse" style={{background: 'linear-gradient(to right, #fbbf24, #f97316)'}} />
                 <img 
                   src="/cherry.jpg" 
                   alt="BlueLabel 7-OH Cherry Tablets" 
@@ -201,8 +197,8 @@ export default function Home() {
             {/* Product 1 - Cherry */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
               <a href="/product/cherry" className="block mb-4">
-                <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                  <img src="/cherry.jpg" alt="Cherry 7-OH" className="w-full h-full object-contain" />
+                <div className="w-full h-48 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                  <img src="/cherry.jpg" alt="Cherry 7-OH" className="w-full h-full object-contain bg-transparent" />
                 </div>
               </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Cherry</h3>
@@ -216,8 +212,8 @@ export default function Home() {
             {/* Product 2 - Mix Berry */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
               <a href="/product/mix-berry" className="block mb-4">
-                <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                  <img src="/mixberry.jpg" alt="Mix Berry 7-OH" className="w-full h-full object-contain" />
+                <div className="w-full h-48 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                  <img src="/mixberry.jpg" alt="Mix Berry 7-OH" className="w-full h-full object-contain bg-transparent" />
                 </div>
               </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Mix Berry</h3>
@@ -231,8 +227,8 @@ export default function Home() {
             {/* Product 3 - Strawberry */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
               <a href="/product/strawberry" className="block mb-4">
-                <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                  <img src="/strawberry.jpg" alt="Strawberry 7-OH" className="w-full h-full object-contain" />
+                <div className="w-full h-48 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                  <img src="/strawberry.jpg" alt="Strawberry 7-OH" className="w-full h-full object-contain bg-transparent" />
                 </div>
               </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Strawberry</h3>
@@ -246,8 +242,8 @@ export default function Home() {
             {/* Product 4 - Watermelon */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
               <a href="/product/watermelon" className="block mb-4">
-                <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                  <img src="/watermelon.jpg" alt="Watermelon 7-OH" className="w-full h-full object-contain" />
+                <div className="w-full h-48 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                  <img src="/watermelon.jpg" alt="Watermelon 7-OH" className="w-full h-full object-contain bg-transparent" />
                 </div>
               </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Watermelon</h3>
