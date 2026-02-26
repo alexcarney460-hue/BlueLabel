@@ -1,14 +1,20 @@
 import Header from '@/app/Header';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import AddToCartClient from './AddToCartClient';
-import { getProductById } from '@/lib/products';
+import { allProducts, normalizeProductId } from '@/lib/products';
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = getProductById(params?.id ?? '');
+  const slug = normalizeProductId(params?.id ?? '');
+
+  if (!slug) {
+    redirect('/catalog');
+  }
+
+  const product = allProducts.find((p) => p.id === slug);
 
   if (!product) {
-    redirect('/catalog');
+    notFound();
   }
 
   return (
