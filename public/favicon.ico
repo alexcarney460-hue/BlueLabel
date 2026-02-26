@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0f172a"/>
+  <!-- simplified droplet/flask mark -->
+  <path d="M26 10h12v6l8 12v18c0 6.6-5.4 12-12 12H30c-6.6 0-12-5.4-12-12V28l8-12z" fill="#ffffff" opacity="0.95"/>
+  <path d="M32 22c6 7 9 12 9 18 0 5-4 9-9 9s-9-4-9-9c0-6 3-11 9-18z" fill="#00A8FF"/>
+</svg>
