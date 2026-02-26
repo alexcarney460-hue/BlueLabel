@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useCart } from './cart-context';
 
 export default function Home() {
   const [ageVerified, setAgeVerified] = useState(false);
   const [bannerIndex, setBannerIndex] = useState(0);
+  const { addToCart, cartCount } = useCart();
 
   const announcements = [
     '🚀 New shipment arriving: Order by Friday for guaranteed delivery next week',
@@ -81,7 +83,7 @@ export default function Home() {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              <span className="absolute top-0 right-0 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+              <span className="absolute top-0 right-0 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>
             </button>
 
             {/* Account / Login */}
@@ -194,56 +196,64 @@ export default function Home() {
           
           <div className="grid md:grid-cols-4 gap-6">
             {/* Product 1 - Cherry */}
-            <a href="/product/cherry" className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
-              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                <img src="/cherry.jpg" alt="Cherry 7-OH" className="w-full h-full object-contain" />
-              </div>
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
+              <a href="/product/cherry" className="block mb-4">
+                <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                  <img src="/cherry.jpg" alt="Cherry 7-OH" className="w-full h-full object-contain" />
+                </div>
+              </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Cherry</h3>
               <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
               <p className="text-slate-600 text-sm mb-4">Premium cherry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
-                View Product
+              <button onClick={() => addToCart({id: 'cherry', name: 'Cherry 7-OH', price: 29.99, quantity: 1, image: '/cherry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+                Add to Cart
               </button>
-            </a>
+            </div>
 
             {/* Product 2 - Mix Berry */}
-            <a href="/product/mix-berry" className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
-              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                <img src="/mixberry.jpg" alt="Mix Berry 7-OH" className="w-full h-full object-contain" />
-              </div>
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
+              <a href="/product/mix-berry" className="block mb-4">
+                <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                  <img src="/mixberry.jpg" alt="Mix Berry 7-OH" className="w-full h-full object-contain" />
+                </div>
+              </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Mix Berry</h3>
               <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
               <p className="text-slate-600 text-sm mb-4">Enhanced berry blend 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
-                View Product
+              <button onClick={() => addToCart({id: 'mix-berry', name: 'Mix Berry 7-OH', price: 32.99, quantity: 1, image: '/mixberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+                Add to Cart
               </button>
-            </a>
+            </div>
 
             {/* Product 3 - Strawberry */}
-            <a href="/product/strawberry" className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
-              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                <img src="/strawberry.jpg" alt="Strawberry 7-OH" className="w-full h-full object-contain" />
-              </div>
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
+              <a href="/product/strawberry" className="block mb-4">
+                <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                  <img src="/strawberry.jpg" alt="Strawberry 7-OH" className="w-full h-full object-contain" />
+                </div>
+              </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Strawberry</h3>
               <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
               <p className="text-slate-600 text-sm mb-4">Premium strawberry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
-                View Product
+              <button onClick={() => addToCart({id: 'strawberry', name: 'Strawberry 7-OH', price: 29.99, quantity: 1, image: '/strawberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+                Add to Cart
               </button>
-            </a>
+            </div>
 
             {/* Product 4 - Watermelon */}
-            <a href="/product/watermelon" className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
-              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                <img src="/watermelon.jpg" alt="Watermelon 7-OH" className="w-full h-full object-contain" />
-              </div>
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
+              <a href="/product/watermelon" className="block mb-4">
+                <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                  <img src="/watermelon.jpg" alt="Watermelon 7-OH" className="w-full h-full object-contain" />
+                </div>
+              </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Watermelon</h3>
               <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
               <p className="text-slate-600 text-sm mb-4">Premium watermelon-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
-                View Product
+              <button onClick={() => addToCart({id: 'watermelon', name: 'Watermelon 7-OH', price: 31.99, quantity: 1, image: '/watermelon.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+                Add to Cart
               </button>
-            </a>
+            </div>
           </div>
         </div>
       </section>
