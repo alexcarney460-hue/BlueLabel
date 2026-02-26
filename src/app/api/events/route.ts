@@ -25,6 +25,9 @@ export async function POST(req: Request) {
       user_agent: body.user_agent ?? null,
       product_id: body.product_id ?? null,
       user_email: body.user_email ?? null,
+      visitor_id: body.visitor_id ?? null,
+      session_id: body.session_id ?? null,
+      utm: body.utm ?? {},
       meta: body.meta ?? {},
     }),
   });

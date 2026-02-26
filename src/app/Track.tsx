@@ -17,6 +17,53 @@ async function getUserEmail() {
   }
 }
 
+function getOrCreateVisitorId() {
+  if (typeof window === 'undefined') return null;
+  const key = 'bluelabel_visitor_id';
+  let id = window.localStorage.getItem(key);
+  if (!id) {
+    id = crypto.randomUUID();
+    window.localStorage.setItem(key, id);
+  }
+  return id;
+}
+
+function getOrRefreshSessionId() {
+  if (typeof window === 'undefined') return null;
+  const key = 'bluelabel_session';
+  const raw = window.sessionStorage.getItem(key);
+  const now = Date.now();
+
+  try {
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed?.id && parsed?.ts && now - parsed.ts < 30 * 60 * 1000) {
+        // refresh rolling window
+        window.sessionStorage.setItem(key, JSON.stringify({ id: parsed.id, ts: now }));
+        return parsed.id;
+      }
+    }
+  } catch {
+    // ignore
+  }
+
+  const id = crypto.randomUUID();
+  window.sessionStorage.setItem(key, JSON.stringify({ id, ts: now }));
+  return id;
+}
+
+function getUtmParams() {
+  if (typeof window === 'undefined') return {};
+  const url = new URL(window.location.href);
+  const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  const out: Record<string, string> = {};
+  for (const k of keys) {
+    const v = url.searchParams.get(k);
+    if (v) out[k] = v;
+  }
+  return out;
+}
+
 export async function track(event_type: string, payload: any = {}) {
   const user_email = await getUserEmail();
   const body = {
@@ -26,6 +73,9 @@ export async function track(event_type: string, payload: any = {}) {
     user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : null,
     product_id: payload.product_id ?? null,
     user_email,
+    visitor_id: getOrCreateVisitorId(),
+    session_id: getOrRefreshSessionId(),
+    utm: getUtmParams(),
     meta: {
       mobile: typeof navigator !== 'undefined' ? isMobileUA(navigator.userAgent) : null,
       ...payload.meta,
