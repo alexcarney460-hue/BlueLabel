@@ -155,8 +155,8 @@ export default function Home() {
             {/* Left Content */}
             <div>
               <p className="text-sm text-amber-300 font-bold uppercase tracking-wide mb-4">Premium Research Grade</p>
-              <h1 className="text-6xl md:text-7xl font-black mb-6 text-white drop-shadow-lg">
-                ≥98% Purity
+              <h1 className="text-5xl md:text-6xl font-black mb-6 text-white drop-shadow-lg">
+                Research-grade 7-OH Tablets
               </h1>
               <p className="text-xl text-slate-100 mb-8 leading-relaxed">
                 Research-grade 7-OH tablets with verified COAs. Lab-tested, pharmaceutical-grade tablets for wholesale distribution and research use.

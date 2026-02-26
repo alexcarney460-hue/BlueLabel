@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { addToCart } from '@/lib/cart';
+import { useCart } from '@/app/cart-context';
 
 const products: { [key: string]: any } = {
   'cherry': {
@@ -72,18 +72,30 @@ const products: { [key: string]: any } = {
 };
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = products[params.id];
+  const key = decodeURIComponent((params.id || '').toLowerCase());
+  const product = products[key];
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [isSubscription, setIsSubscription] = useState(false);
   const [frequency, setFrequency] = useState('monthly');
+  const { addToCart } = useCart();
 
   if (!product) {
+    // try fuzzy match by replacing spaces/dashes
+    const altKey = key.replace(/[^a-z0-9]/g, '-');
+    const alt = products[altKey];
+    if (alt) {
+      // redirect client-side
+      if (typeof window !== 'undefined') window.location.href = `/product/${altKey}`;
+      return null;
+    }
+
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Product Not Found</h1>
-          <Link href="/" className="text-amber-600 hover:underline">Back to Home</Link>
+          <p className="mb-4">If you followed a link, please try the catalog or contact support.</p>
+          <Link href="/catalog" className="text-amber-600 hover:underline">Back to Catalog</Link>
         </div>
       </div>
     );
