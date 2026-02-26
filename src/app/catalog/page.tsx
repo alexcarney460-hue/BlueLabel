@@ -16,7 +16,7 @@ export default function Catalog() {
     {
       id: 'mix-berry',
       name: 'Mix Berry',
-      image: '/mix-berry.jpg',
+      image: '/mixberry.jpg',
       purity: '≥98%',
       dosage: '20mg per unit',
       description: 'Enhanced berry blend 7-OH tablets for optimal research results.',

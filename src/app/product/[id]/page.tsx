@@ -20,7 +20,7 @@ const products: { [key: string]: any } = {
   },
   'mix-berry': {
     name: 'Mix Berry',
-    image: '/mix-berry.jpg',
+    image: '/mixberry.jpg',
     purity: '≥98%',
     dosage: '20mg per unit',
     price: '$32.99',

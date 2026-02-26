@@ -148,8 +148,8 @@ export default function Home() {
             <div className="flex items-center justify-center">
               <div className="relative w-full max-w-sm">
                 <img 
-                  src="/product-hero.jpg" 
-                  alt="BlueLabel 7-OH Tablets" 
+                  src="/cherry.jpg" 
+                  alt="BlueLabel 7-OH Cherry Tablets" 
                   className="w-full h-auto object-contain drop-shadow-2xl"
                 />
               </div>
@@ -181,7 +181,7 @@ export default function Home() {
             {/* Product 2 - Mix Berry */}
             <a href="/product/mix-berry" className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
               <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                <img src="/mix-berry.jpg" alt="Mix Berry 7-OH" className="w-full h-full object-contain" />
+                <img src="/mixberry.jpg" alt="Mix Berry 7-OH" className="w-full h-full object-contain" />
               </div>
               <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Mix Berry</h3>
               <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
