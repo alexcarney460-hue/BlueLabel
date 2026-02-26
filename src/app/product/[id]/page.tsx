@@ -1,27 +1,11 @@
-'use client';
-
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
-import { useCart } from '@/app/cart-context';
-import { allProducts, normalizeProductId } from '@/lib/products';
+import { getProductById, normalizeProductId } from '@/lib/products';
+import AddToCartClient from './AddToCartClient';
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   const rawId = params?.id ?? '';
   const normalizedId = normalizeProductId(rawId);
-  const product = useMemo(() => allProducts.find((p) => p.id === normalizedId), [normalizedId]);
-  const [hydrated, setHydrated] = useState(false);
-  const [added, setAdded] = useState(false);
-  const { addToCart, cartCount } = useCart();
-
-  useEffect(() => setHydrated(true), []);
-
-  if (!hydrated) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-slate-600">Loading product…</div>
-      </div>
-    );
-  }
+  const product = getProductById(normalizedId);
 
   if (!product) {
     return (
@@ -35,18 +19,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     );
   }
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: 1,
-      image: product.image
-    });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
-  };
-
   return (
     <div className="bg-white min-h-screen font-sans">
       <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-sm">
@@ -56,24 +28,16 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           </Link>
           <nav className="flex flex-wrap gap-4 sm:gap-8 items-center text-xs sm:text-sm">
             <Link href="/" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Home</Link>
-            <Link href="/#products" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Products</Link>
+            <Link href="/catalog" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Catalog</Link>
             <Link href="/#wholesale" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Wholesale</Link>
             <Link href="/#contact" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Contact</Link>
           </nav>
-          <div className="flex gap-4 items-center">
-            <button className="relative p-2 hover:text-amber-600 transition" aria-label="Cart">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              <span className="absolute top-0 right-0 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>
-            </button>
-          </div>
         </div>
       </header>
 
       <section className="py-16 sm:py-20 px-4 sm:px-8">
         <div className="max-w-6xl mx-auto">
-          <Link href="/#products" className="text-amber-600 hover:underline mb-8 inline-block font-bold">← Back to Products</Link>
+          <Link href="/catalog" className="text-amber-600 hover:underline mb-8 inline-block font-bold">← Back to Catalog</Link>
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             <div className="flex items-center justify-center">
               <div className="w-full max-w-xs sm:max-w-sm h-80 sm:h-96 rounded-2xl overflow-hidden flex items-center justify-center">
@@ -106,9 +70,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 </div>
               </div>
 
-              <button onClick={handleAddToCart} className={`w-full font-bold py-4 rounded-lg mb-4 transition text-lg ${added ? 'bg-emerald-500 text-white' : 'bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-900 shadow-lg'}`}>
-                {added ? '✓ Added to Cart' : 'Add to Cart'}
-              </button>
+              <AddToCartClient product={product} />
 
               <div className="bg-slate-50 p-6 rounded-lg">
                 <h3 className="font-bold text-slate-900 mb-4">Quality Assurance</h3>
