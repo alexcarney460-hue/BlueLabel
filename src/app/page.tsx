@@ -1,4 +1,45 @@
+'use client';
+
+import { useState } from 'react';
+
 export default function Home() {
+  const [ageVerified, setAgeVerified] = useState(false);
+
+  if (!ageVerified) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center px-8">
+        <div className="max-w-md w-full bg-white rounded-lg shadow-2xl p-8">
+          <h1 className="text-3xl font-bold text-slate-900 mb-4 text-center">Age Verification</h1>
+          <p className="text-slate-600 mb-6 text-center">
+            You must be at least 21 years old to enter this site.
+          </p>
+          <p className="text-slate-600 mb-8 text-center text-sm">
+            This product is for research use only. Not for human consumption.
+          </p>
+          
+          <div className="space-y-3 mb-6">
+            <button 
+              onClick={() => setAgeVerified(true)}
+              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg transition"
+            >
+              I am 21 or older
+            </button>
+            <a 
+              href="https://www.google.com" 
+              className="w-full block bg-slate-300 hover:bg-slate-400 text-slate-900 font-bold py-3 rounded-lg transition text-center"
+            >
+              I am under 21
+            </a>
+          </div>
+
+          <p className="text-xs text-slate-500 text-center">
+            By clicking "I am 21 or older", you confirm that you are at least 21 years of age and agree to our Terms of Service.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* Header */}
@@ -7,7 +48,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold text-slate-900">BlueLabel</h1>
           <nav className="flex gap-8 items-center">
             <a href="#home" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Home</a>
-            <a href="#catalog" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Catalog</a>
+            <a href="#products" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Products</a>
             <a href="#wholesale" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Wholesale</a>
             <a href="#contact" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Contact</a>
           </nav>
@@ -93,7 +134,7 @@ export default function Home() {
                 Research-grade 7-OH tablets with verified COAs. Lab-tested, pharmaceutical-grade tablets for wholesale distribution and research use.
               </p>
               <div className="flex gap-4 flex-wrap mb-6">
-                <a href="#catalog" className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-10 py-4 rounded-full font-bold transition shadow-lg">
+                <a href="#products" className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-10 py-4 rounded-full font-bold transition shadow-lg">
                   Shop Now
                 </a>
                 <a href="#wholesale" className="inline-block border-2 border-slate-900 text-slate-900 hover:bg-slate-50 px-10 py-4 rounded-full font-bold transition">
@@ -108,10 +149,72 @@ export default function Home() {
               <div className="relative w-full max-w-sm">
                 <img 
                   src="/product-hero.jpg" 
-                  alt="BlueLabel 7-OH Watermelon Tablets" 
-                  className="w-full h-auto object-contain drop-shadow-2xl rounded-2xl"
+                  alt="BlueLabel 7-OH Tablets" 
+                  className="w-full h-auto object-contain drop-shadow-2xl"
                 />
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Section */}
+      <section id="products" className="py-24 px-8 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-amber-600 font-bold uppercase tracking-wide text-center mb-4">Our Selection</p>
+          <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Premium Product Line</h2>
+          
+          <div className="grid md:grid-cols-4 gap-6">
+            {/* Product 1 */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition">
+              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center">
+                <span className="text-slate-500">Product Image</span>
+              </div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Pure 7-OH</h3>
+              <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
+              <p className="text-slate-600 text-sm mb-4">Standard premium 7-hydroxymitragynine tablets for research.</p>
+              <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+                Add to Cart
+              </button>
+            </div>
+
+            {/* Product 2 */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition">
+              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center">
+                <span className="text-slate-500">Product Image</span>
+              </div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Extract Blend</h3>
+              <p className="font-bold text-slate-900 mb-2">≥95% Potency</p>
+              <p className="text-slate-600 text-sm mb-4">Enhanced alkaloid blend engineered for research applications.</p>
+              <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+                Add to Cart
+              </button>
+            </div>
+
+            {/* Product 3 */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition">
+              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center">
+                <span className="text-slate-500">Product Image</span>
+              </div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Standardized Tabs</h3>
+              <p className="font-bold text-slate-900 mb-2">Verified Dosage</p>
+              <p className="text-slate-600 text-sm mb-4">Exact-dose tablets for controlled research studies.</p>
+              <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+                Add to Cart
+              </button>
+            </div>
+
+            {/* Product 4 */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition">
+              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center">
+                <span className="text-slate-500">Product Image</span>
+              </div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Bulk Packs</h3>
+              <p className="font-bold text-slate-900 mb-2">Volume Pricing</p>
+              <p className="text-slate-600 text-sm mb-4">Wholesale-ready bulk containers for resellers.</p>
+              <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
@@ -247,7 +350,7 @@ export default function Home() {
             <a href="mailto:info@bluelabel.com" className="inline-block bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-full font-bold transition shadow-lg text-lg">
               Contact Sales
             </a>
-            <a href="#catalog" className="inline-block border-2 border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-slate-900 px-10 py-4 rounded-full font-bold transition text-lg">
+            <a href="#products" className="inline-block border-2 border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-slate-900 px-10 py-4 rounded-full font-bold transition text-lg">
               View Products
             </a>
           </div>
