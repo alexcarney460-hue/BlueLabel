@@ -1,4 +1,4 @@
-import products from './products.json';
+import products from './products.json' assert { type: 'json' };
 
 export type Product = (typeof products)[number];
 
