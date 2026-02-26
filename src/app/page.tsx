@@ -165,57 +165,57 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Premium Product Line</h2>
           
           <div className="grid md:grid-cols-4 gap-6">
-            {/* Product 1 */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition">
-              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center">
-                <span className="text-slate-500">Product Image</span>
+            {/* Product 1 - Cherry */}
+            <a href="/product/cherry" className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
+              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                <img src="/cherry.jpg" alt="Cherry 7-OH" className="w-full h-full object-contain" />
               </div>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Pure 7-OH</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Cherry</h3>
               <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
-              <p className="text-slate-600 text-sm mb-4">Standard premium 7-hydroxymitragynine tablets for research.</p>
+              <p className="text-slate-600 text-sm mb-4">Premium cherry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
               <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
-                Add to Cart
+                View Product
               </button>
-            </div>
+            </a>
 
-            {/* Product 2 */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition">
-              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center">
-                <span className="text-slate-500">Product Image</span>
+            {/* Product 2 - Mix Berry */}
+            <a href="/product/mix-berry" className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
+              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                <img src="/mix-berry.jpg" alt="Mix Berry 7-OH" className="w-full h-full object-contain" />
               </div>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Extract Blend</h3>
-              <p className="font-bold text-slate-900 mb-2">≥95% Potency</p>
-              <p className="text-slate-600 text-sm mb-4">Enhanced alkaloid blend engineered for research applications.</p>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Mix Berry</h3>
+              <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
+              <p className="text-slate-600 text-sm mb-4">Enhanced berry blend 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
               <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
-                Add to Cart
+                View Product
               </button>
-            </div>
+            </a>
 
-            {/* Product 3 */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition">
-              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center">
-                <span className="text-slate-500">Product Image</span>
+            {/* Product 3 - Strawberry */}
+            <a href="/product/strawberry" className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
+              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                <img src="/strawberry.jpg" alt="Strawberry 7-OH" className="w-full h-full object-contain" />
               </div>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Standardized Tabs</h3>
-              <p className="font-bold text-slate-900 mb-2">Verified Dosage</p>
-              <p className="text-slate-600 text-sm mb-4">Exact-dose tablets for controlled research studies.</p>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Strawberry</h3>
+              <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
+              <p className="text-slate-600 text-sm mb-4">Premium strawberry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
               <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
-                Add to Cart
+                View Product
               </button>
-            </div>
+            </a>
 
-            {/* Product 4 */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition">
-              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center">
-                <span className="text-slate-500">Product Image</span>
+            {/* Product 4 - Watermelon */}
+            <a href="/product/watermelon" className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-lg transition cursor-pointer block">
+              <div className="w-full h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                <img src="/watermelon.jpg" alt="Watermelon 7-OH" className="w-full h-full object-contain" />
               </div>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Bulk Packs</h3>
-              <p className="font-bold text-slate-900 mb-2">Volume Pricing</p>
-              <p className="text-slate-600 text-sm mb-4">Wholesale-ready bulk containers for resellers.</p>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Watermelon</h3>
+              <p className="font-bold text-slate-900 mb-2">≥98% Purity</p>
+              <p className="text-slate-600 text-sm mb-4">Premium watermelon-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
               <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition text-sm">
-                Add to Cart
+                View Product
               </button>
-            </div>
+            </a>
           </div>
         </div>
       </section>
