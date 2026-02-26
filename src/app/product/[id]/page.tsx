@@ -3,15 +3,15 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { useCart } from '@/app/cart-context';
-import { allProducts, normalizeProductId } from '@/lib/products';
+import { allProducts, normalizeProductId, requiredProductIds } from '@/lib/products';
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   const rawId = params?.id ?? '';
   const normalizedId = normalizeProductId(rawId);
 
-  // hard-allow slugs
-  const allowed = new Set(['cherry','mix-berry','strawberry','watermelon']);
-  const slug = allowed.has(normalizedId) ? normalizedId : normalizedId;
+  // only allow known slugs
+  const allowed = new Set<string>(requiredProductIds);
+  const slug = allowed.has(normalizedId) ? normalizedId : '';
 
   const product = useMemo(() => allProducts.find((p) => p.id === slug), [slug]);
 
@@ -21,6 +21,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   useEffect(() => setHydrated(true), []);
 
+  useEffect(() => {
+    // redirect weird slugs to normalized (only if it becomes valid)
+    if (hydrated && rawId && rawId !== normalizedId && allowed.has(normalizedId)) {
+      window.location.replace(`/product/${normalizedId}`);
+    }
+  }, [hydrated, rawId, normalizedId, allowed]);
+
   if (!hydrated) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
@@ -28,13 +35,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       </div>
     );
   }
-
-  useEffect(() => {
-    // redirect weird slugs to normalized
-    if (hydrated && rawId && rawId !== slug) {
-      window.location.replace(`/product/${slug}`);
-    }
-  }, [hydrated, rawId, slug]);
 
   if (!product) {
     return (
