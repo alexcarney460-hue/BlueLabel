@@ -34,6 +34,9 @@ export default function Header() {
           </nav>
 
           <div className="flex gap-4 items-center">
+            <Link href="/profile" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition text-xs sm:text-sm">
+              Profile
+            </Link>
             <button
               type="button"
               onClick={() => setOpen(true)}

@@ -52,7 +52,16 @@ export default function Admin() {
   const max = useMemo(() => Math.max(1, ...series.map((s) => s.count)), [series]);
 
   if (authorized === null) return <div className="p-8">Loading…</div>;
-  if (!authorized) return <div className="p-8">Not authorized.</div>;
+  if (!authorized) {
+    return (
+      <div className="p-8">
+        <div className="max-w-md">
+          <div className="font-black text-xl mb-2">Not authorized.</div>
+          <a href="/login" className="inline-block px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Sign in</a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white p-4 sm:p-8">
