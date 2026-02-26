@@ -132,32 +132,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Affiliate Program */}
-      <section className="py-20 px-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-amber-600 font-bold uppercase tracking-wide mb-4">Affiliate Program</p>
-          <h2 className="text-4xl font-bold mb-6 text-slate-900">Creators earn 15%+ recurring</h2>
-          <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
-            Give your audience access to research-grade 7-OH tablets and earn commission on every order. We ship influencer sample kits, custom coupon codes, and real-time dashboards.
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-6 max-w-2xl mx-auto">
-            <div className="text-left">
-              <p className="font-bold text-slate-900 mb-2">Net-7 payouts</p>
-              <p className="text-slate-600 text-sm">Quick payment for your earnings</p>
-            </div>
-            <div className="text-left">
-              <p className="font-bold text-slate-900 mb-2">Personalized discount links</p>
-              <p className="text-slate-600 text-sm">Track every referral</p>
-            </div>
-            <div className="text-left">
-              <p className="font-bold text-slate-900 mb-2">Research-compliant creative kit</p>
-              <p className="text-slate-600 text-sm">Everything you need to promote</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="bg-slate-900 text-white py-8 px-8 text-center border-t border-slate-800">
         <p className="text-slate-400">Research use only · Not for human consumption</p>
