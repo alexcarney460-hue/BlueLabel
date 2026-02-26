@@ -1,40 +1,9 @@
-'use client';
-
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
-import { useCart } from '@/app/cart-context';
-import { allProducts, normalizeProductId, requiredProductIds } from '@/lib/products';
+import AddToCartClient from './AddToCartClient';
+import { getProductById } from '@/lib/products';
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const rawId = params?.id ?? '';
-  const normalizedId = normalizeProductId(rawId);
-
-  // only allow known slugs
-  const allowed = new Set<string>(requiredProductIds);
-  const slug = allowed.has(normalizedId) ? normalizedId : '';
-
-  const product = useMemo(() => allProducts.find((p) => p.id === slug), [slug]);
-
-  const [hydrated, setHydrated] = useState(false);
-  const [added, setAdded] = useState(false);
-  const { addToCart, cartCount } = useCart();
-
-  useEffect(() => setHydrated(true), []);
-
-  useEffect(() => {
-    // redirect weird slugs to normalized (only if it becomes valid)
-    if (hydrated && rawId && rawId !== normalizedId && allowed.has(normalizedId)) {
-      window.location.replace(`/product/${normalizedId}`);
-    }
-  }, [hydrated, rawId, normalizedId, allowed]);
-
-  if (!hydrated) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-slate-600">Loading product…</div>
-      </div>
-    );
-  }
+  const product = getProductById(params?.id ?? '');
 
   if (!product) {
     return (
@@ -42,17 +11,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Product Not Found</h1>
           <p className="mb-4">If you followed a link, please try the catalog or contact support.</p>
-          <Link href="/catalog" className="text-amber-600 hover:underline">Back to Catalog</Link>
+          <Link href="/catalog" className="text-amber-600 hover:underline">
+            Back to Catalog
+          </Link>
         </div>
       </div>
     );
   }
-
-  const handleAddToCart = () => {
-    addToCart({ id: product.id, name: product.name, price: product.price, quantity: 1, image: product.image });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1500);
-  };
 
   return (
     <div className="bg-white min-h-screen font-sans">
@@ -68,12 +33,20 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             <Link href="/#contact" className="text-slate-700 hover:text-amber-600 font-bold uppercase tracking-wide transition">Contact</Link>
           </nav>
           <div className="flex gap-4 items-center">
-            <button className="relative p-2 hover:text-amber-600 transition" aria-label="Cart">
+            <Link
+              href="/checkout"
+              className="relative p-2 hover:text-amber-600 transition"
+              aria-label="Cart"
+            >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                />
               </svg>
-              <span className="absolute top-0 right-0 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>
-            </button>
+            </Link>
           </div>
         </div>
       </header>
@@ -113,16 +86,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 </div>
               </div>
 
-              <button
-                onClick={handleAddToCart}
-                className={`w-full font-bold py-4 rounded-lg mb-4 transition text-lg ${
-                  added
-                    ? 'bg-emerald-500 text-white'
-                    : 'bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-900 shadow-lg'
-                }`}
-              >
-                {added ? '✓ Added to Cart' : 'Add to Cart'}
-              </button>
+              <AddToCartClient product={product} />
 
               <div className="bg-slate-50 p-6 rounded-lg">
                 <h3 className="font-bold text-slate-900 mb-4">Quality Assurance</h3>
