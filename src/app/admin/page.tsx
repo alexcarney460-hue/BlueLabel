@@ -3,6 +3,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getSupabase } from '@/lib/supabase';
 
+// Requires env:
+// - NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN (client)
+// - ADMIN_ANALYTICS_TOKEN (server)
+
 type Row = { day: string; count: number };
 
 function daysAgo(n: number) {
@@ -30,48 +34,18 @@ export default function Admin() {
   useEffect(() => {
     (async () => {
       if (!authorized) return;
-      const since = daysAgo(range).toISOString();
 
-      const types = [
-        'pageview',
-        'click_product',
-        'click_add_to_cart',
-        'click_checkout',
-        'submit_order',
-      ];
+      const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN;
+      if (!token) return;
 
-      const next: Record<string, number> = {};
-      const supabase = getSupabase();
-
-      for (const t of types) {
-        const { count } = await supabase
-          .from('events')
-          .select('*', { count: 'exact', head: true })
-          .eq('event_type', t)
-          .gte('created_at', since);
-        next[t] = count ?? 0;
-      }
-      setKpis(next);
-
-      // daily pageviews series
-      const { data: rows } = await supabase
-        .from('events')
-        .select('created_at')
-        .eq('event_type', 'pageview')
-        .gte('created_at', since);
-
-      const byDay = new Map<string, number>();
-      (rows ?? []).forEach((r: any) => {
-        const day = new Date(r.created_at).toISOString().slice(0, 10);
-        byDay.set(day, (byDay.get(day) ?? 0) + 1);
+      const res = await fetch(`/api/admin-analytics?range=${range}`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
+      if (!res.ok) return;
 
-      const out: Row[] = [];
-      for (let i = range - 1; i >= 0; i--) {
-        const day = daysAgo(i).toISOString().slice(0, 10);
-        out.push({ day, count: byDay.get(day) ?? 0 });
-      }
-      setSeries(out);
+      const json = await res.json();
+      setKpis(json.kpis ?? {});
+      setSeries(json.series ?? []);
     })();
   }, [authorized, range]);
 
