@@ -84,13 +84,12 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
             >
               Clear
             </button>
-            <button
-              className="flex-1 bg-slate-900 text-white font-bold py-3 rounded-xl"
-              disabled={cart.length === 0}
-              onClick={() => alert('Checkout not wired yet.')}
+            <a
+              className={`flex-1 text-center bg-slate-900 text-white font-bold py-3 rounded-xl ${cart.length === 0 ? 'pointer-events-none opacity-50' : ''}`}
+              href="/checkout"
             >
               Checkout
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -9,7 +9,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const rawId = params?.id ?? '';
   const normalizedId = normalizeProductId(rawId);
 
-  const product = useMemo(() => allProducts.find((p) => p.id === normalizedId), [normalizedId]);
+  // hard-allow slugs
+  const allowed = new Set(['cherry','mix-berry','strawberry','watermelon']);
+  const slug = allowed.has(normalizedId) ? normalizedId : normalizedId;
+
+  const product = useMemo(() => allProducts.find((p) => p.id === slug), [slug]);
 
   const [hydrated, setHydrated] = useState(false);
   const [added, setAdded] = useState(false);
@@ -24,6 +28,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       </div>
     );
   }
+
+  useEffect(() => {
+    // redirect weird slugs to normalized
+    if (hydrated && rawId && rawId !== slug) {
+      window.location.replace(`/product/${slug}`);
+    }
+  }, [hydrated, rawId, slug]);
 
   if (!product) {
     return (
