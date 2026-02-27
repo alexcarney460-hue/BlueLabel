@@ -2,13 +2,16 @@
 
 import { useState } from 'react';
 import { useCart } from '@/app/cart-context';
+import { useAccountPricing } from '@/lib/useAccountPricing';
 
 export default function AddToCartClient({ product }: { product: any }) {
   const { addToCart } = useCart();
+  const { isSignedIn, price } = useAccountPricing();
   const [added, setAdded] = useState(false);
 
   const handle = () => {
-    addToCart({ id: product.id, name: product.name, price: product.price, quantity: 1, image: product.image });
+    const finalPrice = price(product.price);
+    addToCart({ id: product.id, name: product.name, price: finalPrice, quantity: 1, image: product.image });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };

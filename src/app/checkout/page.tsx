@@ -2,9 +2,12 @@
 
 import { useState } from 'react';
 import { useCart } from '@/app/cart-context';
+import { useAccountPricing } from '@/lib/useAccountPricing';
+import { minOrderFor } from '@/lib/wholesaleRules';
 
 export default function CheckoutPage() {
   const { cart, clearCart } = useCart();
+  const { accountType, isSignedIn } = useAccountPricing();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -19,8 +22,15 @@ export default function CheckoutPage() {
   const [frequency, setFrequency] = useState<'monthly' | '6weeks'>('monthly');
 
   const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+  const minTotal = isSignedIn ? minOrderFor(accountType) : 0;
+  const belowMin = minTotal > 0 && subtotal < minTotal;
 
   const submit = async () => {
+    if (belowMin) {
+      alert(`Minimum order total required for your account: $${minTotal.toFixed(2)}`);
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch('/api/orders', {
@@ -51,6 +61,9 @@ export default function CheckoutPage() {
     <div className="min-h-screen bg-white px-4 sm:px-8 py-10">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-black mb-6">Checkout</h1>
+        {isSignedIn && accountType !== 'retail' && (
+          <div className="text-sm text-slate-600 mb-6">Account pricing applied.</div>
+        )}
 
         <div className="bg-slate-50 rounded-2xl p-5 sm:p-6 mb-8">
           <div className="font-bold mb-2">Order Summary</div>
@@ -101,7 +114,15 @@ export default function CheckoutPage() {
             )}
           </div>
 
-          <button disabled={loading || cart.length===0} onClick={submit} className="bg-slate-900 text-white font-bold py-4 rounded-xl">
+          {belowMin && (
+            <div className="border border-amber-200 bg-amber-50 text-amber-900 rounded-xl p-4 text-sm">
+              Minimum order total required for your account.
+              <div className="font-black mt-1">Minimum: ${minTotal.toFixed(2)}</div>
+              <div className="text-amber-800">Add more items to proceed.</div>
+            </div>
+          )}
+
+          <button disabled={loading || cart.length===0 || belowMin} onClick={submit} className="bg-slate-900 text-white font-bold py-4 rounded-xl disabled:opacity-50">
             {loading ? 'Submitting…' : 'Submit Order'}
           </button>
 

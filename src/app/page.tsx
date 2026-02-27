@@ -4,10 +4,14 @@ import { useState, useEffect } from 'react';
 import Header from './Header';
 import { useCart } from './cart-context';
 import { allProducts } from '@/lib/products';
+import { getMyProfile } from '@/lib/account';
+import { priceForAccount } from '@/lib/pricing';
 
 export default function Home() {
   const [ageVerified, setAgeVerified] = useState(false);
   const [bannerIndex, setBannerIndex] = useState(0);
+  const [accountType, setAccountType] = useState<'retail' | 'shop' | 'distributor'>('retail');
+  const [isSignedIn, setIsSignedIn] = useState(false);
   const { addToCart } = useCart();
 
   const announcements = [
@@ -18,11 +22,35 @@ export default function Home() {
 
   const products = allProducts;
 
+  const productPrice = (id: string) => {
+    const p = products.find((x) => x.id === id);
+    const base = p?.price ?? 0;
+    return isSignedIn ? priceForAccount(base, accountType) : base;
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setBannerIndex((prev) => (prev + 1) % announcements.length);
     }, 5000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const p = await getMyProfile();
+        if (p) {
+          setIsSignedIn(true);
+          setAccountType((p.account_type as any) ?? 'retail');
+        } else {
+          setIsSignedIn(false);
+          setAccountType('retail');
+        }
+      } catch {
+        setIsSignedIn(false);
+        setAccountType('retail');
+      }
+    })();
   }, []);
 
   if (!ageVerified) {
@@ -129,8 +157,13 @@ export default function Home() {
               </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">Cherry</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
-              <p className="text-slate-600 text-sm mb-4">Premium cherry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button onClick={() => { addToCart({id: 'cherry', name: 'Cherry 7-OH', price: 29.99, quantity: 1, image: '/cherry.jpg'}); import('./Track').then(m => m.track('click_add_to_cart', { product_id: 'cherry' })); }} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
+              <p className="text-slate-600 text-sm mb-3">Premium cherry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
+              <div className="text-sm mb-4">
+                <div className="font-black text-slate-900">${productPrice('cherry').toFixed(2)}</div>
+                <div className="text-slate-600">Retail price{isSignedIn && accountType !== 'retail' ? ' (your account pricing applied)' : ''}</div>
+                {!isSignedIn && <div className="text-slate-500">Wholesale pricing available — sign in to view.</div>}
+              </div>
+              <button onClick={() => { addToCart({id: 'cherry', name: 'Cherry 7-OH', price: productPrice('cherry'), quantity: 1, image: '/cherry.jpg'}); import('./Track').then(m => m.track('click_add_to_cart', { product_id: 'cherry' })); }} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
                 Add to Cart
               </button>
             </div>
@@ -144,8 +177,13 @@ export default function Home() {
               </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">Mix Berry</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
-              <p className="text-slate-600 text-sm mb-4">Enhanced berry blend 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button onClick={() => addToCart({id: 'mix-berry', name: 'Mix Berry 7-OH', price: 32.99, quantity: 1, image: '/mixberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
+              <p className="text-slate-600 text-sm mb-3">Enhanced berry blend 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
+              <div className="text-sm mb-4">
+                <div className="font-black text-slate-900">${productPrice('mix-berry').toFixed(2)}</div>
+                <div className="text-slate-600">Retail price{isSignedIn && accountType !== 'retail' ? ' (your account pricing applied)' : ''}</div>
+                {!isSignedIn && <div className="text-slate-500">Wholesale pricing available — sign in to view.</div>}
+              </div>
+              <button onClick={() => addToCart({id: 'mix-berry', name: 'Mix Berry 7-OH', price: productPrice('mix-berry'), quantity: 1, image: '/mixberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
                 Add to Cart
               </button>
             </div>
@@ -159,8 +197,13 @@ export default function Home() {
               </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">Strawberry</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
-              <p className="text-slate-600 text-sm mb-4">Premium strawberry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button onClick={() => addToCart({id: 'strawberry', name: 'Strawberry 7-OH', price: 29.99, quantity: 1, image: '/strawberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
+              <p className="text-slate-600 text-sm mb-3">Premium strawberry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
+              <div className="text-sm mb-4">
+                <div className="font-black text-slate-900">${productPrice('strawberry').toFixed(2)}</div>
+                <div className="text-slate-600">Retail price{isSignedIn && accountType !== 'retail' ? ' (your account pricing applied)' : ''}</div>
+                {!isSignedIn && <div className="text-slate-500">Wholesale pricing available — sign in to view.</div>}
+              </div>
+              <button onClick={() => addToCart({id: 'strawberry', name: 'Strawberry 7-OH', price: productPrice('strawberry'), quantity: 1, image: '/strawberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
                 Add to Cart
               </button>
             </div>
@@ -174,8 +217,13 @@ export default function Home() {
               </a>
               <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">Watermelon</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
-              <p className="text-slate-600 text-sm mb-4">Premium watermelon-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
-              <button onClick={() => addToCart({id: 'watermelon', name: 'Watermelon 7-OH', price: 31.99, quantity: 1, image: '/watermelon.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
+              <p className="text-slate-600 text-sm mb-3">Premium watermelon-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
+              <div className="text-sm mb-4">
+                <div className="font-black text-slate-900">${productPrice('watermelon').toFixed(2)}</div>
+                <div className="text-slate-600">Retail price{isSignedIn && accountType !== 'retail' ? ' (your account pricing applied)' : ''}</div>
+                {!isSignedIn && <div className="text-slate-500">Wholesale pricing available — sign in to view.</div>}
+              </div>
+              <button onClick={() => addToCart({id: 'watermelon', name: 'Watermelon 7-OH', price: productPrice('watermelon'), quantity: 1, image: '/watermelon.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
                 Add to Cart
               </button>
             </div>
@@ -308,7 +356,7 @@ export default function Home() {
             Join researchers and distributors worldwide who trust BlueLabel for premium 7-OH tablets. Contact us for wholesale inquiries, sample orders, or partnership opportunities.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="mailto:info@bluelabel.com" className="inline-block bg-gradient-to-r from-sky-300 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105 text-lg">
+            <a href="mailto:info@bluelabelwholesale.com" className="inline-block bg-gradient-to-r from-sky-300 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105 text-lg">
               Contact Sales
             </a>
             <a href="#products" className="inline-block border-2 border-sky-300 text-sky-200 hover:bg-white/10 px-10 py-4 rounded-full font-bold transition text-lg backdrop-blur-sm">

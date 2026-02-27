@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { getSupabase } from '@/lib/supabase';
+import { getMyProfile } from '@/lib/account';
 
 const ADMIN_EMAIL = 'gardenablaze@gmail.com';
 
 export default function ProfilePage() {
   const [email, setEmail] = useState<string | null>(null);
+  const [accountType, setAccountType] = useState<string | null>(null);
+  const [companyName, setCompanyName] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -14,6 +17,10 @@ export default function ProfilePage() {
         const supabase = getSupabase();
         const { data } = await supabase.auth.getUser();
         setEmail(data.user?.email ?? null);
+
+        const p = await getMyProfile();
+        setAccountType(p?.account_type ?? null);
+        setCompanyName(p?.company_name ?? null);
       } catch {
         setEmail(null);
       }
@@ -53,6 +60,11 @@ export default function ProfilePage() {
         <div className="border rounded-2xl p-4 mb-4">
           <div className="text-sm text-slate-600">Signed in as</div>
           <div className="font-bold">{email}</div>
+          <div className="mt-3 text-sm text-slate-700">
+            <span className="font-bold">Account type:</span>{' '}
+            {accountType ? accountType : '—'}
+            {companyName ? <span className="text-slate-500"> · {companyName}</span> : null}
+          </div>
           <div className="mt-3 flex gap-2">
             <button onClick={logout} className="px-4 py-2 rounded-lg border font-bold">Sign out</button>
           </div>

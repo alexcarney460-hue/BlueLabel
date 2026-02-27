@@ -84,7 +84,9 @@ export default async function ProductPage({
               <p className="text-sky-600 text-sm font-bold uppercase mb-6">Research Grade</p>
 
               <div className="mb-8">
+                <div className="text-sm text-slate-600 font-semibold">Retail</div>
                 <p className="text-3xl sm:text-4xl font-black text-slate-900">${product.price.toFixed(2)}</p>
+                <p className="text-sm text-slate-500">Wholesale pricing available — sign in to view.</p>
               </div>
 
               <p className="text-base sm:text-lg text-slate-600 mb-8 leading-relaxed">{product.description}</p>

@@ -2,9 +2,11 @@
 
 import { useMemo } from 'react';
 import { useCart } from './cart-context';
+import { useAccountPricing } from '@/lib/useAccountPricing';
 
 export default function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
+  const { isSignedIn, accountType } = useAccountPricing();
 
   const subtotal = useMemo(() => cart.reduce((s, i) => s + i.price * i.quantity, 0), [cart]);
 
@@ -24,9 +26,14 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
         role="dialog"
         aria-label="Shopping cart"
       >
-        <div className="p-4 border-b border-slate-200 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-slate-900">Cart</h2>
-          <button onClick={onClose} className="text-slate-600 hover:text-slate-900 font-bold px-2 py-1">✕</button>
+        <div className="p-4 border-b border-slate-200">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-slate-900">Cart</h2>
+            <button onClick={onClose} className="text-slate-600 hover:text-slate-900 font-bold px-2 py-1">✕</button>
+          </div>
+          {isSignedIn && accountType !== 'retail' && (
+            <div className="text-xs text-slate-500 mt-1">Account pricing applied.</div>
+          )}
         </div>
 
         <div className="p-4 space-y-4 overflow-auto h-[calc(100%-180px)]">
