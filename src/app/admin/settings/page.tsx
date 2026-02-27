@@ -15,6 +15,7 @@ type Product = {
 
 export default function AdminSettings() {
   const [authed, setAuthed] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [form, setForm] = useState<Partial<Product>>({ active: true, sort: 0, price: 0 });
   const [status, setStatus] = useState<string>('');
@@ -24,20 +25,31 @@ export default function AdminSettings() {
     const supabase = getSupabase();
     const { data } = await supabase.auth.getSession();
     const token = data.session?.access_token;
-    if (!token) return;
+    if (!token) {
+      setStatus('Not logged in');
+      return;
+    }
 
     const res = await fetch('/api/admin-products', {
       headers: { Authorization: `Bearer ${token}` },
     });
+    if (!res.ok) {
+      setStatus('Failed to load products');
+      return;
+    }
     const json = await res.json();
     setProducts(json.products ?? []);
   }
 
   useEffect(() => {
     (async () => {
-      const supabase = getSupabase();
-      const { data } = await supabase.auth.getUser();
-      setAuthed((data.user?.email ?? '').toLowerCase() === 'gardenablaze@gmail.com');
+      try {
+        const supabase = getSupabase();
+        const { data } = await supabase.auth.getUser();
+        setAuthed((data.user?.email ?? '').toLowerCase() === 'gardenablaze@gmail.com');
+      } finally {
+        setChecked(true);
+      }
     })();
   }, []);
 
@@ -72,11 +84,14 @@ export default function AdminSettings() {
     await load();
   }
 
+  if (!checked) return <div className="p-8">Loading…</div>;
+
   if (!authed) {
     return (
       <div className="p-8">
         <div className="font-black text-xl mb-2">Admin Settings</div>
-        <div className="text-slate-600">Not authorized.</div>
+        <div className="text-slate-600 mb-4">Not authorized.</div>
+        <a href="/profile" className="inline-block px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Go to profile</a>
       </div>
     );
   }
