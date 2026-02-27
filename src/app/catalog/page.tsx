@@ -27,16 +27,16 @@ export default function Catalog() {
       <Header />
 
       {/* Catalog Section */}
-      <section className="py-20 px-8 bg-gradient-to-b from-slate-50 to-white">
+      <section className="py-14 sm:py-20 px-4 sm:px-8 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl font-bold text-center mb-12 text-slate-900">Product Catalog</h1>
+          <h1 className="text-3xl sm:text-5xl font-black text-center mb-8 sm:mb-12 text-slate-900">Product Catalog</h1>
           
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {products.map((product) => (
               <Link key={product.id} href={`/product/${product.id}`}>
                 <div className="bg-white rounded-2xl shadow-sm border border-white hover:shadow-lg transition cursor-pointer group">
-                  <div className="w-full h-64 bg-slate-200 rounded-t-2xl overflow-hidden flex items-center justify-center">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition" />
+                  <div className="w-full h-52 sm:h-64 bg-slate-100 rounded-t-2xl overflow-hidden flex items-center justify-center">
+                    <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition p-3 sm:p-4" />
                   </div>
                   <div className="p-6">
                     <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">{product.name}</h3>

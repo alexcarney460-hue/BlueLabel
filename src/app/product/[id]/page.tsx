@@ -69,10 +69,10 @@ export default async function ProductPage({
     <div className="bg-white min-h-screen font-sans">
       <Header />
 
-      <section className="py-16 sm:py-20 px-4 sm:px-8">
+      <section className="py-12 sm:py-20 px-4 sm:px-8">
         <div className="max-w-6xl mx-auto">
-          <Link href="/catalog" className="text-sky-600 hover:underline mb-8 inline-block font-bold">← Back to Catalog</Link>
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+          <Link href="/catalog" className="text-sky-600 hover:underline mb-6 sm:mb-8 inline-block font-bold">← Back to Catalog</Link>
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
             <div className="flex items-center justify-center">
               <div className="w-full max-w-xs sm:max-w-sm h-80 sm:h-96 rounded-2xl overflow-hidden flex items-center justify-center">
                 <img src={product.image} alt={product.name} className="w-full h-full object-contain p-6 sm:p-8" />
