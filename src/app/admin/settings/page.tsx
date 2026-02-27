@@ -59,6 +59,30 @@ export default function AdminSettings() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authed]);
 
+  async function seedDefaults() {
+    setStatus('');
+    const supabase = getSupabase();
+    const { data } = await supabase.auth.getSession();
+    const token = data.session?.access_token;
+    if (!token) {
+      setStatus('Not logged in');
+      return;
+    }
+
+    const res = await fetch('/api/admin-products/seed', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (!res.ok) {
+      setStatus('Seed failed');
+      return;
+    }
+
+    setStatus('Seeded');
+    await load();
+  }
+
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setStatus('');
@@ -102,9 +126,12 @@ export default function AdminSettings() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-3xl font-black">Admin Settings</h1>
-            <div className="text-slate-600">Products (prices, photos, active)</div>
+            <div className="text-slate-600">Products (unit price, photos, active)</div>
           </div>
-          <a href="/admin" className="px-4 py-2 rounded-lg border font-bold">Back</a>
+          <div className="flex gap-2">
+            <button onClick={seedDefaults} className="px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Seed defaults</button>
+            <a href="/admin" className="px-4 py-2 rounded-lg border font-bold">Back</a>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -113,7 +140,7 @@ export default function AdminSettings() {
             <form onSubmit={save} className="space-y-3">
               <input className="w-full border rounded-lg px-3 py-2" placeholder="id (e.g. cherry)" value={form.id ?? ''} onChange={(e)=>setForm(f=>({ ...f, id: e.target.value }))} />
               <input className="w-full border rounded-lg px-3 py-2" placeholder="name" value={form.name ?? ''} onChange={(e)=>setForm(f=>({ ...f, name: e.target.value }))} />
-              <input className="w-full border rounded-lg px-3 py-2" placeholder="price" type="number" step="0.01" value={form.price ?? 0} onChange={(e)=>setForm(f=>({ ...f, price: Number(e.target.value) }))} />
+              <input className="w-full border rounded-lg px-3 py-2" placeholder="unit price" type="number" step="0.01" value={form.price ?? 0} onChange={(e)=>setForm(f=>({ ...f, price: Number(e.target.value) }))} />
               <input className="w-full border rounded-lg px-3 py-2" placeholder="image_url (/cherry.jpg or https://...)" value={form.image_url ?? ''} onChange={(e)=>setForm(f=>({ ...f, image_url: e.target.value }))} />
               <input className="w-full border rounded-lg px-3 py-2" placeholder="summary" value={form.summary ?? ''} onChange={(e)=>setForm(f=>({ ...f, summary: e.target.value }))} />
               <div className="flex gap-3">

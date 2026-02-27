@@ -6,13 +6,13 @@ export const allProducts = [
     image: '/cherry.jpg',
     purityLabel: 'Lab-verified purity',
     dosage: '20mg per unit',
-    price: 29.99,
-    summary: 'Premium cherry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.',
+    price: 24.99,
+    summary: 'Premium cherry-flavored 7-OH tablets. 20mg per unit.',
     description: 'Premium cherry-flavored 7-OH tablets crafted for research use.',
     details: [
       'Lab-verified purity with serialized COA',
       '20mg per tablet',
-      '2 containers of 10 tablets',
+      '1 tablet per unit',
       'HPLC & GC-MS tested',
       'Certificate of Analysis included'
     ]
@@ -24,13 +24,13 @@ export const allProducts = [
     image: '/mixberry.jpg',
     purityLabel: 'Lab-verified purity',
     dosage: '20mg per unit',
-    price: 32.99,
-    summary: 'Enhanced berry blend 7-OH tablets. 20mg per unit, 2 containers of 10.',
+    price: 24.99,
+    summary: 'Enhanced berry blend 7-OH tablets. 20mg per unit.',
     description: 'Enhanced berry blend 7-OH tablets optimized for research applications.',
     details: [
       'Lab-verified purity with serialized COA',
       '20mg per tablet',
-      '2 containers of 10 tablets',
+      '1 tablet per unit',
       'Advanced alkaloid blend',
       'Serialized COA included'
     ]
@@ -42,13 +42,13 @@ export const allProducts = [
     image: '/strawberry.jpg',
     purityLabel: 'Lab-verified purity',
     dosage: '20mg per unit',
-    price: 29.99,
-    summary: 'Premium strawberry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.',
+    price: 24.99,
+    summary: 'Premium strawberry-flavored 7-OH tablets. 20mg per unit.',
     description: 'Lab-verified strawberry-flavored 7-OH tablets for research.',
     details: [
       'Lab-verified purity with serialized COA',
       '20mg per tablet',
-      '2 containers of 10 tablets',
+      '1 tablet per unit',
       'HPLC & GC-MS tested',
       'Chain-of-custody documentation'
     ]
@@ -60,13 +60,13 @@ export const allProducts = [
     image: '/watermelon.jpg',
     purityLabel: 'Lab-verified purity',
     dosage: '20mg per unit',
-    price: 31.99,
-    summary: 'Premium watermelon-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.',
+    price: 24.99,
+    summary: 'Premium watermelon-flavored 7-OH tablets. 20mg per unit.',
     description: 'Premium watermelon-flavored 7-OH tablets with comprehensive verification.',
     details: [
       'Lab-verified purity with serialized COA',
       '20mg per tablet',
-      '2 containers of 10 tablets',
+      '1 tablet per unit',
       'Microbial analysis included',
       'ISO 17025 certified testing'
     ]
