@@ -65,9 +65,26 @@ export default async function ProductPage({
     notFound();
   }
 
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    image: [`https://bluelabelwholesale.com${product.image}`],
+    brand: { '@type': 'Brand', name: 'Blue Label Wholesale' },
+    offers: {
+      '@type': 'Offer',
+      url: `https://bluelabelwholesale.com/product/${product.id}`,
+      priceCurrency: 'USD',
+      price: Number(product.price).toFixed(2),
+      availability: 'https://schema.org/InStock',
+    },
+  };
+
   return (
     <div className="bg-white min-h-screen font-sans">
       <Header />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
 
       <section className="py-12 sm:py-20 px-4 sm:px-8">
         <div className="max-w-6xl mx-auto">

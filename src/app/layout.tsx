@@ -53,11 +53,21 @@ export const metadata: Metadata = {
 import TrackPageView from './Track';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const orgJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Blue Label Wholesale',
+    url: 'https://bluelabelwholesale.com',
+    logo: 'https://bluelabelwholesale.com/logo.jpg',
+    email: 'info@bluelabelwholesale.com',
+  };
+
   return (
     <html lang="en">
       <body>
         <CartProvider>
           <TrackPageView />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
           {children}
         </CartProvider>
       </body>
