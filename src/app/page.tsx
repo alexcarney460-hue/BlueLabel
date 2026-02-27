@@ -403,13 +403,6 @@ export default function Home() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <a
-              href="mailto:info@bluelabelwholesale.com"
-              className="inline-block px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105 text-lg"
-              style={{ background: 'linear-gradient(90deg, var(--brand-2), var(--brand))', color: 'white' }}
-            >
-              Contact Sales
-            </a>
-            <a
               href="#products"
               className="inline-block px-10 py-4 rounded-full font-bold transition text-lg"
               style={{ border: '1px solid var(--divider)', color: 'var(--text)', background: 'rgba(255,255,255,0.6)' }}

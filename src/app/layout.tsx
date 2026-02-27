@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from './cart-context';
+import ChatWidget from './ChatWidget';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bluelabelwholesale.com'),
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <TrackPageView />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
           {children}
+          <ChatWidget />
         </CartProvider>
       </body>
     </html>
