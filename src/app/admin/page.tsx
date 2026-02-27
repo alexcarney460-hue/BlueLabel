@@ -67,8 +67,12 @@ export default function Admin() {
     <div className="min-h-screen bg-white p-4 sm:p-8">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-black">Admin</h1>
+          <div>
+            <h1 className="text-3xl font-black">Admin</h1>
+            <div className="text-slate-600">Analytics + settings</div>
+          </div>
           <div className="flex gap-2">
+            <a href="/admin/settings" className="px-4 py-2 rounded-lg border font-bold">Settings</a>
             <button onClick={() => setRange(7)} className={`px-4 py-2 rounded-lg border font-bold ${range===7?'bg-slate-900 text-white':'bg-white'}`}>7d</button>
             <button onClick={() => setRange(30)} className={`px-4 py-2 rounded-lg border font-bold ${range===30?'bg-slate-900 text-white':'bg-white'}`}>30d</button>
           </div>
