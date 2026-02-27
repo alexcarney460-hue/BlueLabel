@@ -321,22 +321,22 @@ export default function Home() {
               <div className="flex gap-4 items-start">
                 <div className="h-6 w-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mt-0.5 flex-shrink-0">✓</div>
                 <div>
-                  <h3 className="font-bold text-slate-900">Ultrasonic Cleaning</h3>
-                  <p className="text-slate-600 text-sm">Automated 360° cleaning removes all contaminants.</p>
+                  <h3 className="font-bold text-slate-900">Validated Cleaning & Handling</h3>
+                  <p className="text-slate-600 text-sm">Controlled cleaning procedures and handling to reduce cross-contamination risk.</p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">
                 <div className="h-6 w-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mt-0.5 flex-shrink-0">✓</div>
                 <div>
-                  <h3 className="font-bold text-slate-900">Class 100 Laminar Flow</h3>
-                  <p className="text-slate-600 text-sm">HEPA-filtered sterilization for maximum safety.</p>
+                  <h3 className="font-bold text-slate-900">Controlled Environment Workflow</h3>
+                  <p className="text-slate-600 text-sm">HEPA-filtered process controls designed for consistent, clean production.</p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">
                 <div className="h-6 w-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mt-0.5 flex-shrink-0">✓</div>
                 <div>
-                  <h3 className="font-bold text-slate-900">Precision Encapsulation</h3>
-                  <p className="text-slate-600 text-sm">Exact dosage accuracy for every tablet.</p>
+                  <h3 className="font-bold text-slate-900">Tablet Uniformity Controls</h3>
+                  <p className="text-slate-600 text-sm">Batch-level checks supporting consistent tablet weight and uniform active content.</p>
                 </div>
               </div>
             </div>
