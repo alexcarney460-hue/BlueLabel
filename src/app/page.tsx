@@ -281,7 +281,7 @@ export default function Home() {
             </div>
           </div>
           <div className="relative aspect-square rounded-3xl overflow-hidden border border-slate-300">
-            <img src="/manufacturing.jpg" alt="Advanced Manufacturing Facility" className="w-full h-full object-cover" />
+            <img src="/cherry.png" alt="BlueLabel Cherry" className="w-full h-full object-contain" />
           </div>
         </div>
       </section>
