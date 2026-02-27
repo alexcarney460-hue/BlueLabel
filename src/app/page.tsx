@@ -342,7 +342,7 @@ export default function Home() {
             </div>
           </div>
           <div className="relative aspect-square rounded-3xl overflow-hidden border border-slate-300">
-            <img src="/cherry.png" alt="BlueLabel Cherry" className="w-full h-full object-contain" />
+            <img src="/cherry.jpg" alt="BlueLabel Cherry" className="w-full h-full object-contain" />
           </div>
         </div>
       </section>
