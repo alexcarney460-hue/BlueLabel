@@ -60,9 +60,27 @@ export default function Catalog() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-8 text-center" style={{ background: 'var(--bg)', color: 'var(--muted)', borderTop: '1px solid var(--divider)' }}>
-        <p>Research use only · Not for human consumption</p>
-        <p className="text-sm mt-4">© 2026 BlueLabel. All rights reserved.</p>
+      <footer style={{ background: 'var(--bg)', color: 'var(--muted)', borderTop: '1px solid var(--divider)' }} className="py-10 px-4 sm:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="text-center sm:text-left">
+              <div className="font-black" style={{ color: 'var(--text)' }}>Blue Label Wholesale</div>
+              <div className="text-sm">© 2026 BlueLabel. All rights reserved.</div>
+            </div>
+
+            <div className="flex flex-wrap justify-center sm:justify-end gap-x-5 gap-y-2 text-sm font-bold">
+              <a href="/terms" className="hover:underline" style={{ color: 'var(--brand)' }}>Terms</a>
+              <a href="/privacy-policy" className="hover:underline" style={{ color: 'var(--brand)' }}>Privacy</a>
+              <a href="/shipping-policy" className="hover:underline" style={{ color: 'var(--brand)' }}>Shipping</a>
+              <a href="/return-policy" className="hover:underline" style={{ color: 'var(--brand)' }}>Returns</a>
+            </div>
+          </div>
+
+          <div className="mt-6 rounded-2xl p-4 text-center text-xs" style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid var(--divider)' }}>
+            <div>Research use only · Not for human consumption</div>
+            <div className="mt-2">Questions? Email <a className="font-bold underline" href="mailto:info@bluelabelwholesale.com">info@bluelabelwholesale.com</a></div>
+          </div>
+        </div>
       </footer>
     </div>
   );
