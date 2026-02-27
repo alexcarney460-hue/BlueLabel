@@ -44,7 +44,7 @@ export default function ProfilePage() {
           <h1 className="text-3xl font-black mb-2">Profile</h1>
           <div className="border rounded-2xl p-4">
             <div className="text-slate-600 mb-4">You’re not signed in.</div>
-            <a href="/login" className="inline-block px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Sign in</a>
+            <a href="/login" className="inline-block px-4 py-2 rounded-lg font-bold" style={{ background: 'var(--brand)', color: 'white' }}>Sign in</a>
           </div>
         </div>
       </div>

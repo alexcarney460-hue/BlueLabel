@@ -55,8 +55,8 @@ export default function Home() {
 
   if (!ageVerified) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center px-8">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-2xl p-8">
+      <div className="min-h-screen flex items-center justify-center px-8" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 55%, #eef6ff 100%)' }}>
+        <div className="max-w-md w-full bg-white rounded-lg p-8" style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--divider)' }}>
           <h1 className="text-3xl font-bold text-slate-900 mb-4 text-center">Age Verification</h1>
           <p className="text-slate-600 mb-6 text-center">
             You must be at least 21 years old to enter this site.
@@ -89,7 +89,7 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-white min-h-screen font-sans">
+    <div className="min-h-screen font-sans" style={{ background: 'var(--bg)' }}>
       {/* Rotating Announcement Banner */}
       <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-500 text-white h-8 sm:h-auto sm:py-3 px-3 sm:px-8 text-center font-semibold overflow-hidden text-xs sm:text-base">
         <div className="max-w-6xl mx-auto h-8 sm:h-auto flex items-center justify-center whitespace-nowrap overflow-hidden text-ellipsis sm:whitespace-normal sm:overflow-visible sm:text-clip sm:animate-pulse">
@@ -103,28 +103,28 @@ export default function Home() {
       </div>
 
       {/* Top Hero Section with Dark Gradient */}
-      <section id="home" className="relative pt-20 sm:pt-28 pb-14 sm:pb-20 px-4 sm:px-8" style={{background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'}}>
+      <section id="home" className="relative pt-20 sm:pt-28 pb-14 sm:pb-20 px-4 sm:px-8" style={{background: 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 55%, #e8f0fb 100%)'}}>
         
         <div className="relative max-w-6xl mx-auto z-10">
           <div className="grid md:grid-cols-2 gap-10 sm:gap-12 items-center">
             {/* Left Content */}
             <div>
-              <p className="text-sm text-sky-200 font-bold uppercase tracking-wide mb-4">Retail + Wholesale</p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-5 sm:mb-6 text-white drop-shadow-lg">
+              <p className="text-sm font-bold uppercase tracking-wide mb-4" style={{ color: 'var(--brand)' }}>Retail + Wholesale</p>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-5 sm:mb-6" style={{ color: 'var(--text)' }}>
                 Premium 7-OH Tablets
               </h1>
-              <p className="text-base sm:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-base sm:text-xl mb-6 sm:mb-8 leading-relaxed" style={{ color: 'var(--muted)' }}>
                 Built for smoke shops, distributors, and retail customers. Create an account to access wholesale pricing and streamlined reorders.
               </p>
               <div className="flex gap-3 sm:gap-4 flex-col sm:flex-row flex-wrap mb-3">
-                <a href="#products" className="inline-block w-full sm:w-auto text-center bg-gradient-to-r from-sky-300 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-slate-900 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105">
+                <a href="#products" className="inline-block w-full sm:w-auto text-center px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105" style={{ background: 'var(--gold)', color: 'var(--text)', boxShadow: 'var(--shadow-md)' }}>
                   Shop Retail
                 </a>
-                <a href="/signup" className="inline-block w-full sm:w-auto text-center border-2 border-sky-200 text-sky-200 hover:bg-white/10 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition backdrop-blur-sm">
+                <a href="/signup" className="inline-block w-full sm:w-auto text-center px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition" style={{ border: '2px solid var(--brand)', color: 'var(--brand)', background: 'rgba(255,255,255,0.6)', boxShadow: 'var(--shadow-sm)' }}>
                   Unlock Wholesale Pricing
                 </a>
               </div>
-              <p className="text-sm text-slate-200">Wholesale pricing available — sign in to view.</p>
+              <p className="text-sm" style={{ color: 'var(--muted)' }}>Wholesale pricing available — sign in to view.</p>
             </div>
 
             {/* Right - Product Image */}
@@ -163,7 +163,7 @@ export default function Home() {
                 <div className="text-slate-600">Retail price{isSignedIn && accountType !== 'retail' ? ' (your account pricing applied)' : ''}</div>
                 {!isSignedIn && <div className="text-slate-500">Wholesale pricing available — sign in to view.</div>}
               </div>
-              <button onClick={() => { addToCart({id: 'cherry', name: 'Cherry 7-OH', price: productPrice('cherry'), quantity: 1, image: '/cherry.jpg'}); import('./Track').then(m => m.track('click_add_to_cart', { product_id: 'cherry' })); }} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
+              <button onClick={() => { addToCart({id: 'cherry', name: 'Cherry 7-OH', price: productPrice('cherry'), quantity: 1, image: '/cherry.jpg'}); import('./Track').then(m => m.track('click_add_to_cart', { product_id: 'cherry' })); }} className="w-full font-bold py-3 rounded-lg transition text-sm" style={{ background: 'var(--brand)', color: 'white' }}>
                 Add to Cart
               </button>
             </div>
@@ -183,7 +183,7 @@ export default function Home() {
                 <div className="text-slate-600">Retail price{isSignedIn && accountType !== 'retail' ? ' (your account pricing applied)' : ''}</div>
                 {!isSignedIn && <div className="text-slate-500">Wholesale pricing available — sign in to view.</div>}
               </div>
-              <button onClick={() => addToCart({id: 'mix-berry', name: 'Mix Berry 7-OH', price: productPrice('mix-berry'), quantity: 1, image: '/mixberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
+              <button onClick={() => addToCart({id: 'mix-berry', name: 'Mix Berry 7-OH', price: productPrice('mix-berry'), quantity: 1, image: '/mixberry.jpg'})} className="w-full font-bold py-3 rounded-lg transition text-sm" style={{ background: 'var(--brand)', color: 'white' }}>
                 Add to Cart
               </button>
             </div>
@@ -203,7 +203,7 @@ export default function Home() {
                 <div className="text-slate-600">Retail price{isSignedIn && accountType !== 'retail' ? ' (your account pricing applied)' : ''}</div>
                 {!isSignedIn && <div className="text-slate-500">Wholesale pricing available — sign in to view.</div>}
               </div>
-              <button onClick={() => addToCart({id: 'strawberry', name: 'Strawberry 7-OH', price: productPrice('strawberry'), quantity: 1, image: '/strawberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
+              <button onClick={() => addToCart({id: 'strawberry', name: 'Strawberry 7-OH', price: productPrice('strawberry'), quantity: 1, image: '/strawberry.jpg'})} className="w-full font-bold py-3 rounded-lg transition text-sm" style={{ background: 'var(--brand)', color: 'white' }}>
                 Add to Cart
               </button>
             </div>
@@ -223,7 +223,7 @@ export default function Home() {
                 <div className="text-slate-600">Retail price{isSignedIn && accountType !== 'retail' ? ' (your account pricing applied)' : ''}</div>
                 {!isSignedIn && <div className="text-slate-500">Wholesale pricing available — sign in to view.</div>}
               </div>
-              <button onClick={() => addToCart({id: 'watermelon', name: 'Watermelon 7-OH', price: productPrice('watermelon'), quantity: 1, image: '/watermelon.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
+              <button onClick={() => addToCart({id: 'watermelon', name: 'Watermelon 7-OH', price: productPrice('watermelon'), quantity: 1, image: '/watermelon.jpg'})} className="w-full font-bold py-3 rounded-lg transition text-sm" style={{ background: 'var(--brand)', color: 'white' }}>
                 Add to Cart
               </button>
             </div>
@@ -232,32 +232,40 @@ export default function Home() {
       </section>
 
       {/* Retail + Wholesale Program */}
-      <section className="relative bg-slate-900 text-white py-24 px-8" style={{background: 'linear-gradient(to right, #0f172a, #1e293b, #0f172a)'}}>
+      <section className="relative py-24 px-8" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 55%, #eef6ff 100%)' }}>
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div>
-            <p className="text-sky-200 font-bold uppercase tracking-wide mb-4">Wholesale Program</p>
-            <h2 className="text-4xl font-bold mb-6">Unlock account pricing + faster reorders</h2>
-            <p className="text-slate-300 mb-6">
+            <p className="font-bold uppercase tracking-wide mb-4" style={{ color: 'var(--brand-2)' }}>Wholesale Program</p>
+            <h2 className="text-4xl font-bold mb-6" style={{ color: 'var(--text)' }}>Unlock account pricing + faster reorders</h2>
+            <p className="mb-6" style={{ color: 'var(--muted)' }}>
               Create an account to access wholesale pricing and an easier reorder flow. Retail customers can continue shopping instantly—no hoops.
             </p>
-            <ul className="space-y-3 text-slate-300 mb-8">
+            <ul className="space-y-3 mb-8" style={{ color: 'var(--muted)' }}>
               <li>• Retail + wholesale in one catalog</li>
               <li>• Account-based pricing</li>
               <li>• Simple reordering</li>
             </ul>
           </div>
-          <div className="bg-slate-800 rounded-3xl border border-sky-200/30 p-8 shadow-xl">
-            <p className="text-sky-200 font-bold uppercase tracking-wide mb-4">Get started</p>
-            <ol className="space-y-3 text-slate-300 mb-6 text-sm">
+          <div className="rounded-3xl p-8" style={{ background: 'rgba(255,255,255,0.78)', border: '1px solid var(--divider)', boxShadow: 'var(--shadow-md)' }}>
+            <p className="font-bold uppercase tracking-wide mb-4" style={{ color: 'var(--brand-2)' }}>Get started</p>
+            <ol className="space-y-3 mb-6 text-sm" style={{ color: 'var(--muted)' }}>
               <li>1. Create an account.</li>
               <li>2. Select Retail / Smoke shop / Distributor.</li>
               <li>3. Sign in to view your pricing.</li>
             </ol>
             <div className="flex gap-3 flex-wrap">
-              <a href="/signup" className="inline-block bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-full font-bold transition">
+              <a
+                href="/signup"
+                className="inline-block px-6 py-3 rounded-full font-bold transition shadow-sm"
+                style={{ background: 'var(--brand)', color: 'white' }}
+              >
                 Create account
               </a>
-              <a href="/login" className="inline-block border border-sky-200/50 hover:bg-white/10 text-white px-6 py-3 rounded-full font-bold transition">
+              <a
+                href="/login"
+                className="inline-block px-6 py-3 rounded-full font-bold transition"
+                style={{ border: '1px solid var(--divider)', color: 'var(--text)', background: 'rgba(255,255,255,0.6)' }}
+              >
                 Sign in
               </a>
             </div>
@@ -367,13 +375,13 @@ export default function Home() {
           </div>
 
           <div className="flex gap-3 justify-center flex-wrap">
-            <a href="/signup" className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-full font-black transition">
+            <a href="/signup" className="inline-block px-8 py-3 rounded-full font-black transition" style={{ background: 'var(--brand)', color: 'white' }}>
               Create account
             </a>
-            <a href="/login" className="inline-block border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white px-8 py-3 rounded-full font-black transition">
+            <a href="/login" className="inline-block px-8 py-3 rounded-full font-black transition" style={{ border: '1px solid var(--divider)', color: 'var(--text)', background: 'rgba(255,255,255,0.6)' }}>
               Sign in
             </a>
-            <a href="mailto:info@bluelabelwholesale.com" className="inline-block border-2 border-sky-500 text-sky-700 hover:bg-sky-500 hover:text-white px-8 py-3 rounded-full font-black transition">
+            <a href="mailto:info@bluelabelwholesale.com" className="inline-block px-8 py-3 rounded-full font-black transition" style={{ border: '1px solid var(--brand)', color: 'var(--brand)', background: 'rgba(255,255,255,0.6)' }}>
               Contact sales
             </a>
           </div>
@@ -381,17 +389,31 @@ export default function Home() {
       </section>
 
       {/* Bottom Hero / CTA Section */}
-      <section id="contact" className="relative py-32 px-8" style={{background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)'}}>
+      <section
+        id="contact"
+        className="relative py-28 sm:py-32 px-4 sm:px-8"
+        style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 55%, #eef6ff 100%)' }}
+      >
         <div className="max-w-6xl mx-auto text-center relative z-10">
-          <h2 className="text-5xl font-bold mb-6 text-white">Ready to Get Started?</h2>
-          <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-black mb-6" style={{ color: 'var(--text)' }}>
+            Ready to Get Started?
+          </h2>
+          <p className="text-lg sm:text-xl mb-10 max-w-2xl mx-auto" style={{ color: 'var(--muted)' }}>
             Shop retail instantly or create an account to access wholesale pricing. Contact us for bulk orders and partnership opportunities.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="mailto:info@bluelabelwholesale.com" className="inline-block bg-gradient-to-r from-sky-300 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105 text-lg">
+            <a
+              href="mailto:info@bluelabelwholesale.com"
+              className="inline-block px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105 text-lg"
+              style={{ background: 'linear-gradient(90deg, var(--brand-2), var(--brand))', color: 'white' }}
+            >
               Contact Sales
             </a>
-            <a href="#products" className="inline-block border-2 border-sky-300 text-sky-200 hover:bg-white/10 px-10 py-4 rounded-full font-bold transition text-lg backdrop-blur-sm">
+            <a
+              href="#products"
+              className="inline-block px-10 py-4 rounded-full font-bold transition text-lg"
+              style={{ border: '1px solid var(--divider)', color: 'var(--text)', background: 'rgba(255,255,255,0.6)' }}
+            >
               View Products
             </a>
           </div>
@@ -399,7 +421,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 text-slate-400 py-8 px-8 text-center border-t border-slate-800">
+      <footer style={{ background: 'var(--bg)', color: 'var(--muted)', borderTop: '1px solid var(--divider)' }} className="py-8 px-8 text-center">
         <p>© 2026 BlueLabel. All rights reserved.</p>
       </footer>
     </div>

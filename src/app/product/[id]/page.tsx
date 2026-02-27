@@ -124,7 +124,7 @@ export default async function ProductPage({
         </div>
       </section>
 
-      <footer className="bg-slate-950 text-slate-400 py-8 px-8 text-center border-t border-slate-800">
+      <footer className="py-8 px-8 text-center" style={{ background: 'var(--bg)', color: 'var(--muted)', borderTop: '1px solid var(--divider)' }}>
         <p>© 2026 BlueLabel. All rights reserved.</p>
       </footer>
     </div>

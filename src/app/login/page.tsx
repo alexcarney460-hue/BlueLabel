@@ -57,7 +57,7 @@ export default function LoginPage() {
             <div className="text-sm text-slate-600">Signed in as</div>
             <div className="font-bold mb-4">{userEmail}</div>
             <div className="flex gap-2">
-              <a href="/profile" className="px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Go to profile</a>
+              <a href="/profile" className="px-4 py-2 rounded-lg font-bold" style={{ background: 'var(--brand)', color: 'white' }}>Go to profile</a>
               <button onClick={logout} className="px-4 py-2 rounded-lg border font-bold">Sign out</button>
             </div>
           </div>

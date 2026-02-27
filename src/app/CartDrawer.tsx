@@ -92,7 +92,8 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
               Clear
             </button>
             <a
-              className={`flex-1 text-center bg-slate-900 text-white font-bold py-3 rounded-xl ${cart.length === 0 ? 'pointer-events-none opacity-50' : ''}`}
+              className={`flex-1 text-center font-bold py-3 rounded-xl ${cart.length === 0 ? 'pointer-events-none opacity-50' : ''}`}
+              style={{ background: 'var(--brand)', color: 'white' }}
               href="/checkout"
             >
               Checkout

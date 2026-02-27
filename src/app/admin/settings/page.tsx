@@ -122,7 +122,7 @@ export default function AdminSettings() {
       <div className="p-8">
         <div className="font-black text-xl mb-2">Admin Settings</div>
         <div className="text-slate-600 mb-4">Not authorized.</div>
-        <a href="/profile" className="inline-block px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Go to profile</a>
+        <a href="/profile" className="inline-block px-4 py-2 rounded-lg font-bold" style={{ background: 'var(--brand)', color: 'white' }}>Go to profile</a>
       </div>
     );
   }
@@ -136,7 +136,7 @@ export default function AdminSettings() {
             <div className="text-slate-600">Products (unit price, photos, active)</div>
           </div>
           <div className="flex gap-2">
-            <button onClick={seedDefaults} className="px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Seed defaults</button>
+            <button onClick={seedDefaults} className="px-4 py-2 rounded-lg font-bold" style={{ background: 'var(--brand)', color: 'white' }}>Seed defaults</button>
             <a href="/admin" className="px-4 py-2 rounded-lg border font-bold">Back</a>
           </div>
         </div>

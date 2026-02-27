@@ -57,7 +57,7 @@ export default function Admin() {
       <div className="p-8">
         <div className="max-w-md">
           <div className="font-black text-xl mb-2">Not authorized.</div>
-          <a href="/login" className="inline-block px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Sign in</a>
+          <a href="/login" className="inline-block px-4 py-2 rounded-lg font-bold" style={{ background: 'var(--brand)', color: 'white' }}>Sign in</a>
         </div>
       </div>
     );
@@ -73,8 +73,20 @@ export default function Admin() {
           </div>
           <div className="flex gap-2">
             <a href="/admin/settings" className="px-4 py-2 rounded-lg border font-bold">Settings</a>
-            <button onClick={() => setRange(7)} className={`px-4 py-2 rounded-lg border font-bold ${range===7?'bg-slate-900 text-white':'bg-white'}`}>7d</button>
-            <button onClick={() => setRange(30)} className={`px-4 py-2 rounded-lg border font-bold ${range===30?'bg-slate-900 text-white':'bg-white'}`}>30d</button>
+            <button
+              onClick={() => setRange(7)}
+              className={`px-4 py-2 rounded-lg border font-bold ${range===7 ? 'text-white' : 'bg-white'}`}
+              style={range===7 ? { background: 'var(--brand)' } : undefined}
+            >
+              7d
+            </button>
+            <button
+              onClick={() => setRange(30)}
+              className={`px-4 py-2 rounded-lg border font-bold ${range===30 ? 'text-white' : 'bg-white'}`}
+              style={range===30 ? { background: 'var(--brand)' } : undefined}
+            >
+              30d
+            </button>
           </div>
         </div>
 

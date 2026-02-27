@@ -122,7 +122,12 @@ export default function CheckoutPage() {
             </div>
           )}
 
-          <button disabled={loading || cart.length===0 || belowMin} onClick={submit} className="bg-slate-900 text-white font-bold py-4 rounded-xl disabled:opacity-50">
+          <button
+            disabled={loading || cart.length===0 || belowMin}
+            onClick={submit}
+            className="font-bold py-4 rounded-xl disabled:opacity-50"
+            style={{ background: 'var(--brand)', color: 'white' }}
+          >
             {loading ? 'Submitting…' : 'Submit Order'}
           </button>
 

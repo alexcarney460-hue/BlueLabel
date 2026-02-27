@@ -47,7 +47,7 @@ export default function Catalog() {
                         <div className="font-bold text-lg text-slate-900">${product.price.toFixed(2)}</div>
                         <div className="text-xs text-slate-500">Retail{product.pricingNote ? ` · ${product.pricingNote}` : ''}</div>
                       </div>
-                      <button className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-lg transition text-sm">
+                      <button className="font-bold py-2 px-4 rounded-lg transition text-sm" style={{ background: 'var(--brand)', color: 'white' }}>
                         View
                       </button>
                     </div>
@@ -60,7 +60,7 @@ export default function Catalog() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 text-slate-400 py-8 px-8 text-center border-t border-slate-800">
+      <footer className="py-8 px-8 text-center" style={{ background: 'var(--bg)', color: 'var(--muted)', borderTop: '1px solid var(--divider)' }}>
         <p>Research use only · Not for human consumption</p>
         <p className="text-sm mt-4">© 2026 BlueLabel. All rights reserved.</p>
       </footer>

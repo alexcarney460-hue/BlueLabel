@@ -50,7 +50,7 @@ export default function SignupPage() {
           <div className="border rounded-2xl p-4">
             <div className="text-sm text-slate-600">Already signed in as</div>
             <div className="font-bold mb-4">{userEmail}</div>
-            <a href="/profile" className="inline-block px-4 py-2 rounded-lg bg-slate-900 text-white font-bold">Go to profile</a>
+            <a href="/profile" className="inline-block px-4 py-2 rounded-lg font-bold" style={{ background: 'var(--brand)', color: 'white' }}>Go to profile</a>
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@ export default function SignupPage() {
             className="w-full border rounded-lg px-3 py-2 mb-4"
           />
 
-          <button className="w-full bg-slate-900 hover:bg-slate-800 text-white font-black py-3 rounded-lg">
+          <button className="w-full font-black py-3 rounded-lg" style={{ background: 'var(--brand)', color: 'white' }}>
             Create account
           </button>
 
