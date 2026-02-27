@@ -250,7 +250,7 @@ export default function Home() {
             <p className="font-bold uppercase tracking-wide mb-4" style={{ color: 'var(--brand-2)' }}>Get started</p>
             <ol className="space-y-3 mb-6 text-sm" style={{ color: 'var(--muted)' }}>
               <li>1. Create an account.</li>
-              <li>2. Select Retail / Smoke shop / Distributor.</li>
+              <li>2. Select Retail / Retailer / Distributor.</li>
               <li>3. Sign in to view your pricing.</li>
             </ol>
             <div className="flex gap-3 flex-wrap">
@@ -360,7 +360,7 @@ export default function Home() {
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
               <div className="text-xs text-sky-700 font-black uppercase tracking-wide">Step 1</div>
               <div className="font-black text-slate-900 mt-1">Create an account</div>
-              <div className="text-sm text-slate-600 mt-2">Choose Retail, Smoke shop, or Distributor.</div>
+              <div className="text-sm text-slate-600 mt-2">Choose Retail, Retailer, or Distributor.</div>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
               <div className="text-xs text-sky-700 font-black uppercase tracking-wide">Step 2</div>

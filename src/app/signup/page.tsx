@@ -124,7 +124,7 @@ export default function SignupPage() {
           style={{ borderColor: 'var(--divider)' }}
         >
           <option value="retail">Retail customer</option>
-          <option value="shop">Smoke shop / retailer (wholesale)</option>
+          <option value="shop">Retailer (wholesale)</option>
           <option value="distributor">Distributor (wholesale)</option>
         </select>
 

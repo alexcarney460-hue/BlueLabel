@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Header from '@/app/Header';
 import { useCart } from '@/app/cart-context';
 import { useAccountPricing } from '@/lib/useAccountPricing';
+import { subscribeAndSavePrice } from '@/lib/pricing';
 import { minOrderFor } from '@/lib/wholesaleRules';
 
 export default function CheckoutPage() {
@@ -23,6 +24,8 @@ export default function CheckoutPage() {
   const [frequency, setFrequency] = useState<'monthly' | '6weeks'>('monthly');
 
   const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+  const subscribedSubtotal = subscribeAndSavePrice(subtotal, subscribe, 0.1);
+  const estimatedSavings = Math.max(0, subtotal - subscribedSubtotal);
   const minTotal = isSignedIn ? minOrderFor(accountType) : 0;
   const belowMin = minTotal > 0 && subtotal < minTotal;
 
@@ -174,9 +177,22 @@ export default function CheckoutPage() {
                     </div>
                   ))}
 
-                  <div className="pt-4 mt-2 flex justify-between font-black" style={{ borderTop: '1px solid var(--divider)', color: 'var(--text)' }}>
-                    <div>Subtotal</div>
-                    <div>${subtotal.toFixed(2)}</div>
+                  <div className="pt-4 mt-2" style={{ borderTop: '1px solid var(--divider)' }}>
+                    <div className="flex justify-between font-black" style={{ color: 'var(--text)' }}>
+                      <div>Subtotal</div>
+                      <div>${subtotal.toFixed(2)}</div>
+                    </div>
+                    {subscribe && (
+                      <div className="mt-2 flex justify-between font-black" style={{ color: 'var(--text)' }}>
+                        <div>Subscribe & Save</div>
+                        <div>${subscribedSubtotal.toFixed(2)}</div>
+                      </div>
+                    )}
+                    {subscribe && (
+                      <div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>
+                        Estimated savings: ${estimatedSavings.toFixed(2)}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

@@ -17,3 +17,8 @@ export function priceForAccount(base: number, accountType: AccountType) {
   const final = base * (1 - discount);
   return roundMoney(final);
 }
+
+export function subscribeAndSavePrice(price: number, enabled: boolean, percent = 0.1) {
+  if (!enabled) return roundMoney(price);
+  return roundMoney(price * (1 - percent));
+}
