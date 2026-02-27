@@ -8,7 +8,7 @@ export const allProducts = [
     dosage: '20mg per unit',
     price: 24.99,
     summary: 'Premium cherry-flavored 7-OH tablets. 20mg per unit.',
-    description: 'Premium cherry-flavored 7-OH tablets crafted for research use.',
+    description: 'Premium cherry-flavored 7-OH tablets with consistent specs and clean packaging.',
     details: [
       'Lab-verified purity with serialized COA',
       '20mg per tablet',
@@ -26,7 +26,7 @@ export const allProducts = [
     dosage: '20mg per unit',
     price: 24.99,
     summary: 'Enhanced berry blend 7-OH tablets. 20mg per unit.',
-    description: 'Enhanced berry blend 7-OH tablets optimized for research applications.',
+    description: 'Enhanced berry blend 7-OH tablets with consistent specs for retail and wholesale.',
     details: [
       'Lab-verified purity with serialized COA',
       '20mg per tablet',
@@ -44,7 +44,7 @@ export const allProducts = [
     dosage: '20mg per unit',
     price: 24.99,
     summary: 'Premium strawberry-flavored 7-OH tablets. 20mg per unit.',
-    description: 'Lab-verified strawberry-flavored 7-OH tablets for research.',
+    description: 'Lab-verified strawberry-flavored 7-OH tablets with consistent specs.',
     details: [
       'Lab-verified purity with serialized COA',
       '20mg per tablet',

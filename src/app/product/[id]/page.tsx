@@ -81,7 +81,7 @@ export default async function ProductPage({
 
             <div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 text-slate-900">{product.name}</h1>
-              <p className="text-sky-600 text-sm font-bold uppercase mb-6">Research Grade</p>
+              <p className="text-sky-600 text-sm font-bold uppercase mb-6">Premium</p>
 
               <div className="mb-8">
                 <div className="text-sm text-slate-600 font-semibold">Retail</div>
@@ -94,7 +94,7 @@ export default async function ProductPage({
               <div className="mb-8 space-y-3 bg-slate-50 p-5 sm:p-6 rounded-lg text-sm sm:text-base">
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span className="font-bold text-slate-900">Wholesale:</span>
-                  <span className="text-slate-700 font-semibold">Wholesale pricing available — contact sales for bulk quotes.</span>
+                  <span className="text-slate-700 font-semibold">Wholesale pricing available — sign in to view.</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span className="font-bold text-slate-900">Dosage:</span>
@@ -102,7 +102,7 @@ export default async function ProductPage({
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span className="font-bold text-slate-900">Format:</span>
-                  <span className="text-slate-700 font-semibold">2x10 Tablet Containers</span>
+                  <span className="text-slate-700 font-semibold">2x10 tablet containers</span>
                 </div>
               </div>
 
@@ -125,8 +125,7 @@ export default async function ProductPage({
       </section>
 
       <footer className="bg-slate-950 text-slate-400 py-8 px-8 text-center border-t border-slate-800">
-        <p>Research use only · Not for human consumption</p>
-        <p className="text-sm mt-4">© 2026 BlueLabel. All rights reserved.</p>
+        <p>© 2026 BlueLabel. All rights reserved.</p>
       </footer>
     </div>
   );

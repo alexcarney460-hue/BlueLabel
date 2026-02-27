@@ -62,7 +62,7 @@ export default function Home() {
             You must be at least 21 years old to enter this site.
           </p>
           <p className="text-slate-600 mb-8 text-center text-sm">
-            This product is for research use only. Not for human consumption.
+            Please confirm you are at least 21 years old.
           </p>
           
           <div className="space-y-3 mb-6">
@@ -385,7 +385,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <h2 className="text-5xl font-bold mb-6 text-white">Ready to Get Started?</h2>
           <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
-            Join researchers and distributors worldwide who trust BlueLabel for premium 7-OH tablets. Contact us for wholesale inquiries, sample orders, or partnership opportunities.
+            Shop retail instantly or create an account to access wholesale pricing. Contact us for bulk orders and partnership opportunities.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <a href="mailto:info@bluelabelwholesale.com" className="inline-block bg-gradient-to-r from-sky-300 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105 text-lg">
@@ -400,8 +400,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-slate-950 text-slate-400 py-8 px-8 text-center border-t border-slate-800">
-        <p>Research use only · Not for human consumption</p>
-        <p className="text-sm mt-4">© 2026 BlueLabel. All rights reserved.</p>
+        <p>© 2026 BlueLabel. All rights reserved.</p>
       </footer>
     </div>
   );
