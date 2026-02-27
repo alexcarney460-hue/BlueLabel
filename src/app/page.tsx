@@ -109,22 +109,22 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-10 sm:gap-12 items-center">
             {/* Left Content */}
             <div>
-              <p className="text-sm text-sky-200 font-bold uppercase tracking-wide mb-4">Premium Research Grade</p>
+              <p className="text-sm text-sky-200 font-bold uppercase tracking-wide mb-4">Retail + Wholesale</p>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-5 sm:mb-6 text-white drop-shadow-lg">
-                Research-grade 7-OH Tablets
+                Premium 7-OH Tablets
               </h1>
               <p className="text-base sm:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed">
-                Research-grade 7-OH tablets with verified COAs. Lab-tested, pharmaceutical-grade tablets for wholesale distribution and research use.
+                Built for smoke shops, distributors, and retail customers. Create an account to access wholesale pricing and streamlined reorders.
               </p>
-              <div className="flex gap-3 sm:gap-4 flex-col sm:flex-row flex-wrap mb-6">
+              <div className="flex gap-3 sm:gap-4 flex-col sm:flex-row flex-wrap mb-3">
                 <a href="#products" className="inline-block w-full sm:w-auto text-center bg-gradient-to-r from-sky-300 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-slate-900 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105">
-                  Shop Now
+                  Shop Retail
                 </a>
-                <a href="#wholesale" className="inline-block w-full sm:w-auto text-center border-2 border-sky-200 text-sky-200 hover:bg-white/10 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition backdrop-blur-sm">
-                  Wholesale
+                <a href="/signup" className="inline-block w-full sm:w-auto text-center border-2 border-sky-200 text-sky-200 hover:bg-white/10 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition backdrop-blur-sm">
+                  Unlock Wholesale Pricing
                 </a>
               </div>
-              <p className="text-sm text-slate-200">For research use only. Not for human consumption.</p>
+              <p className="text-sm text-slate-200">Wholesale pricing available — sign in to view.</p>
             </div>
 
             {/* Right - Product Image */}
@@ -231,31 +231,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Autoship Program */}
+      {/* Retail + Wholesale Program */}
       <section className="relative bg-slate-900 text-white py-24 px-8" style={{background: 'linear-gradient(to right, #0f172a, #1e293b, #0f172a)'}}>
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div>
-            <p className="text-sky-200 font-bold uppercase tracking-wide mb-4">Autoship Program</p>
-            <h2 className="text-4xl font-bold mb-6">Lock in 10% off with Subscribe & Save</h2>
+            <p className="text-sky-200 font-bold uppercase tracking-wide mb-4">Wholesale Program</p>
+            <h2 className="text-4xl font-bold mb-6">Unlock account pricing + faster reorders</h2>
             <p className="text-slate-300 mb-6">
-              Researchers who rely on the same compounds month over month can schedule automatic resupply every 30 days. Pause or cancel anytime inside your account—no hidden fees, just guaranteed inventory and loyalty pricing.
+              Create an account to access wholesale pricing and an easier reorder flow. Retail customers can continue shopping instantly—no hoops.
             </p>
             <ul className="space-y-3 text-slate-300 mb-8">
-              <li>• 10% discount on every recurring shipment</li>
-              <li>• Priority pull from fresh COA lots</li>
-              <li>• Automated cold-chain packaging with tracking</li>
+              <li>• Retail + wholesale in one catalog</li>
+              <li>• Account-based pricing</li>
+              <li>• Simple reordering</li>
             </ul>
           </div>
           <div className="bg-slate-800 rounded-3xl border border-sky-200/30 p-8 shadow-xl">
-            <p className="text-sky-200 font-bold uppercase tracking-wide mb-4">How it works</p>
+            <p className="text-sky-200 font-bold uppercase tracking-wide mb-4">Get started</p>
             <ol className="space-y-3 text-slate-300 mb-6 text-sm">
-              <li>1. Select "Autoship & Save 10%" on any product.</li>
-              <li>2. Choose your tablet quantity. Discount applies instantly.</li>
-              <li>3. Manage renewals from your dashboard in two clicks.</li>
+              <li>1. Create an account.</li>
+              <li>2. Select Retail / Smoke shop / Distributor.</li>
+              <li>3. Sign in to view your pricing.</li>
             </ol>
-            <a href="#" className="inline-block bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-full font-bold transition">
-              Browse eligible products
-            </a>
+            <div className="flex gap-3 flex-wrap">
+              <a href="/signup" className="inline-block bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-full font-bold transition">
+                Create account
+              </a>
+              <a href="/login" className="inline-block border border-sky-200/50 hover:bg-white/10 text-white px-6 py-3 rounded-full font-bold transition">
+                Sign in
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -264,9 +269,9 @@ export default function Home() {
       <section className="py-24 px-8 bg-slate-50 border-y border-slate-200">
         <div className="max-w-6xl mx-auto">
           <p className="text-sky-600 font-bold uppercase tracking-wide text-center mb-4">Why BlueLabel?</p>
-          <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Trusted science. Verified batches.</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Consistent quality. Reliable supply.</h2>
           <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
-            Every tablet that leaves our facility is backed by ISO 17025 partner labs, in-house sterility logs, and serialized labels for full chain-of-custody. Researchers choose BlueLabel for consistent purity and transparent documentation.
+            We focus on consistency—clean specs, dependable inventory, and clear documentation. Built for wholesale buyers and retail customers who want a straightforward experience.
           </p>
           
           <div className="grid md:grid-cols-4 gap-6">
@@ -294,14 +299,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Advanced Manufacturing */}
+      {/* Fulfillment + Operations */}
       <section className="py-24 px-8 bg-white">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-sky-600 font-bold uppercase tracking-wide mb-4">Advanced Manufacturing</p>
-            <h2 className="text-4xl font-bold mb-6 text-slate-900">Sterile. Precise. Automated.</h2>
+            <p className="text-sky-600 font-bold uppercase tracking-wide mb-4">Operations</p>
+            <h2 className="text-4xl font-bold mb-6 text-slate-900">Fast fulfillment. Clear process.</h2>
             <p className="text-slate-600 mb-8">
-              We don't just resell—we manufacture. Our state-of-the-art facility utilizes a fully automated tablet processing line equipped with ultrasonic cleaning, Class 100 laminar air flow, and precision encapsulation to ensure medical-grade sterility and dosage accuracy.
+              Our focus is simple: consistent product, predictable fulfillment, and a clean reorder experience. If you’re buying for a shop or distribution, you’ll get the same reliability you expect from a real wholesale partner.
             </p>
             
             <div className="space-y-4">
@@ -334,17 +339,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Wholesale & White Label */}
+      {/* Wholesale */}
       <section id="wholesale" className="bg-slate-50 py-24 px-8 border-y border-slate-200">
         <div className="max-w-6xl mx-auto">
-          <p className="text-sky-600 font-bold uppercase tracking-wide text-center mb-4">Wholesale Solutions</p>
-          <h2 className="text-4xl font-bold text-center mb-8 text-slate-900">Wholesale & White Label Solutions</h2>
-          <p className="text-center text-slate-600 max-w-2xl mx-auto mb-12">
-            Scale your brand with our premium manufacturing capabilities. We offer competitive bulk pricing and fully custom white-label packaging for qualified partners.
+          <p className="text-sky-600 font-bold uppercase tracking-wide text-center mb-4">Wholesale</p>
+          <h2 className="text-4xl font-bold text-center mb-8 text-slate-900">Wholesale pricing for shops & distributors</h2>
+          <p className="text-center text-slate-600 max-w-2xl mx-auto mb-10">
+            Create an account and sign in to view account pricing. Retail customers can purchase immediately.
           </p>
-          <p className="text-center text-slate-600 text-sm">
-            Minimum Order Quantities apply. ISO 17025 testing included with all bulk orders.
-          </p>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+              <div className="text-xs text-sky-700 font-black uppercase tracking-wide">Step 1</div>
+              <div className="font-black text-slate-900 mt-1">Create an account</div>
+              <div className="text-sm text-slate-600 mt-2">Choose Retail, Smoke shop, or Distributor.</div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+              <div className="text-xs text-sky-700 font-black uppercase tracking-wide">Step 2</div>
+              <div className="font-black text-slate-900 mt-1">Sign in</div>
+              <div className="text-sm text-slate-600 mt-2">Your pricing displays across the site automatically.</div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+              <div className="text-xs text-sky-700 font-black uppercase tracking-wide">Step 3</div>
+              <div className="font-black text-slate-900 mt-1">Place your order</div>
+              <div className="text-sm text-slate-600 mt-2">Minimum order totals apply for wholesale accounts.</div>
+            </div>
+          </div>
+
+          <div className="flex gap-3 justify-center flex-wrap">
+            <a href="/signup" className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-full font-black transition">
+              Create account
+            </a>
+            <a href="/login" className="inline-block border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white px-8 py-3 rounded-full font-black transition">
+              Sign in
+            </a>
+            <a href="mailto:info@bluelabelwholesale.com" className="inline-block border-2 border-sky-500 text-sky-700 hover:bg-sky-500 hover:text-white px-8 py-3 rounded-full font-black transition">
+              Contact sales
+            </a>
+          </div>
         </div>
       </section>
 
