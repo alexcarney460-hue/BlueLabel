@@ -92,7 +92,7 @@ export default function Admin() {
           <div className="flex items-end gap-1 h-32">
             {series.map((p) => (
               <div key={p.day} className="flex-1">
-                <div className="w-full bg-amber-500/80 rounded-t" style={{ height: `${(p.count / max) * 100}%` }} />
+                <div className="w-full bg-sky-500/80 rounded-t" style={{ height: `${(p.count / max) * 100}%` }} />
               </div>
             ))}
           </div>

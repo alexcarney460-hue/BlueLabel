@@ -157,7 +157,7 @@ export default function AdminSettings() {
                 </label>
                 <input className="w-24 border rounded-lg px-3 py-2" placeholder="sort" type="number" value={form.sort ?? 0} onChange={(e)=>setForm(f=>({ ...f, sort: Number(e.target.value) }))} />
               </div>
-              <button className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-3 rounded-lg">Save</button>
+              <button className="w-full bg-sky-500 hover:bg-sky-600 text-black font-black py-3 rounded-lg">Save</button>
               {status && <div className="text-sm text-slate-700">{status}</div>}
             </form>
           </div>

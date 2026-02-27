@@ -59,7 +59,7 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
 
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="ml-auto text-amber-700 hover:text-amber-900 font-bold text-sm"
+                      className="ml-auto text-sky-700 hover:text-sky-900 font-bold text-sm"
                     >
                       Remove
                     </button>

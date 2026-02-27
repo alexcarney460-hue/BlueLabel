@@ -83,7 +83,7 @@ export default function LoginPage() {
               className="w-full border rounded-lg px-3 py-2 mb-4"
             />
 
-            <button className="w-full bg-amber-500 hover:bg-amber-600 text-black font-black py-3 rounded-lg">
+            <button className="w-full bg-sky-500 hover:bg-sky-600 text-black font-black py-3 rounded-lg">
               Sign in
             </button>
             {error && <div className="text-sm text-red-700 mt-3">{error}</div>}

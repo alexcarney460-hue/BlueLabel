@@ -45,7 +45,7 @@ export default async function ProductPage({
             </div>
           </div>
           <div className="mt-4 flex gap-4">
-            <Link href="/catalog" className="text-amber-700 font-bold hover:underline">
+            <Link href="/catalog" className="text-sky-700 font-bold hover:underline">
               Go to catalog
             </Link>
             <Link href={`/product/${slug || 'cherry'}`} className="text-slate-700 font-bold hover:underline">
@@ -71,7 +71,7 @@ export default async function ProductPage({
 
       <section className="py-16 sm:py-20 px-4 sm:px-8">
         <div className="max-w-6xl mx-auto">
-          <Link href="/catalog" className="text-amber-600 hover:underline mb-8 inline-block font-bold">← Back to Catalog</Link>
+          <Link href="/catalog" className="text-sky-600 hover:underline mb-8 inline-block font-bold">← Back to Catalog</Link>
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             <div className="flex items-center justify-center">
               <div className="w-full max-w-xs sm:max-w-sm h-80 sm:h-96 rounded-2xl overflow-hidden flex items-center justify-center">
@@ -81,7 +81,7 @@ export default async function ProductPage({
 
             <div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 text-slate-900">{product.name}</h1>
-              <p className="text-amber-600 text-sm font-bold uppercase mb-6">Research Grade</p>
+              <p className="text-sky-600 text-sm font-bold uppercase mb-6">Research Grade</p>
 
               <div className="mb-8">
                 <p className="text-3xl sm:text-4xl font-black text-slate-900">${product.price.toFixed(2)}</p>

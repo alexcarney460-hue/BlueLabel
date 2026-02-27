@@ -40,7 +40,7 @@ export default function Home() {
           <div className="space-y-3 mb-6">
             <button 
               onClick={() => setAgeVerified(true)}
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg transition"
+              className="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 rounded-lg transition"
             >
               I am 21 or older
             </button>
@@ -63,7 +63,7 @@ export default function Home() {
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* Rotating Announcement Banner */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-white h-8 sm:h-auto sm:py-3 px-3 sm:px-8 text-center font-semibold overflow-hidden text-xs sm:text-base">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-sky-500 via-sky-300 to-sky-500 text-white h-8 sm:h-auto sm:py-3 px-3 sm:px-8 text-center font-semibold overflow-hidden text-xs sm:text-base">
         <div className="max-w-6xl mx-auto h-8 sm:h-auto flex items-center justify-center whitespace-nowrap overflow-hidden text-ellipsis sm:whitespace-normal sm:overflow-visible sm:text-clip sm:animate-pulse">
           {announcements[bannerIndex]}
         </div>
@@ -81,7 +81,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-10 sm:gap-12 items-center">
             {/* Left Content */}
             <div>
-              <p className="text-sm text-amber-300 font-bold uppercase tracking-wide mb-4">Premium Research Grade</p>
+              <p className="text-sm text-sky-200 font-bold uppercase tracking-wide mb-4">Premium Research Grade</p>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-5 sm:mb-6 text-white drop-shadow-lg">
                 Research-grade 7-OH Tablets
               </h1>
@@ -89,10 +89,10 @@ export default function Home() {
                 Research-grade 7-OH tablets with verified COAs. Lab-tested, pharmaceutical-grade tablets for wholesale distribution and research use.
               </p>
               <div className="flex gap-3 sm:gap-4 flex-col sm:flex-row flex-wrap mb-6">
-                <a href="#products" className="inline-block w-full sm:w-auto text-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-900 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105">
+                <a href="#products" className="inline-block w-full sm:w-auto text-center bg-gradient-to-r from-sky-300 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-slate-900 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105">
                   Shop Now
                 </a>
-                <a href="#wholesale" className="inline-block w-full sm:w-auto text-center border-2 border-amber-300 text-amber-300 hover:bg-white/10 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition backdrop-blur-sm">
+                <a href="#wholesale" className="inline-block w-full sm:w-auto text-center border-2 border-sky-200 text-sky-200 hover:bg-white/10 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition backdrop-blur-sm">
                   Wholesale
                 </a>
               </div>
@@ -116,7 +116,7 @@ export default function Home() {
       {/* Products Section */}
       <section id="products" className="py-16 sm:py-24 px-4 sm:px-8" style={{background: 'linear-gradient(to bottom, #ffffff, #f1f5f9, #f8fafc)'}}>
         <div className="max-w-6xl mx-auto">
-          <p className="text-amber-600 font-bold uppercase tracking-wide text-center mb-4">Our Selection</p>
+          <p className="text-sky-600 font-bold uppercase tracking-wide text-center mb-4">Our Selection</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-slate-900">Premium Product Line</h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
@@ -127,7 +127,7 @@ export default function Home() {
                   <img src="/cherry.jpg" alt="Cherry 7-OH" className="w-full h-full object-contain bg-transparent" />
                 </div>
               </a>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Cherry</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">Cherry</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
               <p className="text-slate-600 text-sm mb-4">Premium cherry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
               <button onClick={() => { addToCart({id: 'cherry', name: 'Cherry 7-OH', price: 29.99, quantity: 1, image: '/cherry.jpg'}); import('./Track').then(m => m.track('click_add_to_cart', { product_id: 'cherry' })); }} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
@@ -142,7 +142,7 @@ export default function Home() {
                   <img src="/mixberry.jpg" alt="Mix Berry 7-OH" className="w-full h-full object-contain bg-transparent" />
                 </div>
               </a>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Mix Berry</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">Mix Berry</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
               <p className="text-slate-600 text-sm mb-4">Enhanced berry blend 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
               <button onClick={() => addToCart({id: 'mix-berry', name: 'Mix Berry 7-OH', price: 32.99, quantity: 1, image: '/mixberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
@@ -157,7 +157,7 @@ export default function Home() {
                   <img src="/strawberry.jpg" alt="Strawberry 7-OH" className="w-full h-full object-contain bg-transparent" />
                 </div>
               </a>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Strawberry</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">Strawberry</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
               <p className="text-slate-600 text-sm mb-4">Premium strawberry-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
               <button onClick={() => addToCart({id: 'strawberry', name: 'Strawberry 7-OH', price: 29.99, quantity: 1, image: '/strawberry.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
@@ -172,7 +172,7 @@ export default function Home() {
                   <img src="/watermelon.jpg" alt="Watermelon 7-OH" className="w-full h-full object-contain bg-transparent" />
                 </div>
               </a>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">Watermelon</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">Watermelon</h3>
               <p className="text-slate-600 text-sm mb-2">Wholesale pricing available — contact sales for bulk quotes.</p>
               <p className="text-slate-600 text-sm mb-4">Premium watermelon-flavored 7-OH tablets. 20mg per unit, 2 containers of 10.</p>
               <button onClick={() => addToCart({id: 'watermelon', name: 'Watermelon 7-OH', price: 31.99, quantity: 1, image: '/watermelon.jpg'})} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition text-sm">
@@ -187,7 +187,7 @@ export default function Home() {
       <section className="relative bg-slate-900 text-white py-24 px-8" style={{background: 'linear-gradient(to right, #0f172a, #1e293b, #0f172a)'}}>
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div>
-            <p className="text-amber-300 font-bold uppercase tracking-wide mb-4">Autoship Program</p>
+            <p className="text-sky-200 font-bold uppercase tracking-wide mb-4">Autoship Program</p>
             <h2 className="text-4xl font-bold mb-6">Lock in 10% off with Subscribe & Save</h2>
             <p className="text-slate-300 mb-6">
               Researchers who rely on the same compounds month over month can schedule automatic resupply every 30 days. Pause or cancel anytime inside your account—no hidden fees, just guaranteed inventory and loyalty pricing.
@@ -198,14 +198,14 @@ export default function Home() {
               <li>• Automated cold-chain packaging with tracking</li>
             </ul>
           </div>
-          <div className="bg-slate-800 rounded-3xl border border-amber-200/30 p-8 shadow-xl">
-            <p className="text-amber-300 font-bold uppercase tracking-wide mb-4">How it works</p>
+          <div className="bg-slate-800 rounded-3xl border border-sky-200/30 p-8 shadow-xl">
+            <p className="text-sky-200 font-bold uppercase tracking-wide mb-4">How it works</p>
             <ol className="space-y-3 text-slate-300 mb-6 text-sm">
               <li>1. Select "Autoship & Save 10%" on any product.</li>
               <li>2. Choose your tablet quantity. Discount applies instantly.</li>
               <li>3. Manage renewals from your dashboard in two clicks.</li>
             </ol>
-            <a href="#" className="inline-block bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-bold transition">
+            <a href="#" className="inline-block bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-full font-bold transition">
               Browse eligible products
             </a>
           </div>
@@ -215,7 +215,7 @@ export default function Home() {
       {/* Why Choose BlueLabel */}
       <section className="py-24 px-8 bg-slate-50 border-y border-slate-200">
         <div className="max-w-6xl mx-auto">
-          <p className="text-amber-600 font-bold uppercase tracking-wide text-center mb-4">Why BlueLabel?</p>
+          <p className="text-sky-600 font-bold uppercase tracking-wide text-center mb-4">Why BlueLabel?</p>
           <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Trusted science. Verified batches.</h2>
           <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
             Every tablet that leaves our facility is backed by ISO 17025 partner labs, in-house sterility logs, and serialized labels for full chain-of-custody. Researchers choose BlueLabel for consistent purity and transparent documentation.
@@ -223,22 +223,22 @@ export default function Home() {
           
           <div className="grid md:grid-cols-4 gap-6">
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-md transition">
-              <div className="h-10 w-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-3">✓</div>
+              <div className="h-10 w-10 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold mb-3">✓</div>
               <h3 className="font-bold text-slate-900 mb-2">Unmatched Quality</h3>
               <p className="text-slate-600 text-sm">Lab-verified purity confirmed via HPLC + MS.</p>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-md transition">
-              <div className="h-10 w-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-3">✓</div>
+              <div className="h-10 w-10 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold mb-3">✓</div>
               <h3 className="font-bold text-slate-900 mb-2">Innovative Solutions</h3>
               <p className="text-slate-600 text-sm">Tablets engineered for research and wholesale.</p>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-md transition">
-              <div className="h-10 w-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-3">✓</div>
+              <div className="h-10 w-10 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold mb-3">✓</div>
               <h3 className="font-bold text-slate-900 mb-2">Comprehensive Selection</h3>
               <p className="text-slate-600 text-sm">Multiple potencies and bulk options in stock.</p>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-white hover:shadow-md transition">
-              <div className="h-10 w-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-3">✓</div>
+              <div className="h-10 w-10 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold mb-3">✓</div>
               <h3 className="font-bold text-slate-900 mb-2">Reliable Results</h3>
               <p className="text-slate-600 text-sm">Serialized COAs stored with your order history.</p>
             </div>
@@ -250,7 +250,7 @@ export default function Home() {
       <section className="py-24 px-8 bg-white">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-amber-600 font-bold uppercase tracking-wide mb-4">Advanced Manufacturing</p>
+            <p className="text-sky-600 font-bold uppercase tracking-wide mb-4">Advanced Manufacturing</p>
             <h2 className="text-4xl font-bold mb-6 text-slate-900">Sterile. Precise. Automated.</h2>
             <p className="text-slate-600 mb-8">
               We don't just resell—we manufacture. Our state-of-the-art facility utilizes a fully automated tablet processing line equipped with ultrasonic cleaning, Class 100 laminar air flow, and precision encapsulation to ensure medical-grade sterility and dosage accuracy.
@@ -289,7 +289,7 @@ export default function Home() {
       {/* Wholesale & White Label */}
       <section id="wholesale" className="bg-slate-50 py-24 px-8 border-y border-slate-200">
         <div className="max-w-6xl mx-auto">
-          <p className="text-amber-600 font-bold uppercase tracking-wide text-center mb-4">Wholesale Solutions</p>
+          <p className="text-sky-600 font-bold uppercase tracking-wide text-center mb-4">Wholesale Solutions</p>
           <h2 className="text-4xl font-bold text-center mb-8 text-slate-900">Wholesale & White Label Solutions</h2>
           <p className="text-center text-slate-600 max-w-2xl mx-auto mb-12">
             Scale your brand with our premium manufacturing capabilities. We offer competitive bulk pricing and fully custom white-label packaging for qualified partners.
@@ -308,10 +308,10 @@ export default function Home() {
             Join researchers and distributors worldwide who trust BlueLabel for premium 7-OH tablets. Contact us for wholesale inquiries, sample orders, or partnership opportunities.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="mailto:info@bluelabel.com" className="inline-block bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105 text-lg">
+            <a href="mailto:info@bluelabel.com" className="inline-block bg-gradient-to-r from-sky-300 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white px-10 py-4 rounded-full font-bold transition shadow-xl transform hover:scale-105 text-lg">
               Contact Sales
             </a>
-            <a href="#products" className="inline-block border-2 border-amber-400 text-amber-300 hover:bg-white/10 px-10 py-4 rounded-full font-bold transition text-lg backdrop-blur-sm">
+            <a href="#products" className="inline-block border-2 border-sky-300 text-sky-200 hover:bg-white/10 px-10 py-4 rounded-full font-bold transition text-lg backdrop-blur-sm">
               View Products
             </a>
           </div>

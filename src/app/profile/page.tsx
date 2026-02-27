@@ -60,9 +60,9 @@ export default function ProfilePage() {
 
         {isAdmin && (
           <div className="border rounded-2xl p-4">
-            <div className="text-xs text-amber-700 font-black uppercase tracking-wide">Admin</div>
+            <div className="text-xs text-sky-700 font-black uppercase tracking-wide">Admin</div>
             <div className="font-bold mb-3">Analytics dashboard</div>
-            <a href="/admin" className="inline-block px-4 py-2 rounded-lg bg-amber-500 text-black font-black">Open /admin</a>
+            <a href="/admin" className="inline-block px-4 py-2 rounded-lg bg-sky-500 text-black font-black">Open /admin</a>
           </div>
         )}
       </div>

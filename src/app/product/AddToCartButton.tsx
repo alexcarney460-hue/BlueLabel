@@ -14,7 +14,7 @@ export default function AddToCartButton({ product }: { product: any }) {
   };
 
   return (
-    <button onClick={handle} className={`w-full font-bold py-4 rounded-lg mb-4 transition text-lg ${added ? 'bg-emerald-500 text-white' : 'bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-900 shadow-lg'}`}>
+    <button onClick={handle} className={`w-full font-bold py-4 rounded-lg mb-4 transition text-lg ${added ? 'bg-emerald-500 text-white' : 'bg-gradient-to-r from-sky-300 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-slate-900 shadow-lg'}`}>
       {added ? '✓ Added to Cart' : 'Add to Cart'}
     </button>
   );

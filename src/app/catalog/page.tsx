@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { allProducts } from '@/lib/products';
+import { getActiveProductsFromDb } from '@/lib/products-db';
 
 export default function Catalog() {
   const products = allProducts.map((p) => ({
@@ -20,23 +21,23 @@ export default function Catalog() {
       <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
           <Link href="/" className="text-3xl font-bold">
-            <span className="text-slate-900">Blue</span><span className="text-amber-400">Label</span>
+            <span className="text-slate-900">Blue</span><span className="text-sky-300">Label</span>
           </Link>
           <nav className="flex gap-8 items-center">
-            <Link href="/" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Home</Link>
-            <Link href="/catalog" className="text-amber-600 font-bold text-sm uppercase tracking-wide">Catalog</Link>
-            <Link href="/#wholesale" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Wholesale</Link>
-            <Link href="/#contact" className="text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">Contact</Link>
+            <Link href="/" className="text-slate-700 hover:text-sky-600 font-bold text-sm uppercase tracking-wide transition">Home</Link>
+            <Link href="/catalog" className="text-sky-600 font-bold text-sm uppercase tracking-wide">Catalog</Link>
+            <Link href="/#wholesale" className="text-slate-700 hover:text-sky-600 font-bold text-sm uppercase tracking-wide transition">Wholesale</Link>
+            <Link href="/#contact" className="text-slate-700 hover:text-sky-600 font-bold text-sm uppercase tracking-wide transition">Contact</Link>
           </nav>
           <div className="flex gap-4 items-center">
-            <button className="relative p-2 hover:text-amber-600 transition">
+            <button className="relative p-2 hover:text-sky-600 transition">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              <span className="absolute top-0 right-0 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+              <span className="absolute top-0 right-0 bg-sky-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
             </button>
             <div className="relative group">
-              <button className="flex items-center gap-2 px-4 py-2 text-slate-700 hover:text-amber-600 font-bold text-sm uppercase tracking-wide transition">
+              <button className="flex items-center gap-2 px-4 py-2 text-slate-700 hover:text-sky-600 font-bold text-sm uppercase tracking-wide transition">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -60,7 +61,7 @@ export default function Catalog() {
                     <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition" />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-sm font-bold uppercase tracking-wide text-amber-600 mb-2">{product.name}</h3>
+                    <h3 className="text-sm font-bold uppercase tracking-wide text-sky-600 mb-2">{product.name}</h3>
                     <p className="font-bold text-slate-900 mb-2">Purity: {product.purity}</p>
                     <p className="text-slate-600 text-sm mb-4">{product.description}</p>
                     <div className="flex justify-between items-center">
