@@ -75,7 +75,14 @@ export default function AdminSettings() {
     });
 
     if (!res.ok) {
-      setStatus('Seed failed');
+      let msg = 'Seed failed';
+      try {
+        const j = await res.json();
+        if (j?.detail) msg = `Seed failed: ${String(j.detail).slice(0, 120)}`;
+      } catch {
+        // ignore
+      }
+      setStatus(msg);
       return;
     }
 

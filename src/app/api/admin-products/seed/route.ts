@@ -54,7 +54,10 @@ export async function POST(req: Request) {
     body: JSON.stringify(seed),
   });
 
-  if (!res.ok) return NextResponse.json({ error: 'seed_failed' }, { status: 500 });
+  if (!res.ok) {
+    const detail = await res.text();
+    return NextResponse.json({ error: 'seed_failed', status: res.status, detail: detail.slice(0, 500) }, { status: 500 });
+  }
   const json = await res.json();
   return NextResponse.json({ ok: true, inserted: Array.isArray(json) ? json.length : 0 });
 }
