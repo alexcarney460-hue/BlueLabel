@@ -36,47 +36,50 @@ export default function Admin() {
     })();
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      if (!authorized) return;
+  async function fetchAnalytics() {
+    if (!authorized) return;
 
-      setLoading(true);
-      setError(null);
+    setLoading(true);
+    setError(null);
 
-      const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN;
-      if (!token) {
-        setError('Missing NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN');
+    const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN;
+    if (!token) {
+      setError('Missing NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const [res, diagRes] = await Promise.all([
+        fetch(`/api/admin-analytics?range=${range}`, { headers: { Authorization: `Bearer ${token}` } }),
+        fetch('/api/debug-analytics-env'),
+      ]);
+
+      if (!diagRes.ok) {
+        setDiag(null);
+      } else {
+        setDiag(await diagRes.json());
+      }
+
+      if (!res.ok) {
+        setError(`Analytics API error: ${res.status}`);
         setLoading(false);
         return;
       }
 
-      try {
-        const [res, diagRes] = await Promise.all([
-          fetch(`/api/admin-analytics?range=${range}`, { headers: { Authorization: `Bearer ${token}` } }),
-          fetch('/api/debug-analytics-env'),
-        ]);
+      const json = await res.json();
+      setKpis(json.kpis ?? {});
+      setSeries(json.series ?? []);
+      setLoading(false);
+    } catch (e: any) {
+      setError('Analytics fetch failed');
+      setLoading(false);
+    }
+  }
 
-        if (!diagRes.ok) {
-          setDiag(null);
-        } else {
-          setDiag(await diagRes.json());
-        }
-
-        if (!res.ok) {
-          setError(`Analytics API error: ${res.status}`);
-          setLoading(false);
-          return;
-        }
-
-        const json = await res.json();
-        setKpis(json.kpis ?? {});
-        setSeries(json.series ?? []);
-        setLoading(false);
-      } catch (e: any) {
-        setError('Analytics fetch failed');
-        setLoading(false);
-      }
-    })();
+  useEffect(() => {
+    fetchAnalytics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authorized, range]);
 
   const max = useMemo(() => Math.max(1, ...series.map((s) => s.count)), [series]);
@@ -130,11 +133,23 @@ export default function Admin() {
                 30d
               </button>
               <button
-                onClick={() => track('admin_test_event', { meta: { source: 'admin' } })}
+                onClick={async () => {
+                  // Fire a burst of the SAME events this dashboard is counting,
+                  // then auto-refresh to confirm the pipeline is working.
+                  track('pageview', { meta: { source: 'admin_test' } });
+                  track('click_product', { meta: { source: 'admin_test' } });
+                  track('click_add_to_cart', { meta: { source: 'admin_test' } });
+                  track('click_checkout', { meta: { source: 'admin_test' } });
+                  track('submit_order', { meta: { source: 'admin_test' } });
+
+                  // Give the server a beat to insert rows.
+                  await new Promise((r) => setTimeout(r, 600));
+                  await fetchAnalytics();
+                }}
                 className="px-4 py-2 rounded-lg font-bold"
                 style={{ background: 'var(--brand)', color: 'white' }}
               >
-                Test event
+                Test tracking
               </button>
             </div>
           </div>
