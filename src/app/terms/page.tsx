@@ -1,8 +1,39 @@
 import { PolicyShell } from '@/app/PolicyShell';
 
 export default function TermsPage() {
+  const fdaDisclosure = (
+    <div
+      className="rounded-2xl p-5 text-xs sm:text-sm"
+      style={{ background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.18)', color: 'var(--text)' }}
+    >
+      <div className="font-black">Product Disclaimer &amp; FDA Disclosure</div>
+      <ul className="mt-2 space-y-2" style={{ color: 'var(--muted)' }}>
+        <li>
+          <span className="font-bold" style={{ color: 'var(--text)' }}>Not medical advice:</span> Information on this site is for general
+          informational purposes only and is not medical advice.
+        </li>
+        <li>
+          <span className="font-bold" style={{ color: 'var(--text)' }}>Not for minors:</span> Intended for individuals 21+ only.
+        </li>
+        <li>
+          <span className="font-bold" style={{ color: 'var(--text)' }}>FDA disclosure:</span> Statements on this site have not been evaluated
+          by the Food and Drug Administration (FDA). Products are not intended to diagnose, treat, cure, or prevent any
+          disease.
+        </li>
+        <li>
+          <span className="font-bold" style={{ color: 'var(--text)' }}>Use responsibly:</span> Do not use products in violation of applicable
+          laws or regulations. You are responsible for compliance with local requirements.
+        </li>
+      </ul>
+    </div>
+  );
+
   return (
-    <PolicyShell title="Terms & Conditions" subtitle="Terms & Conditions — please read carefully.">
+    <PolicyShell
+      title="Terms & Conditions"
+      subtitle="Terms & Conditions — please read carefully."
+      footerExtra={fdaDisclosure}
+    >
       <p>
         These Terms &amp; Conditions ("Terms") govern your access to and use of the Blue Label Wholesale website located at{' '}
         <a href="https://bluelabelwholesale.com">bluelabelwholesale.com</a> (the "Site") and any related services

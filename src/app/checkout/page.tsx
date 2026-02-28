@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Header from '@/app/Header';
+import { LegalDisclaimers } from '@/app/LegalDisclaimers';
 import { useCart } from '@/app/cart-context';
 import { useAccountPricing } from '@/lib/useAccountPricing';
 import { subscribeAndSavePrice } from '@/lib/pricing';
@@ -156,6 +157,10 @@ export default function CheckoutPage() {
                 <p className="text-xs" style={{ color: 'var(--muted)' }}>
                   Note: this collects order info for wholesale quoting + invoice. Payment checkout can be added next.
                 </p>
+
+                <div className="mt-6">
+                  <LegalDisclaimers variant="compact" />
+                </div>
               </div>
             </div>
 

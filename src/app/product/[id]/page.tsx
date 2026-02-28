@@ -2,6 +2,7 @@ import Header from '@/app/Header';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import AddToCartClient from './AddToCartClient';
+import { LegalDisclaimers } from '@/app/LegalDisclaimers';
 import { allProducts, normalizeProductId } from '@/lib/products';
 
 export default async function ProductPage({
@@ -135,6 +136,10 @@ export default async function ProductPage({
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              <div className="mt-6">
+                <LegalDisclaimers variant="full" />
               </div>
             </div>
           </div>

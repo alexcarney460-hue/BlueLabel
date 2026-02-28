@@ -4,10 +4,12 @@ export function PolicyShell({
   title,
   subtitle,
   children,
+  footerExtra,
 }: {
   title: string;
   subtitle: string;
   children: React.ReactNode;
+  footerExtra?: React.ReactNode;
 }) {
   return (
     <div className="min-h-screen font-sans" style={{ background: 'var(--bg)' }}>
@@ -74,6 +76,8 @@ export function PolicyShell({
               <div className="prose prose-slate max-w-none prose-headings:font-black prose-h2:text-2xl prose-h3:text-lg">
                 {children}
               </div>
+
+              {footerExtra ? <div className="mt-10">{footerExtra}</div> : null}
 
               <div
                 className="mt-10 rounded-2xl p-4 text-center text-xs"
