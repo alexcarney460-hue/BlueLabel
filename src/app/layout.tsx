@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from './cart-context';
 import ChatWidget from './ChatWidget';
+import GoogleAnalytics from './GoogleAnalytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bluelabelwholesale.com'),
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <CartProvider>
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_ID ?? ''} />
           <TrackPageView />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
           {children}

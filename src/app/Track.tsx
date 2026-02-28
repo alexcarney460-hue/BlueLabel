@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { getSupabase } from '@/lib/supabase';
+import { gaPageView, gaEvent } from './analytics';
 
 function isMobileUA(ua: string) {
   return /Android|iPhone|iPad|iPod/i.test(ua);
@@ -94,11 +96,33 @@ export async function track(event_type: string, payload: any = {}) {
   }
 }
 
-export default function TrackPageView() {
+function TrackPageViewInner() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   useEffect(() => {
+    const qs = searchParams?.toString();
+    const url = pathname + (qs ? `?${qs}` : '');
+
+    // Custom (Supabase) analytics
     track('pageview');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+    // GA4 page_view
+    gaPageView(url);
+  }, [pathname, searchParams]);
 
   return null;
+}
+
+export default function TrackPageView() {
+  return (
+    <Suspense fallback={null}>
+      <TrackPageViewInner />
+    </Suspense>
+  );
+}
+
+// Convenience wrapper if you want to track GA4 events from UI code.
+export function trackGa(event: string, params: Record<string, any> = {}) {
+  gaEvent(event, params);
 }
