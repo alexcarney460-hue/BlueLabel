@@ -19,6 +19,14 @@ export function splitName(fullName?: string) {
   return { firstname: parts[0], lastname: parts.slice(1).join(' ') };
 }
 
+export function mapAccountTypeToCategory(account_type?: string | null) {
+  if (!account_type) return undefined;
+  if (account_type === 'retail') return 'retail';
+  if (account_type === 'shop') return 'wholesale';
+  if (account_type === 'distributor') return 'distributor';
+  return undefined;
+}
+
 export async function hubspotUpsertContact(input: {
   email: string;
   properties?: HubSpotContactProperties;

@@ -45,6 +45,7 @@ export default function CheckoutPage() {
         subtotal,
         subscribe,
         frequency,
+        account_type: accountType,
       },
     });
 
@@ -54,6 +55,7 @@ export default function CheckoutPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          account_type: accountType,
           customer: { name, email, phone },
           shipping: { address1, address2, city, state, zip },
           notes,

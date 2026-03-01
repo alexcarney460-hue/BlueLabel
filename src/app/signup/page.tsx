@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Header from '@/app/Header';
 import { getSupabase } from '@/lib/supabase';
 import { upsertMyProfile } from '@/lib/account';
+import { track } from '@/app/Track';
 
 export default function SignupPage() {
   const [email, setEmail] = useState('');
@@ -36,6 +37,10 @@ export default function SignupPage() {
 
       // Create profile (retail/shop/distributor) immediately after signup
       await upsertMyProfile({ account_type: accountType, company_name: companyName });
+
+      // Best-effort contact creation in HubSpot happens server-side.
+      // We just fire an event; backend can also be wired later if we want.
+      track('signup_completed', { meta: { account_type: accountType, company_name: companyName } });
 
       window.location.href = '/profile';
     } catch {

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { hubspotUpsertContact, splitName } from '@/lib/hubspot';
+import { hubspotUpsertContact, mapAccountTypeToCategory, splitName } from '@/lib/hubspot';
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -52,6 +52,7 @@ export async function POST(req: Request) {
           state: shipping?.state || undefined,
           zip: shipping?.zip || undefined,
           lifecyclestage: 'customer',
+          bluelabel_customer_category: mapAccountTypeToCategory(body?.accountType ?? body?.account_type) || undefined,
           bluelabel_last_order_submitted_at: new Date().toISOString(),
           bluelabel_last_order_subtotal: String(body?.subtotal ?? ''),
         },
