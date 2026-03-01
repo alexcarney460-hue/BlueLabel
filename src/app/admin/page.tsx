@@ -173,11 +173,23 @@ export default function Admin() {
           <div className="rounded-3xl p-6" style={{ background: 'rgba(255,255,255,0.78)', border: '1px solid var(--divider)', boxShadow: 'var(--shadow-md)' }}>
             <div className="font-black mb-3" style={{ color: 'var(--text)' }}>Pageviews (daily)</div>
             <div className="flex items-end gap-1 h-36">
-              {series.map((p) => (
-                <div key={p.day} className="flex-1">
-                  <div className="w-full rounded-t" style={{ height: `${(p.count / max) * 100}%`, background: 'linear-gradient(180deg, #3a86c9, #0e66b3)' }} />
-                </div>
-              ))}
+              {series.map((p) => {
+                const pct = (p.count / max) * 100;
+                const h = p.count > 0 ? `max(4px, ${pct}%)` : '0%';
+
+                return (
+                  <div key={p.day} className="flex-1">
+                    <div
+                      className="w-full rounded-t"
+                      title={`${p.day}: ${p.count}`}
+                      style={{
+                        height: h,
+                        background: 'linear-gradient(180deg, #3a86c9, #0e66b3)',
+                      }}
+                    />
+                  </div>
+                );
+              })}
             </div>
             <div className="text-xs mt-2" style={{ color: 'var(--muted)' }}>Last {range} days</div>
           </div>
