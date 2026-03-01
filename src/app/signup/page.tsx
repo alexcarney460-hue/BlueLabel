@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Header from '@/app/Header';
 import { getSupabase } from '@/lib/supabase';
-import { upsertMyProfile } from '@/lib/account';
 import { track } from '@/app/Track';
 
 export default function SignupPage() {
@@ -31,15 +30,20 @@ export default function SignupPage() {
     setError(null);
 
     try {
-      const supabase = getSupabase();
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) throw error;
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          password,
+          account_type: accountType,
+          company_name: companyName,
+        }),
+      });
 
-      // Create profile (retail/shop/distributor) immediately after signup
-      await upsertMyProfile({ account_type: accountType, company_name: companyName });
+      if (!res.ok) throw new Error('signup_failed');
 
-      // Best-effort contact creation in HubSpot happens server-side.
-      // We just fire an event; backend can also be wired later if we want.
+      // For client-side analytics only
       track('signup_completed', { meta: { account_type: accountType, company_name: companyName } });
 
       window.location.href = '/profile';
