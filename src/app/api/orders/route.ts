@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { hubspotUpsertContact, splitName } from '@/lib/hubspot';
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -30,5 +31,35 @@ export async function POST(req: Request) {
   }
 
   const data = await res.json();
+
+  // Best-effort HubSpot contact upsert (don’t block order creation on HubSpot downtime)
+  try {
+    const customer = body?.customer ?? {};
+    const shipping = body?.shipping ?? {};
+    const { firstname, lastname } = splitName(customer?.name);
+
+    const email = (customer?.email ?? '').trim();
+    if (email) {
+      await hubspotUpsertContact({
+        email,
+        properties: {
+          firstname,
+          lastname,
+          phone: customer?.phone || undefined,
+          address: shipping?.address1 || undefined,
+          address2: shipping?.address2 || undefined,
+          city: shipping?.city || undefined,
+          state: shipping?.state || undefined,
+          zip: shipping?.zip || undefined,
+          lifecyclestage: 'customer',
+          bluelabel_last_order_submitted_at: new Date().toISOString(),
+          bluelabel_last_order_subtotal: String(body?.subtotal ?? ''),
+        },
+      });
+    }
+  } catch {
+    // ignore
+  }
+
   return NextResponse.json({ ok: true, data });
 }
