@@ -6,7 +6,7 @@ export const allProducts = [
     image: '/products/cherry.png',
     purityLabel: 'Lab-verified purity',
     dosage: '20mg per unit',
-    price: 24.99,
+    price: 34.99,
     summary: 'Premium cherry-flavored 7-OH tablets. 20mg per unit.',
     description: 'Premium cherry-flavored 7-OH tablets with consistent specs and clean packaging.',
     details: [
@@ -24,7 +24,7 @@ export const allProducts = [
     image: '/products/mix-berry.png',
     purityLabel: 'Lab-verified purity',
     dosage: '20mg per unit',
-    price: 24.99,
+    price: 34.99,
     summary: 'Enhanced berry blend 7-OH tablets. 20mg per unit.',
     description: 'Enhanced berry blend 7-OH tablets with consistent specs for retail and wholesale.',
     details: [
@@ -42,7 +42,7 @@ export const allProducts = [
     image: '/products/strawberry.png',
     purityLabel: 'Lab-verified purity',
     dosage: '20mg per unit',
-    price: 24.99,
+    price: 34.99,
     summary: 'Premium strawberry-flavored 7-OH tablets. 20mg per unit.',
     description: 'Lab-verified strawberry-flavored 7-OH tablets with consistent specs.',
     details: [
@@ -60,7 +60,7 @@ export const allProducts = [
     image: '/products/watermelon.png',
     purityLabel: 'Lab-verified purity',
     dosage: '20mg per unit',
-    price: 24.99,
+    price: 34.99,
     summary: 'Premium watermelon-flavored 7-OH tablets. 20mg per unit.',
     description: 'Premium watermelon-flavored 7-OH tablets with comprehensive verification.',
     details: [
