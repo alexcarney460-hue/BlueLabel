@@ -5,6 +5,7 @@ import Header from '@/app/Header';
 import { allProducts } from '@/lib/products';
 import { getActiveProductsFromDb } from '@/lib/products-db';
 import { useAccountPricing } from '@/lib/useAccountPricing';
+import { track } from '@/app/Track';
 
 export default function Catalog() {
   const { isSignedIn, accountType, price } = useAccountPricing();
@@ -33,7 +34,11 @@ export default function Catalog() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {products.map((product) => (
-              <Link key={product.id} href={`/product/${product.id}`}>
+              <Link
+                key={product.id}
+                href={`/product/${product.id}`}
+                onClick={() => track('click_product', { product_id: product.id, meta: { source: 'catalog' } })}
+              >
                 <div className="bg-white rounded-2xl shadow-sm border border-white hover:shadow-lg transition cursor-pointer group">
                   <div className="w-full h-52 sm:h-64 bg-slate-100 rounded-t-2xl overflow-hidden flex items-center justify-center">
                     <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition p-3 sm:p-4" />

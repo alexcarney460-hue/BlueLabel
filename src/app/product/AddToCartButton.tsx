@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import { useCart } from '@/app/cart-context';
+import { track } from '@/app/Track';
 
 export default function AddToCartButton({ product }: { product: any }) {
   const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
 
   const handle = () => {
+    track('click_add_to_cart', { product_id: product.id, meta: { source: 'product' } });
     addToCart({ id: product.id, name: product.name, price: product.price, quantity: 1, image: product.image });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);

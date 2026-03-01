@@ -7,6 +7,7 @@ import { useCart } from '@/app/cart-context';
 import { useAccountPricing } from '@/lib/useAccountPricing';
 import { subscribeAndSavePrice } from '@/lib/pricing';
 import { minOrderFor } from '@/lib/wholesaleRules';
+import { track } from '@/app/Track';
 
 export default function CheckoutPage() {
   const { cart, clearCart } = useCart();
@@ -35,6 +36,17 @@ export default function CheckoutPage() {
       alert(`Minimum order total required for your account: $${minTotal.toFixed(2)}`);
       return;
     }
+
+    // user intent
+    track('submit_order', {
+      meta: {
+        source: 'checkout',
+        cart_count: cart.length,
+        subtotal,
+        subscribe,
+        frequency,
+      },
+    });
 
     setLoading(true);
     try {

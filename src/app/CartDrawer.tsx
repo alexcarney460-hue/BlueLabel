@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { useCart } from './cart-context';
 import { useAccountPricing } from '@/lib/useAccountPricing';
+import { track } from '@/app/Track';
 
 export default function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
@@ -95,6 +96,11 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
               className={`flex-1 text-center font-bold py-3 rounded-xl ${cart.length === 0 ? 'pointer-events-none opacity-50' : ''}`}
               style={{ background: 'var(--brand)', color: 'white' }}
               href="/checkout"
+              onClick={() => {
+                if (cart.length === 0) return;
+                const ids = cart.map((i) => i.id);
+                track('click_checkout', { meta: { source: 'cart_drawer', cart_count: cart.length, product_ids: ids } });
+              }}
             >
               Checkout
             </a>
