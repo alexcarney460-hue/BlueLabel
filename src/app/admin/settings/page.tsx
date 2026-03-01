@@ -19,6 +19,7 @@ export default function AdminSettings() {
   const [products, setProducts] = useState<Product[]>([]);
   const [form, setForm] = useState<Partial<Product>>({ active: true, sort: 0, price: 0 });
   const [status, setStatus] = useState<string>('');
+  const [hubspotStatus, setHubspotStatus] = useState<string>('');
 
   async function load() {
     setStatus('');
@@ -58,6 +59,41 @@ export default function AdminSettings() {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authed]);
+
+  async function setupHubspotProperties() {
+    setHubspotStatus('');
+
+    const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN;
+    if (!token) {
+      setHubspotStatus('Missing NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN');
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/hubspot/ensure-properties', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const json = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        setHubspotStatus(`HubSpot setup failed (${res.status})`);
+        return;
+      }
+
+      // quick human summary
+      const results = json?.results ?? {};
+      const failures = Object.entries(results).filter(([, v]: any) => v && v.ok === false);
+      if (failures.length) {
+        setHubspotStatus(`HubSpot setup completed with ${failures.length} warnings`);
+      } else {
+        setHubspotStatus('HubSpot properties ready');
+      }
+    } catch {
+      setHubspotStatus('HubSpot setup failed (network)');
+    }
+  }
 
   async function seedDefaults() {
     setStatus('');
@@ -135,11 +171,18 @@ export default function AdminSettings() {
             <h1 className="text-3xl font-black">Admin Settings</h1>
             <div className="text-slate-600">Products (unit price, photos, active)</div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap justify-end">
+            <button onClick={setupHubspotProperties} className="px-4 py-2 rounded-lg font-bold" style={{ background: '#f97316', color: 'white' }}>
+              Setup HubSpot Properties
+            </button>
             <button onClick={seedDefaults} className="px-4 py-2 rounded-lg font-bold" style={{ background: 'var(--brand)', color: 'white' }}>Seed defaults</button>
             <a href="/admin" className="px-4 py-2 rounded-lg border font-bold">Back</a>
           </div>
         </div>
+
+        {hubspotStatus && (
+          <div className="mb-4 text-sm font-bold" style={{ color: 'var(--text)' }}>{hubspotStatus}</div>
+        )}
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="border rounded-2xl p-4">
