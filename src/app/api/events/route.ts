@@ -33,8 +33,23 @@ export async function POST(req: Request) {
   });
 
   if (!res.ok) {
-    // don't leak upstream details
-    return NextResponse.json({ error: 'supabase_insert_failed' }, { status: 500 });
+    // Return safe debugging info (no secrets) so we can diagnose prod failures.
+    let details: any = null;
+    try {
+      const text = await res.text();
+      details = text?.slice(0, 300);
+    } catch {
+      // ignore
+    }
+
+    return NextResponse.json(
+      {
+        error: 'supabase_insert_failed',
+        status: res.status,
+        hint: details,
+      },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json({ ok: true });
