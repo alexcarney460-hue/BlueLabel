@@ -338,7 +338,7 @@ export default function ContactDetailPage() {
               )}
               <div className="flex justify-between">
                 <span className="text-slate-500">ID</span>
-                <span className="text-slate-500 text-xs font-mono">{contact.id.slice(0, 8)}</span>
+                <span className="text-slate-500 text-xs font-mono">{String(contact.id)}</span>
               </div>
             </div>
           </div>

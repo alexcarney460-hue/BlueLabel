@@ -289,7 +289,7 @@ export default function CompanyDetailPage() {
               )}
               <div className="flex justify-between">
                 <span className="text-slate-500">ID</span>
-                <span className="text-slate-500 text-xs font-mono">{company.id.slice(0, 8)}</span>
+                <span className="text-slate-500 text-xs font-mono">{String(company.id)}</span>
               </div>
             </div>
           </div>
