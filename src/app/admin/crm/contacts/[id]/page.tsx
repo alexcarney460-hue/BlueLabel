@@ -23,9 +23,24 @@ interface ContactDetail {
   companies: { id: string; name: string } | null;
   activities: any[];
   deals: any[];
+  orders: any[];
+  communications: any[];
   created_at: string;
   updated_at: string;
 }
+
+const ORDER_STATUS_COLORS: Record<string, string> = {
+  pending: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+  processing: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+  shipped: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+  delivered: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+  cancelled: 'bg-red-500/20 text-red-400 border-red-500/30',
+  refunded: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+};
+
+const COMM_CHANNELS = ['call', 'text', 'email'] as const;
+const COMM_DIRECTIONS = ['inbound', 'outbound'] as const;
+const COMM_STATUSES = ['completed', 'no_answer', 'voicemail', 'bounced', 'scheduled'] as const;
 
 const LEAD_STATUSES = ['new', 'open', 'in_progress', 'open_deal', 'unqualified', 'attempted_to_contact', 'connected', 'bad_timing'];
 const LIFECYCLE_STAGES = ['subscriber', 'lead', 'marketing_qualified_lead', 'sales_qualified_lead', 'opportunity', 'customer', 'evangelist'];
@@ -46,6 +61,11 @@ export default function ContactDetailPage() {
   const [showAddActivity, setShowAddActivity] = useState(false);
   const [activityForm, setActivityForm] = useState({ type: 'note', subject: '', body: '' });
   const [savingActivity, setSavingActivity] = useState(false);
+
+  // Communication modal
+  const [showAddComm, setShowAddComm] = useState(false);
+  const [commForm, setCommForm] = useState({ channel: 'call' as string, direction: 'outbound' as string, subject: '', body: '', status: 'completed' as string });
+  const [savingComm, setSavingComm] = useState(false);
 
   // Delete
   const [showDelete, setShowDelete] = useState(false);
@@ -112,6 +132,26 @@ export default function ContactDetailPage() {
     setSavingActivity(false);
     setShowAddActivity(false);
     setActivityForm({ type: 'note', subject: '', body: '' });
+    fetchContact();
+  }
+
+  async function handleAddComm() {
+    setSavingComm(true);
+    await crmFetch('/api/admin/crm/communications', {
+      method: 'POST',
+      body: JSON.stringify({
+        contact_id: contactId,
+        company_id: contact?.company_id || null,
+        channel: commForm.channel,
+        direction: commForm.direction,
+        subject: commForm.subject,
+        body: commForm.body,
+        status: commForm.status,
+      }),
+    });
+    setSavingComm(false);
+    setShowAddComm(false);
+    setCommForm({ channel: 'call', direction: 'outbound', subject: '', body: '', status: 'completed' });
     fetchContact();
   }
 
@@ -294,6 +334,119 @@ export default function ContactDetailPage() {
               </div>
             )}
           </div>
+
+          {/* Order History */}
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <h2 className="text-base font-bold text-white mb-4">Order History</h2>
+            {(contact.orders ?? []).length === 0 ? (
+              <p className="text-sm text-slate-500">No orders found</p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-800">
+                      <th className="text-left text-xs font-medium text-slate-400 pb-2 pr-4">Date</th>
+                      <th className="text-left text-xs font-medium text-slate-400 pb-2 pr-4">Status</th>
+                      <th className="text-right text-xs font-medium text-slate-400 pb-2 pr-4">Amount</th>
+                      <th className="text-right text-xs font-medium text-slate-400 pb-2">Items</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {contact.orders.map((order: any) => {
+                      const itemCount = Array.isArray(order.items) ? order.items.length : 0;
+                      const statusClass = ORDER_STATUS_COLORS[order.status] || 'bg-slate-700/50 text-slate-300 border-slate-600';
+                      return (
+                        <tr key={order.id} className="border-b border-slate-800/50 last:border-0">
+                          <td className="py-2.5 pr-4 text-slate-300 whitespace-nowrap">
+                            {new Date(order.created_at).toLocaleDateString()}
+                          </td>
+                          <td className="py-2.5 pr-4">
+                            <span className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full border capitalize ${statusClass}`}>
+                              {order.status || 'unknown'}
+                            </span>
+                          </td>
+                          <td className="py-2.5 pr-4 text-right text-white font-medium whitespace-nowrap">
+                            ${(Number(order.amount_cents) / 100).toFixed(2)}
+                          </td>
+                          <td className="py-2.5 text-right text-slate-400">
+                            {itemCount}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+          {/* Communication Log */}
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-base font-bold text-white">Communication Log</h2>
+              <button
+                onClick={() => setShowAddComm(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white text-xs font-medium rounded-lg transition-colors"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                Log Communication
+              </button>
+            </div>
+            {(contact.communications ?? []).length === 0 ? (
+              <p className="text-sm text-slate-500">No communications recorded</p>
+            ) : (
+              <div className="space-y-3">
+                {[...contact.communications]
+                  .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                  .map((comm: any, i: number) => (
+                    <div key={comm.id ?? i} className="flex items-start gap-3 p-3 bg-slate-800/50 rounded-xl">
+                      {/* Channel icon */}
+                      <div className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
+                        {comm.channel === 'call' && (
+                          <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                          </svg>
+                        )}
+                        {comm.channel === 'text' && (
+                          <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                          </svg>
+                        )}
+                        {comm.channel === 'email' && (
+                          <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-sm font-medium text-white capitalize">{comm.channel}</span>
+                          <span className={`inline-block px-1.5 py-0.5 text-[10px] font-medium rounded border capitalize ${
+                            comm.direction === 'inbound'
+                              ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                              : 'bg-blue-500/20 text-blue-400 border-blue-500/30'
+                          }`}>
+                            {comm.direction}
+                          </span>
+                          {comm.status && (
+                            <span className="inline-block px-1.5 py-0.5 text-[10px] font-medium rounded border bg-slate-700/50 text-slate-300 border-slate-600 capitalize">
+                              {comm.status.replace(/_/g, ' ')}
+                            </span>
+                          )}
+                        </div>
+                        {comm.subject && <p className="text-sm text-slate-300 mt-0.5">{comm.subject}</p>}
+                        {comm.body && <p className="text-xs text-slate-500 mt-0.5 line-clamp-2">{comm.body}</p>}
+                        <p className="text-xs text-slate-600 mt-1">
+                          {new Date(comm.created_at).toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Sidebar - Associated deals */}
@@ -407,6 +560,78 @@ export default function ContactDetailPage() {
               className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm font-medium rounded-lg transition-colors"
             >
               Delete Contact
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Log Communication Modal */}
+      <Modal open={showAddComm} onClose={() => setShowAddComm(false)} title="Log Communication">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-xs font-medium text-slate-400 mb-1">Channel</label>
+            <select
+              value={commForm.channel}
+              onChange={(e) => setCommForm({ ...commForm, channel: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
+            >
+              {COMM_CHANNELS.map((c) => (
+                <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-slate-400 mb-1">Direction</label>
+            <select
+              value={commForm.direction}
+              onChange={(e) => setCommForm({ ...commForm, direction: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
+            >
+              {COMM_DIRECTIONS.map((d) => (
+                <option key={d} value={d}>{d.charAt(0).toUpperCase() + d.slice(1)}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-slate-400 mb-1">Subject</label>
+            <input
+              type="text"
+              value={commForm.subject}
+              onChange={(e) => setCommForm({ ...commForm, subject: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-slate-400 mb-1">Body</label>
+            <textarea
+              value={commForm.body}
+              onChange={(e) => setCommForm({ ...commForm, body: e.target.value })}
+              rows={4}
+              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 resize-none"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-slate-400 mb-1">Status</label>
+            <select
+              value={commForm.status}
+              onChange={(e) => setCommForm({ ...commForm, status: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
+            >
+              {COMM_STATUSES.map((s) => (
+                <option key={s} value={s}>{s.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex justify-end gap-3 pt-2">
+            <button onClick={() => setShowAddComm(false)} className="px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors">
+              Cancel
+            </button>
+            <button
+              onClick={handleAddComm}
+              disabled={savingComm}
+              className="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium rounded-lg disabled:opacity-50 transition-colors"
+            >
+              {savingComm ? 'Saving...' : 'Log Communication'}
             </button>
           </div>
         </div>

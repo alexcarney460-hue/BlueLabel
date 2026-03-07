@@ -19,14 +19,26 @@ export async function GET(req: Request, ctx: Ctx) {
 
   const { data, error } = await supabase
     .from('contacts')
-    .select('*, companies(id, name), activities!activities_contact_id_fkey(*), deals!deals_contact_id_fkey(*)')
+    .select('*, companies(id, name), activities!activities_contact_id_fkey(*), deals!deals_contact_id_fkey(*), communications!communications_contact_id_fkey(*)')
     .eq('id', id)
     .single();
 
   if (error)
     return NextResponse.json({ ok: false, error: error.message }, { status: 404 });
 
-  return NextResponse.json({ ok: true, data });
+  // Fetch orders by matching contact email
+  let orders: any[] = [];
+  if (data.email) {
+    const { data: orderRows } = await supabase
+      .from('orders')
+      .select('*')
+      .eq('email', data.email)
+      .order('created_at', { ascending: false })
+      .limit(20);
+    orders = orderRows ?? [];
+  }
+
+  return NextResponse.json({ ok: true, data: { ...data, orders } });
 }
 
 export async function PATCH(req: Request, ctx: Ctx) {
