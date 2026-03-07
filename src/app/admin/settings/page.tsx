@@ -176,6 +176,7 @@ export default function AdminSettings() {
               Setup HubSpot Properties
             </button>
             <button onClick={seedDefaults} className="px-4 py-2 rounded-lg font-bold" style={{ background: 'var(--brand)', color: 'white' }}>Seed defaults</button>
+            <a href="/admin/crm" className="px-4 py-2 rounded-lg border font-bold">CRM</a>
             <a href="/admin" className="px-4 py-2 rounded-lg border font-bold">Back</a>
           </div>
         </div>
