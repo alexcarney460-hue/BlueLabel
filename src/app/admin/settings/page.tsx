@@ -336,38 +336,38 @@ export default function AdminSettings() {
                       </div>
 
                       {/* Edit controls */}
-                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:items-end flex-shrink-0">
-                        <label className={labelClass}>
+                      <div className="flex flex-wrap gap-3 items-end flex-shrink-0">
+                        <label className={labelClass} style={{ width: '100px' }}>
                           Price ($)
                           <input
                             type="number"
                             step="0.01"
-                            className={inputClass}
+                            className={`${inputClass} w-full`}
                             value={Number(getVal(product, 'price')).toFixed(2)}
                             onChange={e => updateLocal(product.id, { price: Number(e.target.value) })}
                           />
                         </label>
-                        <label className={labelClass}>
+                        <label className={labelClass} style={{ width: '72px' }}>
                           Sort
                           <input
                             type="number"
-                            className={inputClass}
+                            className={`${inputClass} w-full`}
                             value={getVal(product, 'sort') as number}
                             onChange={e => updateLocal(product.id, { sort: Number(e.target.value) })}
                           />
                         </label>
-                        <label className={labelClass}>
+                        <label className={`${labelClass} flex-1`} style={{ minWidth: '140px' }}>
                           Image URL
                           <input
                             type="text"
-                            className={inputClass}
+                            className={`${inputClass} w-full`}
                             value={(getVal(product, 'image_url') as string) || ''}
                             onChange={e => updateLocal(product.id, { image_url: e.target.value || null })}
                             placeholder="/products/..."
                           />
                         </label>
-                        <label className={labelClass}>
-                          Active
+                        <div className="flex flex-col gap-1">
+                          <span className="text-xs font-bold text-slate-600">Active</span>
                           <div className="flex items-center gap-2 py-2">
                             <button
                               onClick={() => updateLocal(product.id, { active: !isActive })}
@@ -383,7 +383,7 @@ export default function AdminSettings() {
                               {isActive ? 'On' : 'Off'}
                             </span>
                           </div>
-                        </label>
+                        </div>
                       </div>
                     </div>
 
